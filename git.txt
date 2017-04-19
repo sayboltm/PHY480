@@ -39,6 +39,7 @@ Make empty repo on web interface first.
 cd /dir/to/folder/repoName
 echo '# repoName' >> README.md
 git init
+git config # any username/email change do it now.
 git add README.md
 git commit -m 'first commit'
 git remote add origin https://github.com/sayboltm/repoName.git
