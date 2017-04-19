@@ -1,0 +1,26 @@
+Armadillo log:
+
+sudo apt-get update && apt-get upgrade
+
+added sources to list
+sudo apt-get update && apt-get upgrade
+
+sudo apt-get install cmake
+restart machine
+
+install: (debian/ubuntu)
+libopenblas-dev, liblapack-dev, libarpack2-dev # it says just 'libarpack-dev' but didnt work
+
+dl armadillo
+tar xf
+cd 
+cmake .
+make
+sudo make install
+
+tried:
+c++ -Wall -o file.x file.cpp -larmadillo -llapack -lblas
+
+Morten says:
+c++ -std=c++11 -o exefile.x programfile.cpp
+

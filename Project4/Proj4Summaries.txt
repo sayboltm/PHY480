@@ -1,0 +1,32 @@
+PHY 480 Project 4 Notes
+
+Quantum Monte carlo
+- stochastic methods instead of eigs (proj2)
+
+
+Molecular dynamics (proj3, gforce instead with [something] potential)
+- uses QT creator
+
+Financial Engineering
+- from statistical physics
+- pareto front
+
+Ising model and statistical physics
+- phase transitions
+- cool physics stuff
+ref: statphys-beamer.pdf
+
+White dwarf star
+- solve diffeq
+- gravitational forces vs pressure from collapse
+- how the sun fails
+- the simplest/use rk4 
+
+
+
+
+
+
+https://github.com/CompPhysics/ComputationalPhysicsMSU/blob/master/doc/Programs/LecturePrograms/programs/VMC/python/vmc_atoms.py
+see ch14 
+

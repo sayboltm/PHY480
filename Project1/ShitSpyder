@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Feb 16 17:40:09 2017
+
+@author: h4x0r
+"""
+
+import numpy as np
+
+
+def f(x):
+    return 100*np.exp(-10*x)
+
+def exact(x):
+    return 1.0-(1-np.exp(-10))*x-np.exp(-10*x)
+
+# Hardcoded params for simplicity
+#fileout = pyOutput
+exponent = 4
+#n = 4
+
+for k in range(1, exponent):
+    # Weird thing we didn't understand
+    n = 10**k
+    
+    # Append i to filename
+    fileout = 'pyOutputSimple'
+    fileout += str(k)
+    
+    # lol wut.. probs descretization of stuff
+    h = 1/n
+    hh = h*h
+  
+    ''''''
+  
+    d = np.zeros(n+1)
+    b = np.zeros(n+1)
+    x = np.zeros(n+1)
+    solution = np.zeros(n+1)
+    
+    d[0] = 2
+    d[n] = 2
+    solution[0] = 0
+    solution[n] = 0
+    for i in range(1,n):
+        d[i] = (i+1)/i
+    for i in range(0,n+1):
+        x[i] = i*h
+        b[i] = hh*f(i*h)
+    
+    # FW sub
+    for i in range(2,n):
+        b[i] = b[i] + b[i-1]/d[i-1]
+    # Backward sub
+    solution[n-1] = b[n-1]/d[n-1]    
+    for i in range((n-2),0):
+        solution[i] = (b[i]+solution[i+1])/d[i]
+        
+    with open(fileout, 'w') as fout:
+        fout.write('x:\t\tApprox:\t\tExact:\t\tRelative Error:\n')
+        for j in range(0,n):
+            RelativeError = np.abs((exact(x[j])-solution[j])/exact(x[j]))
+            fout.writelines('{0:.8f}'.format(x[j]) + '\t')
+            fout.writelines('{0:.8f}'.format(solution[j]) + '\t')
+            fout.writelines('{0:.8f}'.format(exact(x[j])) + '\t')
+            fout.writelines('{0:.8f}'.format(np.log10(RelativeError)) + '\n')
+    fout.closed
+    print('File: ' + str(k) + '/' + str(exponent) + ' written.')

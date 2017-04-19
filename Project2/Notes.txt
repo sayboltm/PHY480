@@ -1,0 +1,52 @@
+Notes:
+
+see pub/eigvalues
+- potentials are Vnstep
+
+
+i) take A from project 1 and the LU part
+	- add the potential to the diagonals (see pub/eigvalues)
+	- can reuse most rest of project 1
+
+ii) Use Armadillo function: 'eig_sym'
+
+iii) w = 1 (all constants =1 or something)
+l = 0
+
+lamb = {3,7,11,15,...} // get eigs
+
+what you should get . but will not get bc diff values of integration pts
+need 2-300 pts to get close (n=2-300) 
+
+rhomax ~5-10 (w=1) to get lowest states
+
+Psy(rho)~exp(-alpha**2*rho**2/w)
+// if alpha = 1, decays ~0 at 3
+
+alpha = np.sqrt(hbar/m*w)
+
+
+Most efficient implementation of Jacobis targets largest element first (why?)
+
+
+Speed up factor of 3 with compiler flags:
+- use vectorization
+
+
+#gprof used to profile code
+c++ -pg -O3 -c mycode.cpp
+c++ -pg -O3 -o mycode.exe mycode.o
+gprof mycode.exe > Output.txt
+
+
+clang++ -O3 -Rpass-analysis=loop-vectorize -ffast-math -o vec7.x program7.cpp
+clag++ -fno-vectorize -o novec7.x program7.cpp
+./novec7.x 1000000
+./vec7.x 1000000
+# will show time differences (in code opt slides)
+
+
+EigvalueArma.cpp and EigvalueStandard.cpp are two codes which solve the standard harmonic oscillator case
+one uses Armadillo, one uses standard c++ way with function whic diagonalizes a tridiag mat using
+Francis algo. Refs 1 and 2 of wiki give good intro to original articles:
+https://en.wikipedia.org/wiki/QR_algorithm

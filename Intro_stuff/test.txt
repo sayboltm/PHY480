@@ -1,0 +1,26 @@
+# THis is a test
+
+#\n
+
+http://codelite.org/Developers/Windows
+
+http://beancoder.com/using-github-git-shell/
+
+
+
+
+
+Proj1:
+Ax=f
+//A tridiagonal (Flops~4*n), gen symmetric mat is 8*n
+
+LU decomp (gauss elim)
+ 2/3n^3 flops (good for dense matrix)
+
+using tridigaonal matrix and special algorithm, can do much larger matricies
+
+
+
+Compiling C++ on Windows:
+c++ -c -Wall myprogram.c
+c++ -o myprogram myprogram.o
