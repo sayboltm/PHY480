@@ -4,35 +4,11 @@
 https://git-scm.com/book/en/v2
 
 # keeping email addr private:
-https://help.github.com/articles/keeping-your-email-address-private/
-# Configure web interface settings>email>setstuff
-# SET user.email to username@users.noreply.github.com
+    https://help.github.com/articles/keeping-your-email-address-private/
+    # Configure web interface settings>email>setstuff
+    # SET user.email to username@users.noreply.github.com
 
-# TODO: organize this where it should go
-# view changes
-git reflog
-# Can revert to a state listed by
-git reset --hard <sha_from_reflog> # --hard to change local files
-
-# Uploading:
-git status # Get status
-git add *
-git commit -m 'changelogtext' # sometimes need -a too
-git push
-
-# Downloading:
-# 1st time:
-git clone http://www.github.com/*.git
-#or
-git clone git@github.com:userName/RepoName.git
-#or
-git clone gh-account2:account2/somerepo.git
-
-# Subsequent:
-git pull
-
-
-
+'''''''''''''''''
 ### Initializing a new repo from cmd:
 # Creating new
 Make empty repo on web interface first.
@@ -49,12 +25,30 @@ git push -u origin master
 
 # push existing repo from cmdline
 git remote add origin https://github.com/username/repoName.git
-	# OR
-	git remote add origin gh-accountID:username/repoName.git
-git push -u origin master The added vigilance of this project's hardware and software will supplement your dog/firearm as well as your own eyes and ears for securing your home from a BG, or snooping maintenance personnel. ;)
+-OR-
+git remote add origin gh-accountID:username/repoName.git
+git push -u origin master 
+
+# Uploading:
+git status # Get status
+git add .
+git commit -m 'changelogtext' # sometimes need -a too
+git push
+
+# Downloading:
+# 1st time:
+git clone http://www.github.com/*.git
+#or
+git clone git@github.com:userName/RepoName.git
+#or
+git clone gh-accountID:userName/RepoName.git
+
+# Subsequent:
+git pull
 
 
-
+# view changes
+git reflog
 
 # Temporarily stash changes
 git stash/pop or something
@@ -65,14 +59,19 @@ git checkout .
 git reset --hard origin/master
 
 # Revert commit
+# Can revert to a state listed by
+git reset --hard <sha_from_reflog> # --hard to change local files
 git reset --hard HEAD^
 # or for moar
 git reset --hard HEAD~2 # last two commits
 
+### Configuring Git
 # Changing username:
 git config --global user.name 'your username'
 # -OR-
 git config --global user.email email@website.com
+
+leave out --global for change on per-repo basis
 
 # Reset author:
 git commit --amend --reset-author
@@ -80,46 +79,46 @@ git commit --amend --reset-author
 
 
 ### Working with multiple accounts on one machine
-#http://stackoverflow.com/questions/3860112/multiple-github-accounts-on-the-same-computer
-	#https://code.tutsplus.com/tutorials/quick-tip-how-to-work-with-github-and-multiple-accounts--net-22574
-	# Gen keys: https://help.github.com/articles/connecting-to-github-with-ssh/
-	# Reconfig user per-repo basis: https://help.github.com/articles/setting-your-email-in-git/
+http://stackoverflow.com/questions/3860112/multiple-github-accounts-on-the-same-computer
+	https://code.tutsplus.com/tutorials/quick-tip-how-to-work-with-github-and-multiple-accounts--net-22574
+	Gen keys: https://help.github.com/articles/connecting-to-github-with-ssh/
+    Reconfig user per-repo basis: https://help.github.com/articles/setting-your-email-in-git/
 # SSH passphrase stuff
 # https://help.github.com/articles/working-with-ssh-key-passphrases/
 
-# NIX
-# To just add passwordless access http://stackoverflow.com/questions/8588768/git-push-username-password-how-to-avoid
-# Check for existing keys in the ~/.ssh/ dir https://help.github.com/articles/checking-for-existing-ssh-keys/
-# If none:
-# Gen key
-# Else, see link
-ssh-keygen -t rsa -b 4096 -C 'youremail@email.com'
-# Save to .ssh with full path (not ~/.ssh)
+## NIX
+To just add passwordless access http://stackoverflow.com/questions/8588768/git-push-username-password-how-to-avoid
+Check for existing keys in the ~/.ssh/ dir https://help.github.com/articles/checking-for-existing-ssh-keys/
+If none:
+    Gen key
+        ssh-keygen -t rsa -b 4096 -C 'youremail@email.com'
+    Save to .ssh with full path (not ~/.ssh)
 
-# Add to ssh agent
-# Make sure started, start in background:
-eval '$(ssh-agent -s)'
+Else:
+    skip generation, just add
 
-# Add key
-ssh-add ~/.ssh/id_rsa_newkey
+Make sure ssh agent started, start in background:
+    eval '$(ssh-agent -s)'
+Add to ssh agent
+    ssh-add ~/.ssh/id_rsa_newkey
 
-# Add public key *.pub to github account in web interface
+Add public key *.pub to github account in web interface
 
-# now need to tell github to use SSH with stored key instead of httpget, i.e.:
-# git+ssh://git@github.com/username/reponame.git
-# instead of:
-# https://github.com/username/reponame.git
-# IF is already:
-gh-desiredidentity:username/reponame.git
-# then good to go
+Now need to tell github to use SSH with stored key instead of httpget, i.e.:
+    git+ssh://git@github.com/username/reponame.git
+instead of:
+    https://github.com/username/reponame.git
+IF is already:
+    gh-desiredidentity:username/reponame.git
+    then good to go
 
-# To see repo URL:
-git remote show origin
+To see repo URL:
+    git remote show origin
 
-# To modify:
-git remote set-url origin git+ssh://git@github.com/yourusername/yourrepo.git
+To modify:
+    git remote set-url origin git+ssh://git@github.com/yourusername/yourrepo.git
 
-# Windows:
+## Windows:
 #http://kevinpelgrims.com/blog/2012/07/20/setting-up-multiple-github-accounts-on-windows/
 # Gen new ssh key:
 ssh-keygen -t rsa -C 'yourEmail@email.com's
