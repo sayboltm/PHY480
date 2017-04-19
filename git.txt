@@ -37,6 +37,7 @@ git push
 
 # Downloading:
 # 1st time:
+
 git clone http://www.github.com/*.git
 #or
 git clone git@github.com:userName/RepoName.git
@@ -49,6 +50,8 @@ git pull
 
 # view changes
 git reflog
+ -or-
+git log # to show commits.. not sure difference
 
 # Temporarily stash changes
 git stash/pop or something
