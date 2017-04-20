@@ -122,7 +122,7 @@ for i in range(N): #moar reliable?
             planet.yd[j] = yd # coord differences last to easily add z
             planet.xd[j] = xd
            
-            
+            # = other.m/m_sun * (current.x - other.x)/((current.x-other.x)**2 + (current.y-other.y)**2)
             planet.forcex[j] = planet.md[j]*planet.xd[j]/planet.rd[j]**3
             planet.forcey[j] = planet.md[j]*planet.yd[j]/planet.rd[j]**3
             j =+ 1 # Need to index numerically for np arrays
@@ -147,19 +147,45 @@ for i in range(N): #moar reliable?
         planet.vx_arr[i] = planet.vx
         planet.vy_arr[i] = planet.vy
     
+        ''' Binary: dvx/dt = -GMsun/r^3*x, dx/dt = vx
+                        GMsun = 4pi^2
+                    dvx/dt = -4pi^2/r^3*x, dx/dt = vx
+                    
+                    Euler:
+                    x_i+1 = x_i + h*vx_i
+                    vx_i+1 = vx_i - h*4pi^2/r_i^3*x_i
+                    
+                    
+                    Verlet:
+                    x_i+1 = x_i + h*vx_i + h^2/2*d(vx_i)/dt
+                    vx_i+1 = vx_i + h/2*(d(vx_i+1)/dt + d(vx_i)/dt)
+                    
+                    x_i+1 = x_i + h*vx_i + h^2/2*( -4pi^2/r_i^3*x_i )
+                    vx_i+1 = vx_i + h/2*(( -4pi^2/r_i+1^3*x_i+1 ) + (-4pi^2/r_i^3*x_i))
+                    
+            Moarplanets: dvx/dt = -4pi^2/r^3*xe - 4pi^2(m_other/msun)/r^3_e-j * (xe-xj)
+                                = -4*pi^2(x/r^3 + sum(md/rd*xd))
+                                
+                    Euler:
+                    vx_i+1 = vx_i - h*( 4pi^2/r_i^3*x_i - 4pi^2(m_other/m_sun)/r^3_e-j * (xe-xj) )
+                    vx_i+1 = vx_i - h*( 4pi^2/r_i^3*x_i - 4pi^2(m_other/m_sun)/r_i^3_ej * (xe_i-xj_i) )
+                    vx_i+1 = vx_i - h*( 4pi^2/r_i^3*x_i - 4pi^2(md)/rd_i^3 * xd_i )
+                    vx_i+1 = vx_i - h*4pi^2( 1/r_i* )
+        '''
         x_old = planet.x
+        ### Euler: x_i+1
         planet.x = planet.x + h*planet.vx
-        #vx = vx - h*(4*np.pi**2/r**3)*x
-        #Earth.vx = Earth.vx - h*(4*np.pi**2/Earth.r**3)*x_old
-        #Earth.vx = Earth.vx - h*4*np.pi**2*(x_old/Earth.r**3 + mde*xde/rde**3) # + mde_pX*xde_pX/rde_pX**3 + this for other planets)
-        planet.vx = planet.vx - h*4*np.pi**2*(x_old/planet.r**3 + np.sum(planet.forcex))
+        # forcex = other.m/m_sun * (current.x - other.x)/((current.x-other.x)**2 + (current.y-other.y)**2)
+        
+#        planet.vx = planet.vx - h*4*np.pi**2*(x_old/planet.r**3 + np.sum(planet.forcex))
+        planet.vx = planet.vx - h*4*np.pi**2*(planet.x/planet.r**3 + np.sum(planet.forcex))
+        ## Second is improved Euler
         
         
         y_old = planet.y
         planet.y = planet.y + h*planet.vy
-        #Earth.vy = Earth.vy - h*(4*np.pi**2/Earth.r**3)*y_old
-        #vy = vy - h*(4*np.pi**2/r**3)*y
-        planet.vy = planet.vy - h*4*np.pi**2*(y_old/planet.r**3 + np.sum(planet.forcey))
+#        planet.vy = planet.vy - h*4*np.pi**2*(y_old/planet.r**3 + np.sum(planet.forcey))
+        planet.vy = planet.vy - h*4*np.pi**2*(planet.y/planet.r**3 + np.sum(planet.forcey))
         
         #r = np.sqrt(x**2 + y**2)
         planet.genR() # This will update earth.r with the new r from new x and y    
