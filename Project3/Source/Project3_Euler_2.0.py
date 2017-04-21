@@ -170,7 +170,7 @@ for i in range(N): #moar reliable?
                     vx_i+1 = vx_i - h*( 4pi^2/r_i^3*x_i - 4pi^2(m_other/m_sun)/r^3_e-j * (xe-xj) )
                     vx_i+1 = vx_i - h*( 4pi^2/r_i^3*x_i - 4pi^2(m_other/m_sun)/r_i^3_ej * (xe_i-xj_i) )
                     vx_i+1 = vx_i - h*( 4pi^2/r_i^3*x_i - 4pi^2(md)/rd_i^3 * xd_i )
-                    vx_i+1 = vx_i - h*4pi^2( 1/r_i* )
+                    vx_i+1 = vx_i - h*4pi^2( x_i/r_i^3 - sum(md_i/rd_i^3*xd_i) ) # check
         '''
         x_old = planet.x
         ### Euler: x_i+1
