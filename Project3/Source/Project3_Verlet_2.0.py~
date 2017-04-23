@@ -8,7 +8,6 @@ it works! Saving as *Verlet_2.0, and cleaning up
 
 @author: Mike
 """
-# TODO: Fix. Planets go in a straight trajectory
 
 ''' The Earth-Sun system can be modeled by 4 coupled DEs: ODEp12
     v_x,i+1 = v_x,i - h*(4*pi^2/r^3_i)*x_i
@@ -65,6 +64,7 @@ from solar_system import *
 AU = 1.5e11
 N = 15000 # mesh points
 
+''' These are lists of planets to be analyzed '''
 #planet_list = [Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune,
 #               Pluto]
 planet_list = [Mercury, Earth, Mars, Jupiter] # shorter list for debugging
@@ -72,122 +72,78 @@ planet_list = [Mercury, Earth, Mars, Jupiter] # shorter list for debugging
 #planet_list = [Earth, Jupiter, PlanetX]
 #planet_list = [Earth]
 
+
+ts = 0
+te = 4*np.pi#10#4*np.pi
+h = (te-ts)/float(N)
+
 # Test looping and skipping
 for planet in planet_list:
     # Works as expected
     print('Current planet: ', planet.name)
     for otherplanet in planet_list:
-        if otherplanet == planet:
+        if otherplanet == planet: # If current planet, skip it
             continue
         print('\totherplanet: ', otherplanet.name)
         
-ts = 0
-te = 4*np.pi#10#4*np.pi
-h = (te-ts)/float(N)
-
-t_arr = np.zeros(N)
-
-t = ts
 
 # Setup some extra arrays in the planets
 for planet in planet_list:
-    #print('Current planet: ', planet.name)
-#    for otherplanet in planet_list:
-#        if otherplanet == planet:
-#            continue
-#        #print('\tSubplanet: ', otherplanet.name)
-    planet.md = np.zeros(len(planet_list)-1)
-    planet.rd = np.zeros(len(planet_list)-1)
-    planet.xd = np.zeros(len(planet_list)-1) 
-    planet.yd = np.zeros(len(planet_list)-1)
-    planet.forcex = np.zeros(len(planet_list)-1)
-    planet.forcey = np.zeros(len(planet_list)-1) # An additional force component since it needs to be summed as a whole in the velocity update
-    for otherplanet in planet_list:
+    planet.md = np.zeros(len(planet_list)-1) # 'MassDifference': otherplanet.m/m_sun ( see planet.diffPlanet)
+    planet.rd = np.zeros(len(planet_list)-1) # 'RadiDifference': sqrt((currentx-otherx)^2 + (currenty-othery)^2)
+    planet.xd = np.zeros(len(planet_list)-1) # 'Xdifference': currentX - otherX
+    planet.yd = np.zeros(len(planet_list)-1) # 'Ydifference': 
+    planet.forcex = np.zeros(len(planet_list)-1) # An additional force component since it needs to be summed as a whole in the velocity update
+    planet.forcey = np.zeros(len(planet_list)-1) # -1 because this is the force from all other planets 
+    for otherplanet in planet_list: 
         if otherplanet == planet:
             continue
         planet.diff_index.append(otherplanet.name) # used to track order of planet iteration, contains planets in order they are printed here
         # i.e. Earth.diff_index contains [Jupiter, PlanetX], and Earth.dx contains [DistEarthJupiter, DistEarthPlanetX] ...
-    
-    # Experimental: go back and add arrays because don't want N in other file
+   
+    # Arrays of position and velocity for plotting/examining later
     planet.x_arr = np.zeros(N)
     planet.y_arr = np.zeros(N)
     planet.vx_arr = np.zeros(N)
     planet.vy_arr = np.zeros(N)
     planet.r_arr = np.zeros(N)
     
-    # Need variable to store old acceleration
+    # Need variable to store old acceleration (Verlet only)
     planet.x_acc_old = None
     planet.y_acc_old = None
     
+''' Used to refresh the force components of other planets once each position has been updated
+created for use in Verlet where velocity must be updated after ALL positions, but cleaner
+implementation if used in Euler too. '''
 def refreshPlanets(planet_list):
     for planet in planet_list:
         j = 0
         for otherplanet in planet_list:
-            if otherplanet == planet:
+            if otherplanet == planet: # skip if current planet as this function pertains to forces of other planets
                 continue
-            # diffPlanet depends on position only, not velocity
+            # diffPlanet depends on position only, not velocity so safe to update here
             md, rd, xd, yd = planet.diffPlanet(planet, otherplanet)
-#            planet.md.append(md)
-#            planet.rd.append(rd)
-#            planet.xd.append(xd)
-#            planet.yd.append(yd) # NOTE: Tis will grow as N increases, fix.
-            #planet.md[planet_list.index(otherplanet)] = md
-            planet.md[j] = md
+            planet.md[j] = md # update mass and other differences for each other planet j
             planet.rd[j] = rd
-            planet.yd[j] = yd # coord differences last to easily add z
+            planet.yd[j] = yd # x and y are last to easily add z later
             planet.xd[j] = xd
            
-            # dv_x/dt = -GMsun/r^3*x
+            # dv_x/dt = -GMsun/r^3*x = 
             planet.forcex[j] = planet.md[j]*planet.xd[j]/planet.rd[j]**3
             planet.forcey[j] = planet.md[j]*planet.yd[j]/planet.rd[j]**3
             j =+ 1 # Need to index numerically for np arrays
     
 i = 0
 #while (t < te):
-for i in range(N): #moar reliable?    
+for i in range(N): #moar reliable. Had issues with t being very close to te and taking an extra loop
 
     t_arr[i] = t
      
-    # Apply ops for each planet
-#    for planet in planet_list:
-#        j = 0
-#        for otherplanet in planet_list:
-#            if otherplanet == planet:
-#                continue
-#            # diffPlanet depends on position only, not velocity
-#            md, rd, xd, yd = planet.diffPlanet(planet, otherplanet)
-##            planet.md.append(md)
-##            planet.rd.append(rd)
-##            planet.xd.append(xd)
-##            planet.yd.append(yd) # NOTE: Tis will grow as N increases, fix.
-#            #planet.md[planet_list.index(otherplanet)] = md
-#            planet.md[j] = md
-#            planet.rd[j] = rd
-#            planet.yd[j] = yd # coord differences last to easily add z
-#            planet.xd[j] = xd
-#           
-#            # dv_x/dt = -GMsun/r^3*x
-#            planet.forcex[j] = planet.md[j]*planet.xd[j]/planet.rd[j]**3
-#            planet.forcey[j] = planet.md[j]*planet.yd[j]/planet.rd[j]**3
-#            j =+ 1 # Need to index numerically for np arrays
-    # refresh planet position, and forces
+    # refresh planet position, and forces 
     refreshPlanets(planet_list)       
             
-        #planet.dm, planet.dr, planet.dx, planet.dy = diffPlanet(planet, )
-
-#    xe_arr[i] = x
-#    ye_arr[i] = y
-#    vxe_arr[i] = vx
-#    vye_arr[i] = vy
-
-#    mde, rde, xde, yde = diffPlanet(Earth, Jupiter)    
-#    mdj, rdj, xdj, ydj = diffPlanet(Jupiter, Earth)    
-    
-    # instead of doing thsi shit separately earth, xy genR, jupiter xy genR,
-    # do for planet in the planetlist
     for planet in planet_list: 
-        # TODO: Cannot updatae position and velocity at same time
-        ''' Must break up and do two for planet in planetlist, first updating 
+        ''' For Verlet, break up and do two for planet in planetlist, first updating 
         position, storing old acceleration, then updating velocity,
         recalculating acceleration as well as using the stored old value '''
         
@@ -199,7 +155,6 @@ for i in range(N): #moar reliable?
         planet.vx_arr[i] = planet.vx
         planet.vy_arr[i] = planet.vy 
         
-#        planet.x_acc_old = (np.sum(planet.forcex)/planet.m)*4*np.pi**2
 #        planet.y_acc_old = (np.sum(planet.forcey)/planet.m)*4*np.pi**2
         # This is actually the 'acceleration component' for use later
         planet.x_acc_old = -4*np.pi**2/planet.r**3*planet.x + np.sum(planet.forcex)
@@ -208,14 +163,11 @@ for i in range(N): #moar reliable?
        
         #x_old = planet.x
         #planet.x = planet.x + h*planet.vx # Euler pos update
-#        planet.x = planet.x + h*planet.vx + h**2/2*(4*np.pi**2)*(np.sum(planet.forcex)/planet.m) # Verlet pos update
-#        planet.y = planet.y + h*planet.vy + h**2/2*(4*np.pi**2)*(np.sum(planet.forcey)/planet.m)
-#        planet.x = planet.x + h*planet.vx + h**2/2*(4*np.pi**2)*(np.sum(planet.forcex)) # Verlet pos update
-        planet.x = planet.x + h*planet.vx + h**2/2*(-4*np.pi**2/planet.r**3*planet.x)        
+        planet.x = planet.x + h*planet.vx + h**2/2*(-4*np.pi**2/planet.r**3*planet.x) # Verlet pos update
         planet.y = planet.y + h*planet.vy + h**2/2*(-4*np.pi**2/planet.r**3*planet.y)
  
-       #planet.vx = planet.vx - h*4*np.pi**2*(x_old/planet.r**3 + np.sum(planet.forcex))
-        #planet.vx = planet.vx + h/2((x_acceleration_old) + (x_acceleration))
+        #planet.vx = planet.vx - h*4*np.pi**2*(x_old/planet.r**3 + np.sum(planet.forcex)) # Euler velocity update
+        #planet.vx = planet.vx + h/2((x_acceleration_old) + (x_acceleration)) # Conceptual Verlet velocity update
         
         # Since position must be updated before new velocity calc, also update r
         planet.genR() # This will update r with the new r from new x and y    
@@ -226,24 +178,22 @@ for i in range(N): #moar reliable?
     # Might need to improve efficiency
     
     for planet in planet_list:
-#        y_old = planet.y
-#        planet.y = planet.y + h*planet.vy
-#        planet.vy = planet.vy - h*4*np.pi**2*(y_old/planet.r**3 + np.sum(planet.forcey))
-#        x_acc = (np.sum(planet.forcex)/planet.m)*4*np.pi**2
-#        y_acc = (np.sum(planet.forcey)/planet.m)*4*np.pi**2
-        #x_acc = (np.sum(planet.forcex))*4*np.pi**2
-        x_acc = -4*np.pi**2/planet.r**3*planet.x + np.sum(planet.forcex)
+#        planet.vy = planet.vy - h*4*np.pi**2*(y_old/planet.r**3 + np.sum(planet.forcey)) # Euler velocity update
+#        x_acc = (np.sum(planet.forcex)/planet.m)*4*np.pi**2 # 1st verlet attempt
+        #x_acc = (np.sum(planet.forcex))*4*np.pi**2 # 2nd attempt, stuck for a week
+        x_acc = -4*np.pi**2/planet.r**3*planet.x + np.sum(planet.forcex) # Current acceleration (Works)
         y_acc = -4*np.pi**2/planet.r**3*planet.y + np.sum(planet.forcey)
-        planet.vx = planet.vx + h/2*((planet.x_acc_old) + (x_acc))
+        planet.vx = planet.vx + h/2*((planet.x_acc_old) + (x_acc)) # Verlet velocity update
         planet.vy = planet.vy + h/2*((planet.y_acc_old) + (y_acc))
     
-        planet.genR()
+        planet.genR() # Again, update R for each planet, then refresh planets at end of loop
         
     refreshPlanets(planet_list)    
     
     t += h
     i += 1
     
+### Plot
 #Plottr.plot(xe_arr, ye_arr)
 #Plottr.plot(Earth.x_arr, Earth.y_arr)
 #Plottr.plot(Jupiter.x_arr, Jupiter.y_arr)

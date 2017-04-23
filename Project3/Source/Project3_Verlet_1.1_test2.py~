@@ -3,9 +3,6 @@
 Created on Wed Mar 22 12:38:40 2017
 Project 3 binary system test
 
-Project3_Verlet1.1_test2.py
-it works! Saving as *Verlet_2.0, and cleaning up
-
 @author: Mike
 """
 # TODO: Fix. Planets go in a straight trajectory
