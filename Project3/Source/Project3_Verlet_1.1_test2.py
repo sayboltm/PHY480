@@ -198,16 +198,17 @@ for i in range(N): #moar reliable?
         
 #        planet.x_acc_old = (np.sum(planet.forcex)/planet.m)*4*np.pi**2
 #        planet.y_acc_old = (np.sum(planet.forcey)/planet.m)*4*np.pi**2
-        planet.x_acc_old = (np.sum(planet.forcex))*4*np.pi**2
-        planet.y_acc_old = (np.sum(planet.forcey))*4*np.pi**2
+        planet.x_acc_old = -4*np.pi**2/planet.r**3*planet.x
+        planet.y_acc_old = -4*np.pi**2/planet.r**3*planet.y
         
        
         #x_old = planet.x
         #planet.x = planet.x + h*planet.vx # Euler pos update
 #        planet.x = planet.x + h*planet.vx + h**2/2*(4*np.pi**2)*(np.sum(planet.forcex)/planet.m) # Verlet pos update
 #        planet.y = planet.y + h*planet.vy + h**2/2*(4*np.pi**2)*(np.sum(planet.forcey)/planet.m)
-        planet.x = planet.x + h*planet.vx + h**2/2*(4*np.pi**2)*(np.sum(planet.forcex)) # Verlet pos update
-        planet.y = planet.y + h*planet.vy + h**2/2*(4*np.pi**2)*(np.sum(planet.forcey))
+#        planet.x = planet.x + h*planet.vx + h**2/2*(4*np.pi**2)*(np.sum(planet.forcex)) # Verlet pos update
+        planet.x = planet.x + h*planet.vx + h**2/2*(-4*np.pi**2/planet.r**3*planet.x)        
+        planet.y = planet.y + h*planet.vy + h**2/2*(-4*np.pi**2/planet.r**3*planet.y)
  
        #planet.vx = planet.vx - h*4*np.pi**2*(x_old/planet.r**3 + np.sum(planet.forcex))
         #planet.vx = planet.vx + h/2((x_acceleration_old) + (x_acceleration))

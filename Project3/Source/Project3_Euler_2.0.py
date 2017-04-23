@@ -122,7 +122,8 @@ for i in range(N): #moar reliable?
             planet.yd[j] = yd # coord differences last to easily add z
             planet.xd[j] = xd
            
-            # = other.m/m_sun * (current.x - other.x)/((current.x-other.x)**2 + (current.y-other.y)**2)
+            # = other.m/m_sun * (current.x - other.x)/((current.x-other.x)**2 + (current.y-other.y)**2)**3
+            # = md*xd/rd**3
             planet.forcex[j] = planet.md[j]*planet.xd[j]/planet.rd[j]**3
             planet.forcey[j] = planet.md[j]*planet.yd[j]/planet.rd[j]**3
             j =+ 1 # Need to index numerically for np arrays
@@ -153,7 +154,12 @@ for i in range(N): #moar reliable?
                     
                     Euler:
                     x_i+1 = x_i + h*vx_i
+                    vx_i+1 = vx_i - d(vx_i)/dt
+                    
+                    x_i+1 = x_i + h*vx_i
                     vx_i+1 = vx_i - h*4pi^2/r_i^3*x_i
+                    
+                    vx_i+1 = vx_i - h*4pi^2*(x_i/r_i^3)
                     
                     
                     Verlet:
@@ -170,13 +176,16 @@ for i in range(N): #moar reliable?
                     vx_i+1 = vx_i - h*( 4pi^2/r_i^3*x_i - 4pi^2(m_other/m_sun)/r^3_e-j * (xe-xj) )
                     vx_i+1 = vx_i - h*( 4pi^2/r_i^3*x_i - 4pi^2(m_other/m_sun)/r_i^3_ej * (xe_i-xj_i) )
                     vx_i+1 = vx_i - h*( 4pi^2/r_i^3*x_i - 4pi^2(md)/rd_i^3 * xd_i )
-                    vx_i+1 = vx_i - h*4pi^2( x_i/r_i^3 - sum(md_i/rd_i^3*xd_i) ) # check
+                    vx_i+1 = vx_i - h*4pi^2( x_i/r_i^3 - sum(md_i/rd_i^3*xd_i) )
+                    
+                    Verlet:
+                    vx_i+1 = vx_i + h/2*(( -4pi^2/r_i+1^3*x_i+1 + sum(md_i+1/rd_i+1^3*xd_i+1)) + (-4pi^2/r_i^3*x_i + sum(md_i/rd_i^3*xd_i)))
         '''
         x_old = planet.x
         ### Euler: x_i+1
         planet.x = planet.x + h*planet.vx
         # forcex = other.m/m_sun * (current.x - other.x)/((current.x-other.x)**2 + (current.y-other.y)**2)
-        
+        #   = md*xd/rd**3
 #        planet.vx = planet.vx - h*4*np.pi**2*(x_old/planet.r**3 + np.sum(planet.forcex))
         planet.vx = planet.vx - h*4*np.pi**2*(planet.x/planet.r**3 + np.sum(planet.forcex))
         ## Second is improved Euler
