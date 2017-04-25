@@ -164,8 +164,7 @@ for i in range(N): #moar reliable?
                     
                     Verlet:
                     x_i+1 = x_i + h*vx_i + h^2/2*d(vx_i)/dt
-                    vx_i+1 = vx_i + h/2*(d(vx_i+1)/dt + d(vx_i)/dt)
-                    
+                     
                     x_i+1 = x_i + h*vx_i + h^2/2*( -4pi^2/r_i^3*x_i )
                     vx_i+1 = vx_i + h/2*(( -4pi^2/r_i+1^3*x_i+1 ) + (-4pi^2/r_i^3*x_i))
                     
