@@ -48,6 +48,7 @@ else:
 ###############################################################################
 
 # TODO: FORREAL: Just take the VIM config and copy/paste whole crap instead of dicking around with regex of epic proportions
+# - this will not work between raspi and ubuntu :(
 
 # TODO: Make generic function to find and uncomment lines in a list
 #   - pathtofile, listoflines, comment character
