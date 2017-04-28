@@ -6,6 +6,9 @@ N agents exchange money in pairs
 All agents start with same amount of money m0 > 0
 at given timestep, random agents exchange random (uniform) amount of money '''
 
+''' Changelog:
+V1.1 Added num_experiments to run multiple experiments of N agents
+'''
 #### clear;
 from IPython import get_ipython
 get_ipython().magic('reset -sf')
@@ -28,6 +31,9 @@ plt.close("all") #close all; </matlab>
 ##### USER PARAMS ######
 #Agents:
 num_agents = 500
+
+# Total experiments
+num_experiments = 2
 
 # Number of transactions
 #N = 10**2 # should be 10**7
@@ -60,27 +66,35 @@ def agentPick(num_agents):
 
 # Setup agents
 agents = np.zeros(num_agents)
+agents_avg  = np.zeros(num_agents)
 agents[:] = m0
 
-# Begin experiment
-for k in range(N):
-    
-    # Pick two agents at random, numbered i and j
-    i, j = agentPick(num_agents)
-    
-    # Generate a random number epsilon
-    ep = epsilonGen()
-    
-    # Exchange money
-    agents[i] = ep*(agents[i] + agents[j])
-    agents[j] = (1-ep)*(agents[i] + agents[j])
-    
+agents_storage = np.zeros((num_agents,num_experiments))
+
+# Begin experiment(s)
+for kk in range(num_experiments):
+    for k in range(N):
+        
+        # Pick two agents at random, numbered i and j
+        i, j = agentPick(num_agents)
+        
+        # Generate a random number epsilon
+        ep = epsilonGen()
+        
+        # Exchange money
+        agents[i] = ep*(agents[i] + agents[j])
+        agents[j] = (1-ep)*(agents[i] + agents[j])
+    agents_storage[:,kk] = agents[:]
+
+for i in range(len(agents)):
+    agents_avg[i] = np.mean(agents_storage[i,:])
 
 # Plot normal
 #plt.plot(agents)
 Plottr.plot(np.arange(len(agents)), agents, 'Agents', '$$$', 'Raw plot of' + 
             ' monies')
- 
+plt.show()
+
 # Plot histogram
 #hist, bin_edges = np.histogram(agents)
 plt.figure()
@@ -88,5 +102,4 @@ plt.hist(agents)
 plb.xlabel('Money amount ($)')
 plb.ylabel('Frequency')
 plb.title('Occurance of certain amount of money')
-
-
+plt.show()
