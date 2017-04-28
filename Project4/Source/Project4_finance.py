@@ -58,7 +58,13 @@ for k in range(N):
     agents[i] = ep*(agents[i] + agents[j])
     agents[j] = (1-ep)*(agents[i] + agents[j])
     
-    
+
+# Plot normal
+plt.plot(agents)
+ 
 # Plot histogram
-hist, bin_edges = np.histogram(agents)
+#hist, bin_edges = np.histogram(agents)
+plt.figure()
+plt.hist(agents)
+
 
