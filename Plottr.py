@@ -6,6 +6,10 @@ Scientific/plotting function library
 
 DUPLICATE SLAVE FOR PHY480 (update one in old dropbox folder.. move to git eventually)
 
+DONE: No need to Integrate updates 4/28/17
+Changelog:
+    - added plt.show() at end of plot()
+    NO. don't do this.
 @author: Mike
 """
 import numpy as np
@@ -32,6 +36,7 @@ def plot(X, Y=None, x_label=' ', y_label = ' ', title = ' ', xlog=0, ylog=0):
         plt.xscale('log')
     if ylog == 1:
         plt.yscale('log')
+    #plt.show()
 
 def ImShow(array, xlabel='', ylabel='', title='', limits=None, docolorbar=0):
     ''' 2D array plot via ImShow '''

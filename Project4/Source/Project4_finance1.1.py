@@ -93,8 +93,6 @@ for i in range(len(agents)):
 #plt.plot(agents)
 Plottr.plot(np.arange(len(agents)), agents, 'Agents', '$$$', 'Raw plot of' + 
             ' monies')
-plt.show()
-
 # Plot histogram
 #hist, bin_edges = np.histogram(agents)
 plt.figure()
@@ -102,4 +100,16 @@ plt.hist(agents)
 plb.xlabel('Money amount ($)')
 plb.ylabel('Frequency')
 plb.title('Occurance of certain amount of money')
-plt.show()
+#plt.show() # Only call plt.show() after all plots plotted
+
+## Plot avg all experiments
+Plottr.plot(np.arange(len(agents_avg)), agents, 'Agents', '$$$', 
+        'Raw plot of monies(All)')
+
+plt.figure()
+plt.hist(agents_avg)
+plb.xlabel('Money amount ($)')
+plb.ylabel('Frequency')
+plb.title('Occurance of certain amount of money(All)')
+plt.show(block=False) # show but allow input (and python to quit and leave plot)
+
