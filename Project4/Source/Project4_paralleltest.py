@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# Attempt at parallel code to speed up. didn't really work.
+
 ''' Program will simulate transactions between random agents. 
 Assumptions:
 N agents exchange money in pairs
@@ -23,6 +25,8 @@ import sys
 sys.path.append('../../') # Add path out of project folder to grab Plottr.py
 import Plottr 
 
+from joblib import Parallel, delayed
+import multiprocessing
 ###
 plt.close("all") #close all; </matlab>
 #mlab.close(all=True)
@@ -66,18 +70,11 @@ def agentPick(num_agents):
 #            print('agents same. redoing')
     return agent_i, agent_j
 
-# Setup agents
-agents = np.zeros(num_agents)
-agents_avg  = np.zeros(num_agents)
-agents[:] = m0
-
-agents_storage = np.zeros((num_agents,num_experiments))
-
-pct_10 = num_experiments/10
-# Begin experiment(s)
-for kk in range(num_experiments):
-    for k in range(N):
-        
+# Exchange of money experiment, modularized so can be run on multi-cores
+def exchangeMoney(num_agents, m0, num_transactions):
+    agents = np.zeros(num_agents)
+    agents[:] = m0
+    for k in range(num_transactions):
         # Pick two agents at random, numbered i and j
         i, j = agentPick(num_agents)
         
@@ -89,17 +86,30 @@ for kk in range(num_experiments):
         agents_i_old = agents[i]
         agents[i] = ep*(agents[i] + agents[j])
         agents[j] = (1-ep)*(agents_i_old + agents[j])# THIS IS WRONG
-    
-    # Store result for averaginv 
-    agents_storage[:,kk] = agents[:]
-    
-    # Print progress. Good for long runs
-    #print(str(kk+1) + '/' + str(num_experiments) + ' experiments done.')
-    if kk % pct_10 == 0:
-        print(str(kk+pct_10) + '/' + str(num_experiments) + ' experiments done.') 
+    return agents
 
-# Average the experiments
-for i in range(len(agents)):
+# Setup agents
+agents_avg  = np.zeros(num_agents)
+agents_storage = np.zeros((num_agents,num_experiments))
+
+pct_10 = num_experiments/10
+# Begin experiment(s)
+
+#for kk in range(num_experiments):
+#    # Store result for averaging
+#    agents_storage[:,kk] = exchangeMoney(N)
+#    
+#    # Print progress. Good for long runs
+#    #print(str(kk+1) + '/' + str(num_experiments) + ' experiments done.')
+#    if kk % pct_10 == 0:
+#        print(str(kk+pct_10) + '/' + str(num_experiments) + ' experiments done.') 
+
+num_cores = multiprocessing.cpu_count()
+results = Parallel(n_jobs=num_cores)(delayed(exchangeMoney(num_agents, m0, N))(kk) for kk in range(num_experiments))
+
+# Average the experiments ( This probably isn't the right way to avg)
+#for i in range(len(agents)):
+for i in range(num_agents):
     agents_avg[i] = np.mean(agents_storage[i,:])
 
 # Plot normal
