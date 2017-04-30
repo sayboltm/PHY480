@@ -26,6 +26,8 @@ import sys
 sys.path.append('../../') # Add path out of project folder to grab Plottr.py
 import Plottr 
 
+from datetime import datetime
+
 ###
 plt.close("all") #close all; </matlab>
 #mlab.close(all=True)
@@ -47,7 +49,7 @@ N = 10**5 # less transactions for debugging
 m0 = 100
 
 # Fraction of money to save
-sav = .5
+sav = .9
 
 ########################
 
@@ -78,7 +80,7 @@ agents_avg  = np.zeros(num_agents)
 agents_storage = np.zeros((num_agents,num_experiments))
 
 pct_10 = num_experiments/10
-# Begin experiment(s)
+
 def exchangeMoney(num_agents, m0, num_transactions):
     agents = np.zeros(num_agents)
     agents[:] = m0
@@ -97,6 +99,10 @@ def exchangeMoney(num_agents, m0, num_transactions):
         agents[j] = agents[j]*sav + (1-ep)*(1-sav)*(agents_i_old + agents[j])
     return agents
 
+# Start timer
+begintime = datetime.now()
+
+# Begin experiment(s)
 for kk in range(num_experiments):
     # Store result for averaging
     agents_storage[:,kk] = exchangeMoney(num_agents, m0, N)
@@ -105,6 +111,9 @@ for kk in range(num_experiments):
     #print(str(kk+1) + '/' + str(num_experiments) + ' experiments done.')
     if kk % pct_10 == 0:
         print(str(kk+pct_10) + '/' + str(num_experiments) + ' experiments done.') 
+
+# End timer
+print(datetime.now() - begintime)
 
 ## Average the experiments ( This probably isn't the right way to avg)
 #for i in range(num_agents):
