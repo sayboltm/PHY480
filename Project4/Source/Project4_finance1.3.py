@@ -37,7 +37,7 @@ plt.close("all") #close all; </matlab>
 num_agents = 500
 
 # Total experiments
-num_experiments = 10**2
+num_experiments = 10**3
 
 # Number of transactions
 N = 10**5 # less transactions for debugging
@@ -47,7 +47,7 @@ N = 10**5 # less transactions for debugging
 m0 = 100
 
 # Fraction of money to save
-sav = .3
+sav = .5
 
 ########################
 
@@ -123,7 +123,7 @@ Plottr.plot(np.arange(num_agents), agents_storage[:,-1], 'Agents', '$$$',
 # Plot histogram
 #hist, bin_edges = np.histogram(agents)
 plt.figure()
-plt.hist(agents_storage[:,-1])
+plt.hist(agents_storage[:,-1],bins=20)
 plb.xlabel('Money amount ($)')
 plb.ylabel('Frequency')
 plb.title('Occurance of certain amount of money(last experiment)')
@@ -133,14 +133,14 @@ plb.title('Occurance of certain amount of money(last experiment)')
 #Plottr.plot(np.arange(len(agents_avg)), agents_avg, 'Agents', '$$$', 
 #        'Raw plot of monies(All)')
 plt.figure()
-plt.hist(agents_total)
+plt.hist(agents_total,bins=20)
 plb.xlabel('Money amount ($)')
 plb.ylabel('Frequency')
 plb.title('Occurance of certain amount of money(All Experiments)')
 #plt.show(block=False) # show but allow input (and python to quit and leave plot)
 
 # Plot the log histogram (part b)
-data, bins = np.histogram(agents_total)
+data, bins = np.histogram(agents_total, bins=20)
 Plottr.plot(bins[:-1], np.log10(data))
 plt.show(block=False)
 
