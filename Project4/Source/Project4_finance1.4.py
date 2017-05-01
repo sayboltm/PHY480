@@ -73,6 +73,12 @@ def agentPick(num_agents):
 #            print('agents same. redoing')
     return agent_i, agent_j
 
+def monetaryAgentPick(num_agents, agents):
+    ''' Pick pairs of agents, non-uniformily, with skewing
+    towards agents of similar monetary status. '''
+    # Import agents, for num_agents scan for moneys, generate Pij
+    #numpy.random.choice(numpy.arange(num_agents), p=[agent1, agent2,.. etc])
+
 # Setup agents
 #agents = np.zeros(num_agents)
 agents_avg  = np.zeros(num_agents)
