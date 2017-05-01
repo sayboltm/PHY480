@@ -12,6 +12,7 @@ V1.2 works kind of up to part b
     - fixed summation bug (never comitted)
 V1.3 Add transactions and savings
 V1.4 IN PROGRESS Nearest neighbor interactions
+V1.5 IN PROGRESS Previous transaction likelihood
 '''
 #### clear;
 from IPython import get_ipython
