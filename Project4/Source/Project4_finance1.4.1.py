@@ -11,7 +11,8 @@ V1.1 Added num_experiments to run multiple experiments of N agents
 V1.2 works kind of up to part b
     - fixed summation bug (never comitted)
 V1.3 Add transactions and savings
-V1.4 IN PROGRESS Nearest neighbor interactions
+V1.4 DONE Nearest neighbor interactions (similar wealth)
+    V1.4.1 Corrected caveatSimilarWeath 
 '''
 #### clear;
 from IPython import get_ipython
@@ -56,7 +57,7 @@ sav = 0
 # Mean money = to m0 since all start with same
 mean_money = m0
 
-# Alpha
+# Alpha (discrimination of similar wealth, 0=none, 1 =some, 2= alot)
 #a = 1 
 a = 2.7
 ########################
@@ -120,7 +121,7 @@ def exchangeMoneyCaveat(num_agents, m0, num_transactions, mean_money, a):
         ep = epsilonGen()
         
         # Exchange money | New: if probability agrees with it
-        interact = caveatSimilarMoney(agents, i, j, m0, a)
+        interact = caveatSimilarWealth(agents, i, j, m0, a)
 
         if interact == 1: # Else, don't exchange money
             agents_i_old = agents[i]
@@ -128,7 +129,7 @@ def exchangeMoneyCaveat(num_agents, m0, num_transactions, mean_money, a):
             agents[j] = agents[j]*sav + (1-ep)*(1-sav)*(agents_i_old + agents[j])
     return agents
 
-def caveatSimilarMoney(agents, i, j, mean_money, a):
+def caveatSimilarWealth(agents, i, j, mean_money, a):
     ''' A Function to decide on interaction based on similar wealth
         Where:
             agents: vector of agents
@@ -136,16 +137,17 @@ def caveatSimilarMoney(agents, i, j, mean_money, a):
             j: index of second agent picked
             mean_money: average money of agents
             a: discrimination based on money
-                0 = same output (but reduced by 1-(2*(1/e))
-                small a will tend toward less discrimination
-                big a only agents with very similar wealth will interact '''
-
-    ''' pij = np.tanh(np.abs((mi-mj)/m0)**-a), where a = 0 to disable, but
-    actually still reduces probability. Nice that bounded by 1, so easy to 
-    work with. small a lessens the effect., big a, agents will back off for
-    smaller differences.'''
-    pij = np.tanh(np.abs((agents[i]-agents[j])/mean_money)**-a)
+                0 = disabled
+                small = some discrimination
+                a > 1: only agents with very similar wealth will interact '''
+''' The paper's function was for random initial money, not all the same which
+is why this modification is required. '''
     # Where pij is probability of INTERACTION
+#    pij = np.tanh(np.abs((agents[i]-agents[j])/mean_money)**-a)
+    mi = agents[i]
+    mj = agents[j]
+    x = np.abs((mi-mj)/mean_money)
+    pij = 1-(x/(x+1))**a # The 1 in 'x+1' could also be varied in the future
     p_interact = pij
     p_no_interact = 1-pij
     # Decide if interact or not

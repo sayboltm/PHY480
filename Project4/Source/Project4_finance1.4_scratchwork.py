@@ -40,7 +40,7 @@ plt.close("all") #close all; </matlab>
 num_agents = 500
 
 # Total experiments
-num_experiments = 10**2
+num_experiments = 10**3
 
 # Number of transactions
 N = 10**5 # less transactions for debugging
@@ -49,16 +49,14 @@ N = 10**5 # less transactions for debugging
 # start money for all agents
 m0 = 100
 
-# Fraction of money to save (set = 0 to disable)
-#sav = .9
-sav = 0
+# Fraction of money to save
+sav = .9
 
 # Mean money = to m0 since all start with same
 mean_money = m0
 
 # Alpha
-#a = 1 
-a = 2.7
+a = 1 
 ########################
 
 # Random function for epsilon for modularity
@@ -74,11 +72,39 @@ def agentPick(num_agents):
         agent_i = r.randint(0, num_agents-1)
         agent_j = r.randint(0, num_agents-1)
         
-        # Make sure picked agents are not the same
         if agent_i != agent_j:
             break
+#        else:
+#            print('agents same. redoing')
     return agent_i, agent_j
 
+def monetaryAgentPick(num_agents, agents, mean_money, a):
+    ''' Pick pairs of agents, non-uniformily, with skewing
+    towards agents of similar monetary status. '''
+    # Import agents, for num_agents scan for moneys, generate Pij
+    #numpy.random.choice(numpy.arange(num_agents), p=[agent1, agent2,.. etc])
+   
+
+    # Import agents, scan through and build a PDF for the second
+#    p = np.zeros(num_agents)
+#    for i in range(num_agents):
+#        p[i] = someFormulaNearestItemsGetHigherP ''' What might this be? '''
+
+    ''' Instead of screwing with the probability of being matched up,
+    adjust the likelyhood of transaction once matched. This will slow the 
+    'rate of monte carlo' but will surely be faster than scanning through
+    all to build a PDF. '''
+
+    while(1):
+        # pick the first agent
+        agent_i = r.randint(0, num_agents-1)
+#        agent_j = np.random.choice(np.arange(num_agents), p) 
+        agent_j = r.randint(0, num_agents-1)
+        if agent_i != agent_j:
+            # If valid selection, compute probability of interaction
+            pij = 2*np.abs((agents[agent_i]-agents[agent_j])/mean_money)**-a
+            break
+    return agent_i, agent_j
 # Setup agents
 #agents = np.zeros(num_agents)
 agents_avg  = np.zeros(num_agents)
@@ -106,10 +132,8 @@ def exchangeMoney(num_agents, m0, num_transactions):
         agents[j] = agents[j]*sav + (1-ep)*(1-sav)*(agents_i_old + agents[j])
     return agents
 
-def exchangeMoneyCaveat(num_agents, m0, num_transactions, mean_money, a):
-    ''' Attempt to exchange money with some caviat after selection.
-    This caveat may be agents must be of similar wealth, or have done a 
-    transaction previously. '''
+def exchangeMoneyCaveat(num_agents, m0, num_transactions):
+    ''' Attempt to exchange money with some caviat after selection '''
     agents = np.zeros(num_agents)
     agents[:] = m0
     for k in range(num_transactions):
@@ -120,46 +144,30 @@ def exchangeMoneyCaveat(num_agents, m0, num_transactions, mean_money, a):
         ep = epsilonGen()
         
         # Exchange money | New: if probability agrees with it
-        interact = caveatSimilarMoney(agents, i, j, m0, a)
+        # TODO: case where mi==mj==m0 is problem? -alpha = div 0
+        # Make own formula:
+        # no just add exception
+        # if alpha = 0, output = 2
+        # LOL kidding make own this works well
+        ''' pij = np.tanh(np.abs((mi-mj)/m0)**-a), where a = 0 to disable, but
+        actually still reduces probability. Nice that bounded by 1, so easy to 
+        work with. small a lessens the effect., big a, agents will back off for
+        smaller differences.'''
 
-        if interact == 1: # Else, don't exchange money
-            agents_i_old = agents[i]
-            agents[i] = agents[i]*sav + ep*(1-sav)*(agents[i] + agents[j])
-            agents[j] = agents[j]*sav + (1-ep)*(1-sav)*(agents_i_old + agents[j])
+        agents_i_old = agents[i]
+#        agents[i] = ep*(agents[i] + agents[j])
+#        agents[j] = (1-ep)*(agents_i_old + agents[j])
+        agents[i] = agents[i]*sav + ep*(1-sav)*(agents[i] + agents[j])
+        agents[j] = agents[j]*sav + (1-ep)*(1-sav)*(agents_i_old + agents[j])
     return agents
-
-def caveatSimilarMoney(agents, i, j, mean_money, a):
-    ''' A Function to decide on interaction based on similar wealth
-        Where:
-            agents: vector of agents
-            i: first agent picked
-            j: index of second agent picked
-            mean_money: average money of agents
-            a: discrimination based on money
-                0 = same output (but reduced by 1-(2*(1/e))
-                small a will tend toward less discrimination
-                big a only agents with very similar wealth will interact '''
-
-    ''' pij = np.tanh(np.abs((mi-mj)/m0)**-a), where a = 0 to disable, but
-    actually still reduces probability. Nice that bounded by 1, so easy to 
-    work with. small a lessens the effect., big a, agents will back off for
-    smaller differences.'''
-    pij = np.tanh(np.abs((agents[i]-agents[j])/mean_money)**-a)
-    # Where pij is probability of INTERACTION
-    p_interact = pij
-    p_no_interact = 1-pij
-    # Decide if interact or not
-    interact = np.random.choice(np.arange(2), p=[p_no_interact, p_interact])
-    return interact
-
 # Start timer
 begintime = datetime.now()
 
 # Begin experiment(s)
 for kk in range(num_experiments):
     # Store result for averaging
-#    agents_storage[:,kk] = exchangeMoney(num_agents, m0, N)
-    agents_storage[:,kk] = exchangeMoneyCaveat(num_agents,m0, N,mean_money, a)
+    agents_storage[:,kk] = exchangeMoney(num_agents, m0, N)
+    
     # Print progress. Good for long runs
     #print(str(kk+1) + '/' + str(num_experiments) + ' experiments done.')
     if kk % pct_10 == 0:

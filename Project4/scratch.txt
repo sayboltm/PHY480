@@ -1,0 +1,30 @@
+
+
+f(x) = x/(x+1)
+
+x:
+0 = 0
+small = small
+1 = 0.5
+big = almost 1
+
+
+np.abs((mi-mj)/m0)**-a returns:
+1 no matter what for a=0
+
+small pos for big difference, a=1
+huge for small difference, a=1, even more huge for a=2
+, will never be zero, but could be infinity if mi==mj, which is problem
+
+
+so make formula:
+(x/(x+1))**-a
+
+np.abs((mi-mj)/m0)
+
+((np.abs((mi-mj)/m0))/(np.abs((mi-mj)/m0) + 1))**-a
+
+
+
+
+
