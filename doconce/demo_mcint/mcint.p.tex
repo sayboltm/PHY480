@@ -1,0 +1,3677 @@
+%%
+%% Automatically generated file from DocOnce source
+%% (https://github.com/hplgit/doconce/)
+%%
+%%
+% #ifdef PTEX2TEX_EXPLANATION
+%%
+%% The file follows the ptex2tex extended LaTeX format, see
+%% ptex2tex: http://code.google.com/p/ptex2tex/
+%%
+%% Run
+%%      ptex2tex myfile
+%% or
+%%      doconce ptex2tex myfile
+%%
+%% to turn myfile.p.tex into an ordinary LaTeX file myfile.tex.
+%% (The ptex2tex program: http://code.google.com/p/ptex2tex)
+%% Many preprocess options can be added to ptex2tex or doconce ptex2tex
+%%
+%%      ptex2tex -DMINTED myfile
+%%      doconce ptex2tex myfile envir=minted
+%%
+%% ptex2tex will typeset code environments according to a global or local
+%% .ptex2tex.cfg configure file. doconce ptex2tex will typeset code
+%% according to options on the command line (just type doconce ptex2tex to
+%% see examples). If doconce ptex2tex has envir=minted, it enables the
+%% minted style without needing -DMINTED.
+% #endif
+
+% #define PREAMBLE
+
+% #ifdef PREAMBLE
+%-------------------- begin preamble ----------------------
+
+\documentclass[%
+oneside,                 % oneside: electronic viewing, twoside: printing
+final,                   % draft: marks overfull hboxes, figures with paths
+10pt]{article}
+
+\listfiles               %  print all files needed to compile this document
+
+\usepackage{relsize,epsfig,makeidx,color,setspace,amsmath,amsfonts,amssymb}
+\usepackage[table]{xcolor}
+\usepackage{bm,ltablex,microtype}
+
+\usepackage{graphicx}
+
+\usepackage{ptex2tex}
+% #ifdef MINTED
+\usepackage{minted}
+\usemintedstyle{default}
+% #endif
+
+\usepackage[T1]{fontenc}
+%\usepackage[latin1]{inputenc}
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+
+\usepackage{lmodern}         % Latin Modern fonts derived from Computer Modern
+
+% Hyperlinks in PDF:
+\definecolor{linkcolor}{rgb}{0,0,0.4}
+\usepackage{hyperref}
+\hypersetup{
+    breaklinks=true,
+    colorlinks=true,
+    linkcolor=linkcolor,
+    urlcolor=linkcolor,
+    citecolor=black,
+    filecolor=black,
+    %filecolor=blue,
+    pdfmenubar=true,
+    pdftoolbar=true,
+    bookmarksdepth=3   % Uncomment (and tweak) for PDF bookmarks with more levels than the TOC
+    }
+%\hyperbaseurl{}   % hyperlinks are relative to this root
+
+\setcounter{tocdepth}{2}  % levels in table of contents
+
+% --- fancyhdr package for fancy headers ---
+\usepackage{fancyhdr}
+\fancyhf{} % sets both header and footer to nothing
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[LE,RO]{\thepage}
+% Ensure copyright on titlepage (article style) and chapter pages (book style)
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[C]{{\footnotesize \copyright\ 1999-2017, Morten Hjorth-Jensen. Released under CC Attribution-NonCommercial 4.0 license}}
+%  \renewcommand{\footrulewidth}{0mm}
+  \renewcommand{\headrulewidth}{0mm}
+}
+% Ensure copyright on titlepages with \thispagestyle{empty}
+\fancypagestyle{empty}{
+  \fancyhf{}
+  \fancyfoot[C]{{\footnotesize \copyright\ 1999-2017, Morten Hjorth-Jensen. Released under CC Attribution-NonCommercial 4.0 license}}
+  \renewcommand{\footrulewidth}{0mm}
+  \renewcommand{\headrulewidth}{0mm}
+}
+
+\pagestyle{fancy}
+
+
+\usepackage[framemethod=TikZ]{mdframed}
+
+% --- begin definitions of admonition environments ---
+
+% Admonition style "mdfbox" is an oval colored box based on mdframed
+% "notice" admon
+\colorlet{mdfbox_notice_background}{gray!5}
+\newmdenv[
+  skipabove=15pt,
+  skipbelow=15pt,
+  outerlinewidth=0,
+  backgroundcolor=mdfbox_notice_background,
+  linecolor=black,
+  linewidth=2pt,       % frame thickness
+  frametitlebackgroundcolor=mdfbox_notice_background,
+  frametitlerule=true,
+  frametitlefont=\normalfont\bfseries,
+  shadow=false,        % frame shadow?
+  shadowsize=11pt,
+  leftmargin=0,
+  rightmargin=0,
+  roundcorner=5,
+  needspace=0pt,
+]{notice_mdfboxmdframed}
+
+\newenvironment{notice_mdfboxadmon}[1][]{
+\begin{notice_mdfboxmdframed}[frametitle=#1]
+}
+{
+\end{notice_mdfboxmdframed}
+}
+
+% Admonition style "mdfbox" is an oval colored box based on mdframed
+% "summary" admon
+\colorlet{mdfbox_summary_background}{gray!5}
+\newmdenv[
+  skipabove=15pt,
+  skipbelow=15pt,
+  outerlinewidth=0,
+  backgroundcolor=mdfbox_summary_background,
+  linecolor=black,
+  linewidth=2pt,       % frame thickness
+  frametitlebackgroundcolor=mdfbox_summary_background,
+  frametitlerule=true,
+  frametitlefont=\normalfont\bfseries,
+  shadow=false,        % frame shadow?
+  shadowsize=11pt,
+  leftmargin=0,
+  rightmargin=0,
+  roundcorner=5,
+  needspace=0pt,
+]{summary_mdfboxmdframed}
+
+\newenvironment{summary_mdfboxadmon}[1][]{
+\begin{summary_mdfboxmdframed}[frametitle=#1]
+}
+{
+\end{summary_mdfboxmdframed}
+}
+
+% Admonition style "mdfbox" is an oval colored box based on mdframed
+% "warning" admon
+\colorlet{mdfbox_warning_background}{gray!5}
+\newmdenv[
+  skipabove=15pt,
+  skipbelow=15pt,
+  outerlinewidth=0,
+  backgroundcolor=mdfbox_warning_background,
+  linecolor=black,
+  linewidth=2pt,       % frame thickness
+  frametitlebackgroundcolor=mdfbox_warning_background,
+  frametitlerule=true,
+  frametitlefont=\normalfont\bfseries,
+  shadow=false,        % frame shadow?
+  shadowsize=11pt,
+  leftmargin=0,
+  rightmargin=0,
+  roundcorner=5,
+  needspace=0pt,
+]{warning_mdfboxmdframed}
+
+\newenvironment{warning_mdfboxadmon}[1][]{
+\begin{warning_mdfboxmdframed}[frametitle=#1]
+}
+{
+\end{warning_mdfboxmdframed}
+}
+
+% Admonition style "mdfbox" is an oval colored box based on mdframed
+% "question" admon
+\colorlet{mdfbox_question_background}{gray!5}
+\newmdenv[
+  skipabove=15pt,
+  skipbelow=15pt,
+  outerlinewidth=0,
+  backgroundcolor=mdfbox_question_background,
+  linecolor=black,
+  linewidth=2pt,       % frame thickness
+  frametitlebackgroundcolor=mdfbox_question_background,
+  frametitlerule=true,
+  frametitlefont=\normalfont\bfseries,
+  shadow=false,        % frame shadow?
+  shadowsize=11pt,
+  leftmargin=0,
+  rightmargin=0,
+  roundcorner=5,
+  needspace=0pt,
+]{question_mdfboxmdframed}
+
+\newenvironment{question_mdfboxadmon}[1][]{
+\begin{question_mdfboxmdframed}[frametitle=#1]
+}
+{
+\end{question_mdfboxmdframed}
+}
+
+% Admonition style "mdfbox" is an oval colored box based on mdframed
+% "block" admon
+\colorlet{mdfbox_block_background}{gray!5}
+\newmdenv[
+  skipabove=15pt,
+  skipbelow=15pt,
+  outerlinewidth=0,
+  backgroundcolor=mdfbox_block_background,
+  linecolor=black,
+  linewidth=2pt,       % frame thickness
+  frametitlebackgroundcolor=mdfbox_block_background,
+  frametitlerule=true,
+  frametitlefont=\normalfont\bfseries,
+  shadow=false,        % frame shadow?
+  shadowsize=11pt,
+  leftmargin=0,
+  rightmargin=0,
+  roundcorner=5,
+  needspace=0pt,
+]{block_mdfboxmdframed}
+
+\newenvironment{block_mdfboxadmon}[1][]{
+\begin{block_mdfboxmdframed}[frametitle=#1]
+}
+{
+\end{block_mdfboxmdframed}
+}
+
+% --- end of definitions of admonition environments ---
+
+% prevent orhpans and widows
+\clubpenalty = 10000
+\widowpenalty = 10000
+
+% --- end of standard preamble for documents ---
+
+
+% insert custom LaTeX commands...
+
+\raggedbottom
+\makeindex
+\usepackage[totoc]{idxlayout}   % for index in the toc
+\usepackage[nottoc]{tocbibind}  % for references/bibliography in the toc
+
+%-------------------- end preamble ----------------------
+
+\begin{document}
+
+% matching end for #ifdef PREAMBLE
+% #endif
+
+\newcommand{\exercisesection}[1]{\subsection*{#1}}
+
+
+% ------------------- main content ----------------------
+
+
+
+% ----------------- title -------------------------
+
+\thispagestyle{empty}
+
+\begin{center}
+{\LARGE\bf
+\begin{spacing}{1.25}
+Computational Physics Lectures: Introduction to Monte Carlo methods
+\end{spacing}
+}
+\end{center}
+
+% ----------------- author(s) -------------------------
+
+\begin{center}
+{\bf Morten Hjorth-Jensen${}^{1, 2}$} \\ [0mm]
+\end{center}
+
+\begin{center}
+% List of all institutions:
+\centerline{{\small ${}^1$Department of Physics, University of Oslo}}
+\centerline{{\small ${}^2$Department of Physics and Astronomy and National Superconducting Cyclotron Laboratory, Michigan State University}}
+\end{center}
+    
+% ----------------- end author(s) -------------------------
+
+% --- begin date ---
+\begin{center}
+2017
+\end{center}
+% --- end date ---
+
+\vspace{1cm}
+
+
+% !split
+\subsection{Monte Carlo methods, plan for the lectures}
+
+\begin{block_mdfboxadmon}[]
+\begin{enumerate}
+\item Intro, MC integration and probability distribution functions (PDFs)
+
+\item More on integration, PDFs, MC integration and random walks.
+
+\item Random walks and statistical physics.
+
+\item Statistical physics and the Ising and Potts models
+
+\item Quantum Monte Carlo
+\end{enumerate}
+
+\noindent
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Monte Carlo: Enhances algorithmic thinking!}
+
+\begin{block_mdfboxadmon}[]
+\begin{itemize}
+\item Be able to generate random variables following a given probability distribution function PDF
+
+\item Find a probability distribution function (PDF)
+
+\item Sampling rule for accepting a move
+
+\item Compute standard deviation and other expectation values
+
+\item Techniques for improving errors
+\end{itemize}
+
+\noindent
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Domains and probabilities}
+
+\begin{block_mdfboxadmon}[]
+Consider the following simple example, namely the tossing of a dice, resulting in  the following possible values
+\begin{equation*}
+\{2,3,4,5,6,7,8,9,10,11,12\}. 
+\end{equation*}
+These values are called the \emph{domain}. 
+To this domain we have the corresponding \emph{probabilities}
+\begin{equation*}
+\{1/36,2/36/3/36,4/36,5/36,6/36,5/36,4/36,3/36,2/36,1/36\}.
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Monte Carlo methods, tossing a dice}
+
+\begin{block_mdfboxadmon}[]
+The numbers in the domain are the outcomes of the physical process tossing the dice.
+We cannot tell beforehand whether the outcome is 3 or 5 or any other number in this domain.
+This defines the randomness of the outcome, or unexpectedness or any other synonimous word which
+encompasses the uncertitude of the final outcome. 
+
+The only thing we can tell beforehand
+is that say the outcome 2 has a certain probability.  
+If our favorite hobby is to  spend an hour every evening throwing dice and 
+registering the sequence of outcomes, we will note that the numbers in the above domain
+\begin{equation*}
+\{2,3,4,5,6,7,8,9,10,11,12\},
+\end{equation*}
+appear in a random order. After 11 throws the results may look like
+
+\begin{equation*}
+\{10,8,6,3,6,9,11,8,12,4,5\}. 
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Stochastic variables}
+
+\begin{block_mdfboxadmon}[]
+
+\textbf{Random variables are characterized by a domain which contains all possible values that the random value may take. This domain has a corresponding PDF}.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Stochastic variables and the main concepts, the discrete case}
+
+\begin{block_mdfboxadmon}[]
+There are two main concepts associated with a stochastic variable. The
+\emph{domain} is the set $\mathbb D = \{x\}$ of all accessible values
+the variable can assume, so that $X \in \mathbb D$. An example of a
+discrete domain is the set of six different numbers that we may get by
+throwing of a dice, $x\in\{1,\,2,\,3,\,4,\,5,\,6\}$.
+
+The \emph{probability distribution function (PDF)} is a function
+$p(x)$ on the domain which, in the discrete case, gives us the
+probability or relative frequency with which these values of $X$
+occur
+\begin{equation*}
+p(x) = \mathrm{Prob}(X=x).
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Stochastic variables and the main concepts, the continuous case}
+
+\begin{block_mdfboxadmon}[]
+In the continuous case, the PDF does not directly depict the
+actual probability. Instead we define the probability for the
+stochastic variable to assume any value on an infinitesimal interval
+around $x$ to be $p(x)dx$. The continuous function $p(x)$ then gives us
+the \emph{density} of the probability rather than the probability
+itself. The probability for a stochastic variable to assume any value
+on a non-infinitesimal interval $[a,\,b]$ is then just the integral
+
+\begin{equation*}
+\mathrm{Prob}(a\leq X\leq b) = \int_a^b p(x)dx.
+\end{equation*}
+Qualitatively speaking, a stochastic variable represents the values of
+numbers chosen as if by chance from some specified PDF so that the
+selection of a large set of these numbers reproduces this PDF.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{The cumulative probability}
+
+\begin{block_mdfboxadmon}[]
+Of interest to us is the \emph{cumulative probability
+distribution function} (\textbf{CDF}), $P(x)$, which is just the probability
+for a stochastic variable $X$ to assume any value less than $x$
+\begin{equation*}
+P(x)=\mathrm{Prob(}X\leq x\mathrm{)} =
+\int_{-\infty}^x p(x^{\prime})dx^{\prime}.
+\end{equation*}
+The relation between a CDF and its corresponding PDF is then
+
+\begin{equation*}
+p(x) = \frac{d}{dx}P(x).
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Properties of PDFs}
+
+\begin{block_mdfboxadmon}[]
+
+There are two properties that all PDFs must satisfy. The first one is
+positivity (assuming that the PDF is normalized)
+
+\begin{equation*}
+0 \leq p(x) \leq 1.
+\end{equation*}
+Naturally, it would be nonsensical for any of the values of the domain
+to occur with a probability greater than $1$ or less than $0$. Also,
+the PDF must be normalized. That is, all the probabilities must add up
+to unity.  The probability of ``anything'' to happen is always unity. For
+both discrete and continuous PDFs, this condition is
+\begin{align*}
+\sum_{x_i\in\mathbb D} p(x_i) & =  1,\\
+\int_{x\in\mathbb D} p(x)\,dx & =  1.
+\end{align*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Important distributions, the uniform distribution}
+
+\begin{block_mdfboxadmon}[]
+The first one
+is the most basic PDF; namely the uniform distribution
+\begin{equation}
+p(x) = \frac{1}{b-a}\theta(x-a)\theta(b-x),
+\label{eq:unifromPDF}
+\end{equation}
+with
+\begin{equation*}
+\begin{array}{ll}
+\theta(x)=0 & x<0 \\
+\theta(x)=\frac{1}{b-a} & \in [a,b].
+\end{array}
+\end{equation*}
+The normal distribution with $b=1$ and $a=0$ is used to generate random numbers.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Gaussian distribution}
+
+\begin{block_mdfboxadmon}[]
+The second one is the Gaussian Distribution
+\begin{equation*}
+p(x) = \frac{1}{\sigma\sqrt{2\pi}} \exp{(-\frac{(x-\mu)^2}{2\sigma^2})},
+\end{equation*}
+with mean value $\mu$ and standard deviation $\sigma$. If $\mu=0$ and $\sigma=1$, it is normally called the \textbf{standard normal distribution}
+\begin{equation*}
+p(x) = \frac{1}{\sqrt{2\pi}} \exp{(-\frac{x^2}{2})},
+\end{equation*}
+
+The following simple Python code plots the above distribution for different values of $\mu$ and $\sigma$. 
+\bpypro
+import numpy as np
+from math import acos, exp, sqrt
+from  matplotlib import pyplot as plt
+from matplotlib import rc, rcParams
+import matplotlib.units as units
+import matplotlib.ticker as ticker
+rc('text',usetex=True)
+rc('font',**{'family':'serif','serif':['Gaussian distribution']})
+font = {'family' : 'serif',
+        'color'  : 'darkred',
+        'weight' : 'normal',
+        'size'   : 16,
+        }
+pi = acos(-1.0)
+mu0 = 0.0
+sigma0 = 1.0
+mu1= 1.0
+sigma1 = 2.0
+mu2 = 2.0
+sigma2 = 4.0
+
+x = np.linspace(-20.0, 20.0)
+v0 = np.exp(-(x*x-2*x*mu0+mu0*mu0)/(2*sigma0*sigma0))/sqrt(2*pi*sigma0*sigma0)
+v1 = np.exp(-(x*x-2*x*mu1+mu1*mu1)/(2*sigma1*sigma1))/sqrt(2*pi*sigma1*sigma1)
+v2 = np.exp(-(x*x-2*x*mu2+mu2*mu2)/(2*sigma2*sigma2))/sqrt(2*pi*sigma2*sigma2)
+plt.plot(x, v0, 'b-', x, v1, 'r-', x, v2, 'g-')
+plt.title(r'{\bf Gaussian distributions}', fontsize=20)
+plt.text(-19, 0.3, r'Parameters: $\mu = 0$, $\sigma = 1$', fontdict=font)
+plt.text(-19, 0.18, r'Parameters: $\mu = 1$, $\sigma = 2$', fontdict=font)
+plt.text(-19, 0.08, r'Parameters: $\mu = 2$, $\sigma = 4$', fontdict=font)
+plt.xlabel(r'$x$',fontsize=20)
+plt.ylabel(r'$p(x)$ [MeV]',fontsize=20)
+
+# Tweak spacing to prevent clipping of ylabel                                                                       
+plt.subplots_adjust(left=0.15)
+plt.savefig('gaussian.pdf', format='pdf')
+plt.show()
+\epypro
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Exponential distribution}
+
+\begin{block_mdfboxadmon}[]
+Another important distribution in science is the exponential distribution
+\begin{equation*}
+p(x) = \alpha\exp{-(\alpha x)}.
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Expectation values}
+
+\begin{block_mdfboxadmon}[]
+Let $h(x)$ be an arbitrary continuous function on the domain of the stochastic
+variable $X$ whose PDF is $p(x)$. We define the \emph{expectation value}
+of $h$ with respect to $p$ as follows
+
+\begin{equation}
+\langle h \rangle_X \equiv \int\! h(x)p(x)\,dx
+\label{eq:expectation_value_of_h_wrt_p}
+\end{equation}
+Whenever the PDF is known implicitly, like in this case, we will drop
+the index $X$ for clarity.  
+A particularly useful class of special expectation values are the
+\emph{moments}. The $n$-th moment of the PDF $p$ is defined as
+follows
+\begin{equation*}
+\langle x^n \rangle \equiv \int\! x^n p(x)\,dx
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Stochastic variables and the main concepts, mean values}
+
+\begin{block_mdfboxadmon}[]
+The zero-th moment $\langle 1\rangle$ is just the normalization condition of
+$p$. The first moment, $\langle x\rangle$, is called the \emph{mean} of $p$
+and often denoted by the letter $\mu$
+\begin{equation*}
+\langle x\rangle  = \mu \equiv \int x p(x)dx,
+\end{equation*}
+for a continuous distribution and 
+\begin{equation*}
+\langle x\rangle  = \mu \equiv \frac{1}{N}\sum_{i=1}^N x_i p(x_i),
+\end{equation*}
+for a discrete distribution. 
+Qualitatively it represents the centroid or the average value of the
+PDF and is therefore simply called the expectation value of $p(x)$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Stochastic variables and the main concepts, central moments, the variance}
+
+\begin{block_mdfboxadmon}[]
+
+A special version of the moments is the set of \emph{central moments}, the n-th central moment defined as
+\begin{equation*}
+\langle (x-\langle x\rangle )^n\rangle  \equiv \int\! (x-\langle x\rangle)^n p(x)\,dx
+\end{equation*}
+The zero-th and first central moments are both trivial, equal $1$ and
+$0$, respectively. But the second central moment, known as the
+\emph{variance} of $p$, is of particular interest. For the stochastic
+variable $X$, the variance is denoted as $\sigma^2_X$ or $\mathrm{Var}(X)$
+\begin{align*}
+\sigma^2_X &=\mathrm{Var}(X) =  \langle (x-\langle x\rangle)^2\rangle  =
+\int (x-\langle x\rangle)^2 p(x)dx\\
+& =  \int\left(x^2 - 2 x \langle x\rangle^{2} +\langle x\rangle^2\right)p(x)dx\\
+& =  \langle x^2\rangle\rangle - 2 \langle x\rangle\langle x\rangle + \langle x\rangle^2\\
+& =  \langle x^2 \rangle - \langle x\rangle^2
+\end{align*}
+The square root of the variance, $\sigma =\sqrt{\langle (x-\langle x\rangle)^2\rangle}$ is called the 
+\textbf{standard deviation} of $p$. It is the RMS (root-mean-square)
+value of the deviation of the PDF from its mean value, interpreted
+qualitatively as the ``spread'' of $p$ around its mean.
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+
+% !split
+\subsection{First Illustration of the Use of Monte-Carlo Methods, integration}
+
+\begin{block_mdfboxadmon}[]
+With this definition of a random variable and its associated PDF, 
+we attempt now a clarification of the Monte-Carlo strategy by using the 
+evaluation of an integral
+as our example. 
+
+In discussion on numerical integration  we went through standard methods for evaluating an integral like
+
+\begin{equation*}
+   I=\int_0^1 f(x)dx\approx \sum_{i=1}^N\omega_if(x_i),
+\end{equation*}
+where $\omega_i$ are the weights determined by the specific integration method  
+(like Simpson's method) with $x_i$ the given mesh points. 
+To give you a feeling of how we are to evaluate the above integral using Monte-Carlo,
+we employ here the crudest possible approach. Later on we will present
+slightly more refined approaches.
+This crude approach consists in setting all weights equal 1, $\omega_i=1$.  That corresponds to the 
+rectangle method
+\begin{equation*}
+   I=\int_a^bf(x) dx \approx  h\sum_{i=1}^N f(x_{i-1/2}), 
+\end{equation*}
+where $f(x_{i-1/2})$ is the midpoint value of $f$ for a  given value $x_{i-1/2}$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{First Illustration of the Use of Monte-Carlo Methods, integration}
+
+\begin{block_mdfboxadmon}[]
+Setting $h=(b-a)/N$ where $b=1$, $a=0$, we can then rewrite the above integral as
+\begin{equation*}
+   I=\int_0^1 f(x)dx\approx \frac{1}{N}\sum_{i=1}^Nf(x_{i-1/2}),
+\end{equation*}
+where $x_{i-1/2}$ are the midpoint values of $x$.
+Introducing the concept of the average of the function $f$ for a given PDF $p(x)$ as
+\begin{equation*}
+   \langle f \rangle = \frac{1}{N}\sum_{i=1}^Nf(x_i)p(x_i),
+\end{equation*}
+and identify $p(x)$ with the uniform distribution, viz
+$ p(x)=1$ when $x\in [0,1]$ and zero for all other values of $x$.
+The integral is 
+is then  the average of $f$ over the interval $x \in [0,1]$
+
+\begin{equation*}
+      I=\int_0^1 f(x)dx\approx \langle f \rangle. 
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{First Illustration of the Use of Monte-Carlo Methods, variance in integration}
+
+\begin{block_mdfboxadmon}[]
+In addition to the average value $\langle f \rangle$ the other 
+important quantity in a  
+Monte-Carlo calculation is the variance $\sigma^2$ and 
+the standard deviation $\sigma$. We define first the variance
+of the integral with $f$ for a uniform distribution in the interval 
+$x \in [0,1]$ to be
+\begin{equation*}
+  \sigma^2_f=\frac{1}{N}\sum_{i=1}^N(f(x_i)-\langle f\rangle)^2p(x_i), 
+\end{equation*}
+and inserting the uniform distribution this yields
+\begin{equation*}
+  \sigma^2_f=\frac{1}{N}\sum_{i=1}^Nf(x_i)^2- 
+  \left(\frac{1}{N}\sum_{i=1}^Nf(x_i)\right)^2,
+\end{equation*}
+or
+\begin{equation*}
+  \sigma^2_f=\left(\langle f^2\rangle - 
+                                 \langle f \rangle^2\right).
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Monte-Carlo integration, meaning of variance}
+
+\begin{block_mdfboxadmon}[]
+The variance  is nothing but a measure of the extent to
+which $f$ deviates from its average over the region of integration. 
+The standard deviation is defined as the square root of the variance.
+If we consider the above results for 
+a fixed value of $N$ as a measurement, 
+we could recalculate the 
+above average and variance for a series of different measurements.
+If each such measumerent produces a set of averages for the 
+integral $I$ denoted $\langle f\rangle_l$, we have for $M$ measurements
+that the integral is given by
+\begin{equation*}
+   \langle I \rangle_M=\frac{1}{M}\sum_{l=1}^{M}\langle f\rangle_l.
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{First Illustration of the Use of Monte-Carlo Methods, integration}
+
+\begin{block_mdfboxadmon}[]
+If we can consider the probability of 
+correlated events to be zero, we can rewrite
+the variance of these series of measurements as (equating $M=N$)
+\begin{equation}
+  \sigma^2_N\approx \frac{1}{N}\left(\langle f^2\rangle - 
+                                 \langle f \rangle^2\right)=\frac{\sigma^2_f}{N}.
+\label{eq:sigmaN}
+\end{equation}
+We note that the standard deviation is proportional to the inverse square root of 
+the number of measurements
+\begin{equation*}
+   \sigma_N \sim \frac{1}{\sqrt{N}}.
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Important aspects of Monte-Carlo Methods}
+
+\begin{block_mdfboxadmon}[]
+\emph{The aim of Monte Carlo calculations is to have $\sigma_N$ as small as possible after $N$ samples. }
+The results from one  sample represents, 
+since we are using concepts from statistics,
+a 'measurement'.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Why Monte Carlo integration?}
+
+\begin{block_mdfboxadmon}[]
+The scaling in the previous equation 
+is clearly unfavorable compared even with the 
+trapezoidal rule. We saw that the trapezoidal
+rule carries a truncation error 
+\[
+\mathrm{error}\sim O(h^2),
+\]
+with $h$ the step length.
+In general, methods based on a Taylor expansion such as the trapezoidal
+rule or Simpson's rule have a truncation
+error which goes like $\sim O(h^k)$, with $k \ge 1$. 
+Recalling that the step size is defined as $h=(b-a)/N$, we have an
+error which goes like 
+\[
+\mathrm{error}\sim N^{-k}.  
+\]
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Why Monte Carlo integration?}
+
+\begin{block_mdfboxadmon}[]
+Monte Carlo integration is more efficient in higher dimensions.
+To see this, let us assume that our integration volume is a hypercube 
+with side $L$ and dimension $d$. This cube contains hence 
+$N=(L/h)^d$ points and therefore the error in the result scales as
+$N^{-k/d}$ for the traditional methods. 
+
+The error in the Monte carlo integration is 
+however independent of $d$ and scales as 
+\[
+\mathrm{error}\sim 1/\sqrt{N}. 
+\]
+\textbf{Always}! 
+
+Comparing this error with that of the traditional methods, shows that
+Monte Carlo integration is more efficient than an  algorithm with error in powers of $k$
+when 
+\[
+d>2k.
+\]
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Why Monte Carlo integration? Example}
+
+\begin{block_mdfboxadmon}[]
+In order to expose this, consider the definition of the quantum mechanical energy
+of a system consisting of 10 particles in three dimensions. The energy is the expectation value 
+of the Hamiltonian $H$ and reads
+\begin{equation*}
+    E=\frac{\int d\mathbf{R}_1d\mathbf{R}_2\dots d\mathbf{R}_N
+          \Psi^{\ast}(\mathbf{R_1},\mathbf{R}_2,\dots,\mathbf{R}_N)
+           H(\mathbf{R_1},\mathbf{R}_2,\dots,\mathbf{R}_N)
+           \Psi(\mathbf{R_1},\mathbf{R}_2,\dots,\mathbf{R}_N)}
+         {\int d\mathbf{R}_1d\mathbf{R}_2\dots d\mathbf{R}_N
+         \Psi^{\ast}(\mathbf{R_1},\mathbf{R}_2,\dots,\mathbf{R}_N)
+         \Psi(\mathbf{R_1},\mathbf{R}_2,\dots,\mathbf{R}_N)},
+ \end{equation*}
+where $\Psi$ is the wave function of the system and $\mathbf{R}_i$ are the coordinates
+of each particle. If we want to compute the above integral 
+using for example Gaussian quadrature and use for example ten mesh
+points for the ten particles, we need to compute a ten-dimensional integral with a total of $10^{30}$ mesh points.
+As an amusing exercise, assume that you have access to today's fastest computer with a theoretical peak 
+capacity of more than one Petaflops, that is $10^{15}$ floating point operations per second. Assume also that every mesh point
+corresponds to one floating operation per second. Estimate then the time needed to compute this integral with
+a traditional method like Gaussian quadrature and compare this number with the estimated lifetime of the
+universe, $T\approx 4.7 \times 10^{17}$s. Do you have the patience to wait?
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Monte Carlo integration, simple  example}
+
+\begin{block_mdfboxadmon}[]
+We end this first part with a discussion of 
+a brute force Monte Carlo program which integrates
+\begin{equation*}
+   \int_0^1dx\frac{4}{1+x^2} = \pi,
+\end{equation*}
+where the input is the desired number of Monte Carlo samples.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Monte Carlo integration, simple  example}
+
+\begin{block_mdfboxadmon}[]
+What we are doing is to employ a random number generator to obtain numbers
+$x_i$ in the interval $[0,1]$ through a call to one of the 
+library functions
+$ran0$, $ran1$, $ran2$ or $ran3$ which generate random numbers in the 
+interval $x\in [0,1]$. 
+These functions will be discussed in the next section. 
+Here we simply employ these functions in order
+to generate a random variable.
+All random number generators produce pseudo-random  
+numbers in the interval $[0,1]$ using the so-called uniform
+probability distribution  
+$p(x)$ defined as
+
+\begin{equation*}
+  p(x)=\frac{1}{b-a}\Theta(x-a)\Theta(b-x),
+\end{equation*}
+with  $a=0$ og $b=1$ and where $\Theta$ is the standard Heaviside 
+function or simply the step function.
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Monte Carlo integration, simple  example}
+
+\begin{block_mdfboxadmon}[]
+If we have a general  interval  $[a,b]$, we can still
+use these random number generators through a change of variables
+
+\begin{equation*}
+   z=a+(b-a)x,
+\end{equation*}
+with $x$ in the interval  $x\in [0,1]$.
+\end{block_mdfboxadmon} % title: 
+
+
+% !split
+\subsection{Monte Carlo integration, simple  example}
+
+\begin{block_mdfboxadmon}[]
+The present  approach to the above integral is often called 'crude' or 
+'Brute-Force' Monte-Carlo. 
+Later on in this chapter we will study refinements to this
+simple approach. The reason is that a random generator 
+produces 
+points that are distributed
+in a homogenous way in the interval $[0,1]$.  
+If our function is peaked around certain values of $x$,  
+we may end 
+up sampling function values where 
+$f(x)$ is small or near zero. Better schemes which reflect the 
+properties of the function to be integrated are thence needed.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Monte Carlo integration, algorithm}
+
+\begin{block_mdfboxadmon}[]
+The algorithm is as follows
+
+\begin{itemize}
+  \item Choose the number of Monte Carlo samples $N$.
+
+  \item Perform a loop over $N$ and for each step generate a random number $x_i$ in the interval $[0,1]$ through a call  to a random number generator.
+
+  \item Use this number to evaluate $f(x_i)$.
+
+  \item Evaluate the contributions to the mean value and the standard  deviation for each loop.
+
+  \item After $N$ samples calculate the final mean value and the standard deviation.
+\end{itemize}
+
+\noindent
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Monte Carlo integration, simple  example, the program}
+
+\begin{block_mdfboxadmon}[]
+\bcppcod
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+//     Here we define various functions called by the main program  
+//     this function defines the function to integrate  
+
+double func(double x);
+
+//     Main function begins here     
+int main()
+{
+     int n;
+     double MCint, MCintsqr2, fx, Variance; 
+     cout << "Read in the number of Monte-Carlo samples" << endl;
+     cin >> n;
+     MCint = MCintsqr2=0.;
+     double invers_period = 1./RAND_MAX; // initialise the random number generator
+     srand(time(NULL));  // This produces the so-called seed in MC jargon
+//   evaluate the integral with the a crude Monte-Carlo method    
+     for ( int i = 1;  i <= n; i++){
+  // obtain a floating number x in [0,1]
+           double x = double(rand())*invers_period; 
+           fx = func(x);
+           MCint += fx;
+           MCintsqr2 += fx*fx;
+     }
+     MCint = MCint/((double) n );
+     MCintsqr2 = MCintsqr2/((double) n );
+     double variance=MCintsqr2-MCint*MCint;
+//   final output 
+     cout << " variance= " << variance << " Integral = " << MCint << " Exact= " << M_PI << endl;
+}  // end of main program 
+// this function defines the function to integrate 
+double func(double x)
+{
+  double value;
+  value = 4/(1.+x*x);
+  return value;
+} // end of function to evaluate 
+\ecppcod
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Monte Carlo integration, simple  example and the results}
+
+\begin{block_mdfboxadmon}[]
+
+
+\begin{quote}
+\begin{tabular}{rll}
+\hline
+\multicolumn{1}{c}{ $N$ } & \multicolumn{1}{c}{ $I$ } & \multicolumn{1}{c}{ $\sigma_N$ } \\
+\hline
+10       & 3.10263E+00 & 3.98802E-01 \\
+100      & 3.02933E+00 & 4.04822E-01 \\
+1000     & 3.13395E+00 & 4.22881E-01 \\
+10000    & 3.14195E+00 & 4.11195E-01 \\
+100000   & 3.14003E+00 & 4.14114E-01 \\
+1000000  & 3.14213E+00 & 4.13838E-01 \\
+10000000 & 3.14177E+00 & 4.13523E-01 \\
+$10^{9}$ & 3.14162E+00 & 4.13581E-01 \\
+\hline
+\end{tabular}
+\end{quote}
+
+\noindent
+We note that as $N$ increases, the integral itself never reaches more than an agreement 
+to the fourth or fifth digit. The variance also oscillates around its exact value
+$4.13581E-01$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Testing against the trapezoidal rule for a one-dimensional integral}
+
+\begin{block_mdfboxadmon}[]
+The following simple Python code, with pertaining plot shows the relative error for the above integral using a brute force Monte Carlo approach and the trapezoidal rule. Running the python code shows that the trapezoidal rule is clearly superior in this case. With importance sampling and multi-dimensional integrals, the Monte Carl method takes over again.
+\bpypro
+from  matplotlib import pyplot as plt
+from math import exp, acos, log10
+import numpy as np
+import random
+
+# function for the trapezoidal rule
+def TrapezoidalRule(a,b,f,n):
+   h = (b-a)/float(n)
+   s = 0
+   x = a
+   for i in range(1,n,1):
+       x = x+h
+       s = s+ f(x)
+   s = 0.5*(f(a)+f(b))+s
+   return h*s
+# function to perform the Monte Carlo calculations
+def MonteCarloIntegration(f,n):
+    sum = 0
+# Define the seed for the rng
+    random.seed()    
+    for i in range (1, n, 1):
+        x = random.random()
+        sum = sum +f(x)
+    return sum/n
+
+#  function to compute
+def function(x):
+    return 4/(1+x*x)
+
+# Integration limits for the Trapezoidal rule
+a = 0.0; b = 1.0
+exact = acos(-1.0)
+# set up the arrays for plotting the relative error
+log10n = np.zeros(6); Trapez = np.zeros(6); MCint = np.zeros(6);
+# find the relative error as function of integration points
+for i in range(1, 6):
+    npts = 10**(i+1)
+    log10n[i] = log10(npts)
+    Trapez[i] = log10(abs((TrapezoidalRule(a,b,function,npts)-exact)/exact))
+    MCint[i] = log10(abs((MonteCarloIntegration(function,npts)-exact)/exact))
+plt.plot(log10n, Trapez ,'b-',log10n, MCint,'g-')
+plt.axis([1,6,-14.0, 0.0])
+plt.xlabel('$\log_{10}(n)$')
+plt.ylabel('Relative error')
+plt.title('Relative errors for Monte Carlo integration and Trapezoidal rule')
+plt.legend(['Trapezoidal rule', 'Brute force Monte Carlo integration'], loc='best') 
+plt.savefig('mcintegration.pdf')
+plt.show()
+
+\epypro
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Second example, particles in a box}
+
+\begin{block_mdfboxadmon}[]
+
+We give here an example of how a system evolves towards 
+a well defined equilibrium state.
+
+Consider a box divided into two equal halves separated by a wall.
+At the beginning, time $t=0$, there are $N$ particles on the left
+side. A small hole in the wall is then opened and one particle
+can pass through the hole per unit time. 
+
+After some time the system reaches its equilibrium state with
+equally many particles in both halves, $N/2$. 
+Instead of determining complicated initial conditions for a system 
+of $N$ particles, we model the system by a simple statistical model. 
+In order to simulate this system, which may consist of $N \gg 1$ particles,
+we assume that all particles in the left half have equal probabilities
+of going to the right half. 
+We introduce the label $n_l$ to denote the 
+ number of particles at every time on the left side, and $n_r=N-n_l$ for those
+on the right side.
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Second example, particles in a box}
+
+\begin{block_mdfboxadmon}[]
+The probability for a move to the right during a time step  $\Delta t$
+is $n_l/N$. The algorithm for simulating this problem may then look
+like this
+
+\begin{itemize}
+  \item Choose the number of particles $N$.
+\end{itemize}
+
+\noindent
+  b* Make a loop over time, where the maximum time (or maximum number of steps) should be larger than the number of particles $N$.
+
+\begin{itemize}
+  \item For every time step $\Delta t$ there is a probability $n_l/N$  for a move to the right. Compare this probability with a random number $x$.
+
+  \item If $ x \le n_l/N$, decrease the number of particles in the left half by one, i.e., $n_l=n_l-1$. Else, move a particle from the  right half to the left, i.e., $n_l=n_l+1$.
+
+  \item Increase the time by one unit (the external loop).
+\end{itemize}
+
+\noindent
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Second example, particles in a box}
+
+\begin{block_mdfboxadmon}[]
+In this case, a Monte Carlo sample corresponds to one time unit
+$\Delta t$. 
+
+The following simple C/C++-program illustrates this model.
+\bcppcod
+// Particles in a box
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+#include "lib.h"
+using namespace  std;
+
+ofstream ofile;
+int main(int argc, char* argv[])
+{
+  char *outfilename;
+  int initial_n_particles, max_time, time, random_n, nleft; 
+  long idum;
+  // Read in output file, abort if there are too few command-line arguments
+  if( argc <= 1 ){
+    cout << "Bad Usage: " << argv[0] <<
+      " read also output file on same line" << endl;
+    exit(1);
+  }
+  else{
+    outfilename=argv[1];
+  }
+  ofile.open(outfilename);
+  // Read in data 
+  cout << "Initial number of particles = " << endl ;
+  cin >> initial_n_particles;
+  // setup of initial conditions
+  nleft = initial_n_particles;
+  max_time = 10*initial_n_particles;
+  idum = -1;
+  // sampling over number of particles
+  for( time=0; time <= max_time; time++){
+    random_n = ((int) initial_n_particles*ran0(&idum));
+    if ( random_n <= nleft){
+      nleft -= 1;
+    }
+    else{
+      nleft += 1;
+    }
+    ofile << setiosflags(ios::showpoint | ios::uppercase);
+    ofile << setw(15) << time;
+    ofile << setw(15) << nleft << endl;
+  }
+  return 0; 
+} // end main function
+\ecppcod
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Second example, particles in a box, discussion}
+
+\begin{block_mdfboxadmon}[]
+If we denote $\langle n_l \rangle $ as the number of particles in the left 
+half as a time average after \emph{equilibrium is reached}, 
+we can define the standard 
+deviation as
+
+\begin{equation}
+   \sigma =\sqrt{\langle n_l^2 \rangle-\langle n_l \rangle^2}.
+\end{equation}
+
+This problem has also an analytic solution to which we can compare
+our numerical simulation.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Second example, particles in a box, discussion}
+
+\begin{block_mdfboxadmon}[]
+If $n_l(t)$ is the number of particles in the left half after 
+$t$ moves, the change in $n_l(t)$ in the time interval $\Delta t$
+is
+
+\begin{equation*}
+    \Delta n=\left(\frac{N-n_l(t)}{N}-\frac{n_l(t)}{N}\right)\Delta t,
+\end{equation*}
+and assuming that $n_l$ and $t$ are continuous variables we arrive at
+\begin{equation*}
+\frac{dn_l(t)}{dt}=1-\frac{2n_l(t)}{N},
+\end{equation*}
+whose solution is
+\begin{equation*}
+   n_l(t)=\frac{N}{2}\left(1+e^{-2t/N}\right),
+\end{equation*}
+with the initial condition $n_l(t=0)=N$. Note that we have assumed $n$ to be a continuous variable. Obviously, particles are discrete objects.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Simple demonstration using python}
+
+\begin{block_mdfboxadmon}[]
+The following simple Python code implements the above algorithm for particles in a box and plots the final number of particles in each part of the box.
+\bpypro
+#!/usr/bin/env python
+from  matplotlib import pyplot as plt
+from math import exp
+import numpy as np
+import random
+
+# initial number of particles
+N0 = 1000
+MaxTime = 10*N0
+values = np.zeros(MaxTime)   
+time = np.zeros(MaxTime)   
+random.seed() 
+# initial number of particles in left half
+nleft = N0
+for t in range (0, MaxTime, 1):
+    if N0*random.random() <= nleft: 
+       nleft -= 1
+    else: 
+       nleft += 1
+    time[t] = t
+    values[t] = nleft
+
+# Finally we plot the results
+plt.plot(time, values,'b-')
+plt.axis([0,MaxTime, N0/4, N0])
+plt.xlabel('$t$')
+plt.ylabel('$N$')
+plt.title('Number of particles in left half')
+plt.savefig('box.pdf')
+plt.show()
+\epypro
+The produced figure  shows the development of this system as 
+function of time steps. We note that for $N=1000$ 
+after roughly $2000$ time steps,
+the system has reached the equilibrium state. There are however noteworthy
+fluctuations around equilibrium.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Brief Summary}
+
+In essence the Monte Carlo method  contains the following ingredients
+
+\begin{itemize}
+  \item A PDF which characterizes the system
+
+  \item Random numbers which are generated so as to cover in an as uniform as  possible way on the unity interval [0,1].
+
+  \item A sampling rule
+
+  \item An error estimation
+
+  \item Techniques for improving the errors
+\end{itemize}
+
+\noindent
+% !split
+\subsection{Probability Distribution Functions}
+
+\begin{block_mdfboxadmon}[]
+
+The following table collects properties of probability distribution functions.
+In our notation we reserve the label $p(x)$ for the probability of a certain event,
+while $P(x)$ is the cumulative probability. 
+
+
+
+\begin{quote}
+\begin{tabular}{lcc}
+\hline
+\multicolumn{1}{c}{  } & \multicolumn{1}{c}{ Discrete PDF } & \multicolumn{1}{c}{ Continuous PDF } \\
+\hline
+Domain        & $\left\{x_1, x_2, x_3, \dots, x_N\right\}$ & $[a,b]$                            \\
+Probability   & $p(x_i)$                                   & $p(x)dx$                           \\
+Cumulative    & $P_i=\sum_{l=1}^ip(x_l)$                   & $P(x)=\int_a^xp(t)dt$              \\
+Positivity    & $ 0\le p(x_i)\le 1$                        & $ p(x) \ge 0$                      \\
+Positivity    & $ 0\le P_i\le 1$                           & $ 0\le P(x)\le 1$                  \\
+Monotonic     & $P_i\ge P_j$ if $x_i\ge x_j$               & $P(x_i)\ge P(x_j)$ if $x_i\ge x_j$ \\
+Normalization & $P_N=1$                                    & $P(b)=1$                           \\
+\hline
+\end{tabular}
+\end{quote}
+
+\noindent
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Probability Distribution Functions}
+
+\begin{block_mdfboxadmon}[]
+With a PDF we can compute expectation values of selected quantities such as
+
+\begin{equation*}
+    \langle x^k\rangle=\frac{1}{N}\sum_{i=1}^{N}x_i^kp(x_i),
+\end{equation*}
+if we have a discrete PDF or
+
+\begin{equation*}
+    \langle x^k\rangle=\int_a^b x^kp(x)dx,
+\end{equation*}
+in the case of a continuous PDF. We have already defined the mean value $\mu$
+and the variance $\sigma^2$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{The three famous Probability Distribution Functions}
+
+\begin{block_mdfboxadmon}[]
+
+There are at least three PDFs which one may encounter. These are the
+
+\textbf{Uniform distribution}  
+\begin{equation*}   
+p(x)=\frac{1}{b-a}\Theta(x-a)\Theta(b-x),
+\end{equation*}
+yielding probabilities different from zero in the interval $[a,b]$.
+
+\textbf{The exponential distribution}
+\begin{equation*}   
+p(x)=\alpha \exp{(-\alpha x)},
+\end{equation*}
+yielding probabilities different from zero in the interval $[0,\infty)$ and with mean value
+\begin{equation*} 
+\mu = \int_0^{\infty}xp(x)dx=\int_0^{\infty}x\alpha \exp{(-\alpha x)}dx=\frac{1}{\alpha},
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+with variance
+\begin{equation*}
+\sigma^2=\int_0^{\infty}x^2p(x)dx-\mu^2 = \frac{1}{\alpha^2}.
+\end{equation*}
+
+% !split
+\subsection{Probability Distribution Functions, the normal distribution}
+
+\begin{block_mdfboxadmon}[]
+Finally, we have the so-called univariate normal  distribution, or just the \textbf{normal distribution}
+\begin{equation*}    
+p(x)=\frac{1}{b\sqrt{2\pi}}\exp{\left(-\frac{(x-a)^2}{2b^2}\right)}
+\end{equation*}
+with probabilities different from zero in the interval $(-\infty,\infty)$.
+The integral $\int_{-\infty}^{\infty}\exp{\left(-(x^2\right)}dx$ appears in many calculations, its value
+is $\sqrt{\pi}$,  a result we will need when we compute the mean value and the variance.
+The mean value is
+\begin{equation*}  
+ \mu = \int_0^{\infty}xp(x)dx=\frac{1}{b\sqrt{2\pi}}\int_{-\infty}^{\infty}x \exp{\left(-\frac{(x-a)^2}{2b^2}\right)}dx,
+\end{equation*}
+which becomes with a suitable change of variables
+\begin{equation*}  
+ \mu =\frac{1}{b\sqrt{2\pi}}\int_{-\infty}^{\infty}b\sqrt{2}(a+b\sqrt{2}y)\exp{-y^2}dy=a.
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Probability Distribution Functions, the normal distribution}
+
+\begin{block_mdfboxadmon}[]
+Similarly, the variance becomes
+\begin{equation*}  
+ \sigma^2 = \frac{1}{b\sqrt{2\pi}}\int_{-\infty}^{\infty}(x-\mu)^2 \exp{\left(-\frac{(x-a)^2}{2b^2}\right)}dx,
+\end{equation*}
+and inserting the mean value and performing a variable change we obtain
+
+\begin{equation*}  
+ \sigma^2 = \frac{1}{b\sqrt{2\pi}}\int_{-\infty}^{\infty}b\sqrt{2}(b\sqrt{2}y)^2\exp{\left(-y^2\right)}dy=
+\frac{2b^2}{\sqrt{\pi}}\int_{-\infty}^{\infty}y^2\exp{\left(-y^2\right)}dy,
+\end{equation*}
+and performing a final integration by parts we obtain the well-known result $\sigma^2=b^2$.
+It is useful to introduce the standard normal distribution as well, defined by $\mu=a=0$, viz. a distribution
+centered around zero and with a variance $\sigma^2=1$, leading to
+
+\begin{equation}
+   p(x)=\frac{1}{\sqrt{2\pi}}\exp{\left(-\frac{x^2}{2}\right)}.
+\end{equation}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Probability Distribution Functions, the cumulative distribution}
+
+\begin{block_mdfboxadmon}[]
+
+The exponential and uniform distributions have simple cumulative functions,
+whereas the normal distribution does not, being proportional to the so-called
+error function $erf(x)$, given by
+
+\begin{equation*} 
+P(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^x\exp{\left(-\frac{t^2}{2}\right)}dt,
+\end{equation*}
+which is difficult to evaluate in a quick way.
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Probability Distribution Functions, other important distribution}
+
+\begin{block_mdfboxadmon}[]
+
+Some other PDFs which one encounters often in the natural sciences are the binomial distribution
+\begin{equation*}
+   p(x) = \left(\begin{array}{c} n \\ x\end{array}\right)y^x(1-y)^{n-x} \hspace{0.5cm}x=0,1,\dots,n,
+\end{equation*}
+where $y$ is the probability for a specific event, such as the tossing of a coin or moving left or right
+in case of a random walker. Note that $x$ is a discrete stochastic variable. 
+
+The sequence of binomial trials is characterized by the following definitions
+
+\begin{itemize}
+  \item Every experiment is thought to consist of $N$ independent trials.
+
+  \item In every independent trial one registers if a specific situation happens or not, such as the  jump to the left or right of a random walker.
+
+  \item The probability for every outcome in a single trial has the same value, for example the outcome of tossing (either heads or tails) a coin is always $1/2$.
+\end{itemize}
+
+\noindent
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Probability Distribution Functions, the binomial distribution}
+
+\begin{block_mdfboxadmon}[]
+
+In order to compute the mean and variance we need to recall Newton's binomial
+formula
+\begin{equation*}
+   (a+b)^m=\sum_{n=0}^m \left(\begin{array}{c} m \\ n\end{array}\right)a^nb^{m-n},
+\end{equation*}
+which can be used to show that
+
+\begin{equation*}
+\sum_{x=0}^n\left(\begin{array}{c} n \\ x\end{array}\right)y^x(1-y)^{n-x} = (y+1-y)^n = 1,
+\end{equation*}
+the PDF is normalized to one. 
+The mean value is
+\begin{equation*}
+\mu = \sum_{x=0}^n x\left(\begin{array}{c} n \\ x\end{array}\right)y^x(1-y)^{n-x} =
+\sum_{x=0}^n x\frac{n!}{x!(n-x)!}y^x(1-y)^{n-x}, 
+\end{equation*}
+resulting in
+\begin{equation*}
+\mu = 
+\sum_{x=0}^n x\frac{(n-1)!}{(x-1)!(n-1-(x-1))!}y^{x-1}(1-y)^{n-1-(x-1)},
+\end{equation*}
+which we rewrite as
+
+\begin{equation*}
+\mu=ny\sum_{\nu=0}^n\left(\begin{array}{c} n-1 \\ \nu\end{array}\right)y^{\nu}(1-y)^{n-1-\nu} =ny(y+1-y)^{n-1}=ny. 
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+The variance is slightly trickier to get. It reads $\sigma^2=ny(1-y)$. 
+
+% !split
+\subsection{Probability Distribution Functions, Poisson's  distribution}
+
+\begin{block_mdfboxadmon}[]
+
+Another important distribution with discrete stochastic variables $x$ is  
+the Poisson model, which resembles the exponential distribution and reads
+\begin{equation*}
+    p(x) = \frac{\lambda^x}{x!} e^{-\lambda} \hspace{0.5cm}x=0,1,\dots,;\lambda > 0.
+\end{equation*}
+In this case both the mean value and the variance are easier to calculate,
+
+\begin{equation*}
+\mu = \sum_{x=0}^{\infty} x \frac{\lambda^x}{x!} e^{-\lambda} = \lambda e^{-\lambda}\sum_{x=1}^{\infty}
+\frac{\lambda^{x-1}}{(x-1)!}=\lambda,
+\end{equation*}
+and the variance is $\sigma^2=\lambda$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+
+% !split
+\subsection{Probability Distribution Functions, Poisson's  distribution}
+
+\begin{block_mdfboxadmon}[]
+An example of applications of the Poisson distribution could be the counting
+of the number of $\alpha$-particles emitted from a radioactive source in a given time interval.
+In the limit of $n\rightarrow \infty$ and for small probabilities $y$, the binomial distribution
+approaches the Poisson distribution. Setting $\lambda = ny$, with $y$ the probability for an event in
+the binomial distribution we can show that
+
+\begin{equation*} 
+\lim_{n\rightarrow \infty}\left(\begin{array}{c} n \\ x\end{array}\right)y^x(1-y)^{n-x} e^{-\lambda}=\sum_{x=1}^{\infty}\frac{\lambda^x}{x!} e^{-\lambda}.
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Meet the  covariance!}
+
+\begin{block_mdfboxadmon}[]
+An important quantity in a statistical analysis is the so-called covariance. 
+
+Consider the set $\{X_i\}$ of $n$
+stochastic variables (not necessarily uncorrelated) with the
+multivariate PDF $P(x_1,\dots,x_n)$. The \emph{covariance} of two
+of the stochastic variables, $X_i$ and $X_j$, is defined as follows
+
+\begin{align}
+\mathrm{Cov}(X_i,\,X_j) & = \langle (x_i-\langle x_i\rangle)(x_j-\langle x_j\rangle)\rangle \\
+&=\int\cdots\int (x_i-\langle x_i\rangle)(x_j-\langle x_j\rangle)P(x_1,\dots,x_n)\,dx_1\dots dx_n,
+\label{eq:def_covariance}
+\end{align}
+with
+\begin{equation*}
+\langle x_i\rangle =
+\int\cdots\int x_i P(x_1,\dots,x_n)\,dx_1\dots dx_n.
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+
+% !split
+\subsection{Meet the  covariance in matrix disguise}
+
+\begin{block_mdfboxadmon}[]
+If we consider the above covariance as a matrix 
+\[
+C_{ij} =\mathrm{Cov}(X_i,\,X_j), 
+\]
+then the diagonal elements are just the familiar
+variances, $C_{ii} = \mathrm{Cov}(X_i,\,X_i) = \mathrm{Var}(X_i)$. It turns out that
+all the off-diagonal elements are zero if the stochastic variables are
+uncorrelated.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Meet the  covariance, uncorrelated events}
+
+\begin{block_mdfboxadmon}[]
+
+This is easy to show, keeping in mind the linearity of
+the expectation value. Consider the stochastic variables $X_i$ and
+$X_j$, ($i\neq j$)
+\begin{align*}
+\mathrm{Cov}(X_i,\,X_j) &= \langle (x_i-\langle x_i\rangle)(x_j-\langle x_j\rangle)\rangle\\
+&=\langle x_i x_j - x_i\langle x_j\rangle - \langle x_i\rangle x_j + \langle x_i\rangle\langle x_j\rangle\rangle\\
+&=\langle x_i x_j\rangle - \langle x_i\langle x_j\rangle\rangle - \langle \langle x_i\rangle x_j \rangle +
+\langle \langle x_i\rangle\langle x_j\rangle\rangle\\
+&=\langle x_i x_j\rangle - \langle x_i\rangle\langle x_j\rangle - \langle x_i\rangle\langle x_j\rangle +
+\langle x_i\rangle\langle x_j\rangle\\
+&=\langle x_i x_j\rangle - \langle x_i\rangle\langle x_j\rangle
+\end{align*}
+If $X_i$ and $X_j$ are independent, we get 
+\[
+\langle x_i x_j\rangle =
+\langle x_i\rangle\langle x_j\rangle=\mathrm{Cov}(X_i, X_j) = 0\ \ (i\neq j).
+\]
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Numerical experiments and the covariance}
+
+\begin{block_mdfboxadmon}[]
+
+Now that we have constructed an idealized mathematical framework, let
+us try to apply it to empirical observations. Examples of relevant
+physical phenomena may be spontaneous decays of nuclei, or a purely
+mathematical set of numbers produced by some deterministic
+mechanism. It is the latter we will deal with, using so-called pseudo-random
+number generators.  In general our observations will contain only a limited set of
+observables. We remind the reader that
+a \emph{stochastic process} is a process that produces sequentially a
+chain of values
+\begin{equation*}
+\{x_1, x_2,\dots\,x_k,\dots\}.
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Numerical experiments and the covariance}
+
+\begin{block_mdfboxadmon}[]
+We will call these
+values our \emph{measurements} and the entire set as our measured
+\emph{sample}.  The action of measuring all the elements of a sample
+we will call a stochastic \emph{experiment} (since, operationally,
+they are often associated with results of empirical observation of
+some physical or mathematical phenomena; precisely an experiment). We
+assume that these values are distributed according to some 
+PDF $p_X^{\phantom X}(x)$, where $X$ is just the formal symbol for the
+stochastic variable whose PDF is $p_X^{\phantom X}(x)$. Instead of
+trying to determine the full distribution $p$ we are often only
+interested in finding the few lowest moments, like the mean
+$\mu_X^{\phantom X}$ and the variance $\sigma_X^{\phantom X}$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Numerical experiments and the covariance, actual situations}
+
+\begin{block_mdfboxadmon}[]
+In practical situations however, a sample is always of finite size. Let that
+size be $n$. The expectation value of a sample $\alpha$, the \textbf{sample mean}, is then defined as follows
+\begin{equation*}
+\langle x_{\alpha} \rangle \equiv \frac{1}{n}\sum_{k=1}^n x_{\alpha,k}.
+\end{equation*}
+The \emph{sample variance} is:
+\begin{equation*}
+\mathrm{Var}(x) \equiv \frac{1}{n}\sum_{k=1}^n (x_{\alpha,k} - \langle x_{\alpha} \rangle)^2,
+\end{equation*}
+with its square root being the \emph{standard deviation of the sample}.
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Numerical experiments and the covariance, our observables}
+
+\begin{block_mdfboxadmon}[]
+You can think of the above observables as a set of quantities which define
+a given experiment. This experiment is then repeated several times, say $m$ times.
+The total average is then
+\begin{equation}
+\langle X_m \rangle= \frac{1}{m}\sum_{\alpha=1}^mx_{\alpha}=\frac{1}{mn}\sum_{\alpha, k} x_{\alpha,k},
+\label{eq:exptmean}
+\end{equation}
+where the last sums end at $m$ and $n$.
+The total variance is
+\begin{equation*}
+\sigma^2_m= \frac{1}{mn^2}\sum_{\alpha=1}^m(\langle x_{\alpha} \rangle-\langle X_m \rangle)^2,
+\end{equation*}
+which we rewrite as
+\begin{equation}
+\sigma^2_m=\frac{1}{m}\sum_{\alpha=1}^m\sum_{kl=1}^n (x_{\alpha,k}-\langle X_m \rangle)(x_{\alpha,l}-\langle X_m \rangle).
+\label{eq:exptvariance}
+\end{equation}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Numerical experiments and the covariance, the sample variance}
+
+\begin{block_mdfboxadmon}[]
+
+We define also the sample variance $\sigma^2$ of all $mn$ individual experiments as
+\begin{equation}
+\sigma^2=\frac{1}{mn}\sum_{\alpha=1}^m\sum_{k=1}^n (x_{\alpha,k}-\langle X_m \rangle)^2.
+\label{eq:sampleexptvariance}
+\end{equation}
+
+
+
+These quantities, being known experimental values or the results from our calculations, 
+may differ, in some cases
+significantly,  from the similarly named
+exact values for the mean value $\mu_X$, the variance $\mathrm{Var}(X)$
+and the covariance $\mathrm{Cov}(X,Y)$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Numerical experiments and the covariance, central limit theorem}
+
+\begin{block_mdfboxadmon}[]
+
+The central limit theorem states that the PDF $\tilde{p}(z)$ of
+the average of $m$ random values corresponding to a PDF $p(x)$ 
+is a normal distribution whose mean is the 
+mean value of the PDF $p(x)$ and whose variance is the variance
+of the PDF $p(x)$ divided by $m$, the number of values used to compute $z$.
+
+The central limit theorem leads then to the well-known expression for the
+standard deviation, given by
+\begin{equation*}
+    \sigma_m=
+\frac{\sigma}{\sqrt{m}}.
+\end{equation*}
+
+In many cases the above estimate for the standard deviation, in particular if correlations are strong, may be too simplistic.  We need therefore a more precise defintion of the error and the variance in our results.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Definition of Correlation Functions and Standard Deviation}
+
+\begin{block_mdfboxadmon}[]
+Our estimate of the true average $\mu_{X}$ is the sample mean $\langle X_m \rangle$
+
+\begin{equation*}
+\mu_{X}^{\phantom X} \approx X_m=\frac{1}{mn}\sum_{\alpha=1}^m\sum_{k=1}^n x_{\alpha,k}.
+\end{equation*}
+
+
+We can then use Eq. (\ref{eq:exptvariance})
+\begin{equation*}
+\sigma^2_m=\frac{1}{mn^2}\sum_{\alpha=1}^m\sum_{kl=1}^n (x_{\alpha,k}-\langle X_m \rangle)(x_{\alpha,l}-\langle X_m \rangle),
+\end{equation*}
+and rewrite it as
+\begin{equation*}
+\sigma^2_m=\frac{\sigma^2}{n}+\frac{2}{mn^2}\sum_{\alpha=1}^m\sum_{k<l}^n (x_{\alpha,k}-\langle X_m \rangle)(x_{\alpha,l}-\langle X_m \rangle),
+\end{equation*}
+where the first term is the sample variance of all $mn$ experiments divided by $n$
+and the last term is nothing but the covariance which arises when $k\ne l$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+
+
+
+% !split
+\subsection{Definition of Correlation Functions and Standard Deviation}
+
+\begin{block_mdfboxadmon}[]
+Our estimate of the true average $\mu_{X}$ is the sample mean $\langle X_m \rangle$
+
+If the 
+observables are uncorrelated, then the covariance is zero and we obtain a total variance
+which agrees with the central limit theorem. Correlations may often be present in our data set, resulting in a non-zero covariance.  The first term is normally called the uncorrelated 
+contribution.
+Computationally the uncorrelated first term is much easier to treat
+efficiently than the second.
+We just accumulate separately the values $x^2$ and $x$ for every
+measurement $x$ we receive. The correlation term, though, has to be
+calculated at the end of the experiment since we need all the
+measurements to calculate the cross terms. Therefore, all measurements
+have to be stored throughout the experiment.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Definition of Correlation Functions and Standard Deviation}
+
+\begin{block_mdfboxadmon}[]
+
+Let us analyze the problem by splitting up the correlation term into
+partial sums of the form
+
+\begin{equation*}
+f_d = \frac{1}{nm}\sum_{\alpha=1}^m\sum_{k=1}^{n-d}(x_{\alpha,k}-\langle X_m \rangle)(x_{\alpha,k+d}-\langle X_m \rangle),
+\end{equation*}
+The correlation term of the total variance can now be rewritten in terms of
+$f_d$
+
+\begin{equation*}
+\frac{2}{mn^2}\sum_{\alpha=1}^m\sum_{k<l}^n (x_{\alpha,k}-\langle X_m \rangle)(x_{\alpha,l}-\langle X_m \rangle)=
+\frac{2}{n}\sum_{d=1}^{n-1} f_d
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Definition of Correlation Functions and Standard Deviation}
+
+\begin{block_mdfboxadmon}[]
+The value of $f_d$ reflects the correlation between measurements
+separated by the distance $d$ in the samples.  Notice that for
+$d=0$, $f$ is just the sample variance, $\sigma^2$. If we divide $f_d$
+by $\sigma^2$, we arrive at the so called \textbf{autocorrelation function}
+
+\begin{equation}
+\kappa_d = \frac{f_d}{\sigma^2}
+\label{eq:autocorrelformal}
+\end{equation}
+which gives us a useful measure of the correlation pair correlation
+starting always at $1$ for $d=0$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Definition of Correlation Functions and Standard Deviation, sample variance}
+
+\begin{block_mdfboxadmon}[]
+
+The sample variance of the $mn$ experiments can now be
+written in terms of the autocorrelation function
+
+\begin{equation}
+\sigma_m^2=\frac{\sigma^2}{n}+\frac{2}{n}\cdot\sigma^2\sum_{d=1}^{n-1}
+\frac{f_d}{\sigma^2}=\left(1+2\sum_{d=1}^{n-1}\kappa_d\right)\frac{1}{n}\sigma^2=\frac{\tau}{n}\cdot\sigma^2
+\label{eq:error_estimate_corr_time}
+\end{equation}
+and we see that $\sigma_m$ can be expressed in terms of the
+uncorrelated sample variance times a correction factor $\tau$ which
+accounts for the correlation between measurements. We call this
+correction factor the \emph{autocorrelation time}
+
+\begin{equation}
+\tau = 1+2\sum_{d=1}^{n-1}\kappa_d
+\label{eq:autocorrelation_time}
+\end{equation}
+% It is closely related to the area under the graph of the
+% autocorrelation function.
+For a correlation free experiment, $\tau$
+equals 1.
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+
+% !split
+\subsection{Definition of Correlation Functions and Standard Deviation}
+
+\begin{block_mdfboxadmon}[]
+From the point of view of
+Eq. (\ref{eq:error_estimate_corr_time}) we can interpret a sequential
+correlation as an effective reduction of the number of measurements by
+a factor $\tau$. The effective number of measurements becomes
+\begin{equation*}
+n_\mathrm{eff} = \frac{n}{\tau}
+\end{equation*}
+To neglect the autocorrelation time $\tau$ will always cause our
+simple uncorrelated estimate of $\sigma_m^2\approx \sigma^2/n$ to
+be less than the true sample error. The estimate of the error will be
+too ``good''. On the other hand, the calculation of the full
+autocorrelation time poses an efficiency problem if the set of
+measurements is very large.  The solution to this problem is given by 
+more practically oriented methods like the blocking technique.
+% add ref here to flybjerg
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\section{Random Numbers}
+
+\begin{block_mdfboxadmon}[]
+
+Uniform deviates are just random numbers that lie within a specified range
+(typically 0 to 1), with any one number in the range just as likely as any other. They
+are, in other words, what you probably think random numbers are. However,
+we want to distinguish uniform deviates from other sorts of random numbers, for
+example numbers drawn from a normal (Gaussian) distribution of specified mean
+and standard deviation. These other sorts of deviates are almost always generated by
+performing appropriate operations on one or more uniform deviates, as we will see
+in subsequent sections. So, a reliable source of random uniform deviates, the subject
+of this section, is an essential building block for any sort of stochastic modeling
+or Monte Carlo computer work.
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\section{Random Numbers, better name: pseudo random numbers}
+
+\begin{block_mdfboxadmon}[]
+
+A disclaimer is however appropriate. It should be fairly obvious that 
+something as deterministic as a computer cannot generate purely random numbers.
+
+Numbers generated by any of the standard algorithms are in reality pseudo random
+numbers, hopefully abiding to the following criteria:
+
+\begin{itemize}
+  \item they produce a uniform distribution in the interval [0,1].
+
+  \item correlations between random numbers are negligible
+
+  \item the period before the same sequence of random numbers is repeated   is as large as possible and finally
+
+  \item the algorithm should be fast.
+\end{itemize}
+
+\noindent
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\section{Random number generator RNG}
+
+\begin{block_mdfboxadmon}[]
+ The most common random number generators are based on so-called
+Linear congruential relations of the type
+
+\begin{equation*}
+  N_i=(aN_{i-1}+c) \mathrm{MOD} (M),
+\end{equation*}
+which yield a number in the interval [0,1] through
+
+\begin{equation*}
+  x_i=N_i/M
+\end{equation*}
+
+The number 
+$M$ is called the period and it should be as large as possible 
+ and 
+$N_0$ is the starting value, or seed. The function $\mathrm{MOD}$ means the remainder,
+that is if we were to evaluate $(13)\mathrm{MOD}(9)$, the outcome is the remainder
+of the division $13/9$, namely $4$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\section{Random number generator RNG and periodic outputs}
+
+\begin{block_mdfboxadmon}[]
+
+The problem with such generators is that their outputs are periodic;
+they 
+will start to repeat themselves with a period that is at most $M$. If however
+the parameters $a$ and $c$ are badly chosen, the period may be even shorter.
+
+Consider the following example
+
+\begin{equation*}
+  N_i=(6N_{i-1}+7) \mathrm{MOD} (5),
+\end{equation*}
+with a seed $N_0=2$. This generator produces the sequence
+$4,1,3,0,2,4,1,3,0,2,...\dots$, i.e., a sequence with period $5$.
+However, increasing $M$ may not guarantee a larger period as the following
+example shows
+
+\begin{equation*}
+  N_i=(27N_{i-1}+11) \mathrm{MOD} (54),
+\end{equation*}
+which still, with $N_0=2$, results in $11,38,11,38,11,38,\dots$, a period of
+just $2$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\section{Random number generator RNG and its period}
+
+\begin{block_mdfboxadmon}[]
+Typical periods for the random generators provided in the program library 
+are of the order of $\sim 10^9$ or larger. Other random number generators which have
+become increasingly popular are so-called shift-register generators.
+In these generators each successive number depends on many preceding
+values (rather than the last values as in the linear congruential
+generator).
+For example, you could make a shift register generator whose $l$th 
+number is the sum of the $l-i$th and $l-j$th values with modulo $M$,
+\begin{equation*}
+   N_l=(aN_{l-i}+cN_{l-j})\mathrm{MOD}(M).
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\section{Random number generator RNG, other examples}
+
+\begin{block_mdfboxadmon}[]
+Such a generator again produces a sequence of pseudorandom numbers
+but this time with a period much larger than $M$.
+It is also possible to construct more elaborate algorithms by including
+more than two past terms in the sum of each iteration.
+One example is the generator of \href{{http://dl.acm.org/citation.cfm?id=187154}}{Marsaglia and Zaman}
+which consists of two congruential relations
+
+\begin{equation}
+   N_l=(N_{l-3}-N_{l-1})\mathrm{MOD}(2^{31}-69),
+   \label{eq:mz1}
+\end{equation}
+followed by
+\begin{equation}
+   N_l=(69069N_{l-1}+1013904243)\mathrm{MOD}(2^{32}),
+   \label{eq:mz2}
+\end{equation}
+which according to the authors has a period larger than $2^{94}$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\section{Random number generator RNG, other examples}
+
+\begin{block_mdfboxadmon}[]
+Instead of  using modular addition, we could use the bitwise
+exclusive-OR ($\oplus$) operation so that
+
+\begin{equation*}
+   N_l=(N_{l-i})\oplus (N_{l-j})
+\end{equation*}
+where the bitwise action of $\oplus$ means that if $N_{l-i}=N_{l-j}$ the result is
+$0$ whereas if $N_{l-i}\ne N_{l-j}$ the result is
+$1$. As an example, consider the case where  $N_{l-i}=6$ and $N_{l-j}=11$. The first
+one has a bit representation (using 4 bits only) which reads $0110$ whereas the 
+second number is $1011$. Employing the $\oplus$ operator yields 
+$1101$, or $2^3+2^2+2^0=13$.
+
+In Fortran90, the bitwise $\oplus$ operation is coded through the intrinsic
+function $\mathrm{IEOR}(m,n)$ where $m$ and $n$ are the input numbers, while in $C$
+it is given by $m\wedge n$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\section{Random number generator RNG, RAN0}
+
+\begin{block_mdfboxadmon}[]
+
+We show here how the linear congruential algorithm can be implemented, namely
+\begin{equation*}
+  N_i=(aN_{i-1}) \mathrm{MOD} (M).
+\end{equation*}
+However, since $a$ and $N_{i-1}$ are integers and their multiplication 
+could become greater than the standard 32 bit integer, there is a trick via 
+Schrage's algorithm which approximates the multiplication
+of large integers through the factorization
+\begin{equation*}
+  M=aq+r,
+\end{equation*}
+where we have defined
+
+\begin{equation*}
+   q=[M/a],
+\end{equation*}
+and
+\begin{equation*}
+  r = M\hspace{0.1cm}\mathrm{MOD} \hspace{0.1cm}a.
+\end{equation*}
+where the brackets denote integer division. In the code below the numbers 
+$q$ and $r$ are chosen so that $r < q$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+
+% !split
+\section{Random number generator RNG, RAN0}
+
+\begin{block_mdfboxadmon}[]
+
+To see how this works we note first that
+\begin{equation}
+(aN_{i-1}) \mathrm{MOD} (M)= (aN_{i-1}-[N_{i-1}/q]M)\mathrm{MOD} (M),
+\label{eq:rntrick1}
+\end{equation}
+since we can add or subtract any integer multiple of $M$ from $aN_{i-1}$.
+The last term $[N_{i-1}/q]M\mathrm{MOD}(M)$ is zero since the integer division 
+$[N_{i-1}/q]$ just yields a constant which is multiplied with $M$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\section{Random number generator RNG, RAN0}
+
+\begin{block_mdfboxadmon}[]
+We can now rewrite Eq. (\ref{eq:rntrick1}) as
+
+\begin{equation}
+(aN_{i-1}) \mathrm{MOD} (M)= (aN_{i-1}-[N_{i-1}/q](aq+r))\mathrm{MOD} (M),
+\label{eq:rntrick2}
+\end{equation}
+which results
+in
+
+\begin{equation}
+(aN_{i-1}) \mathrm{MOD} (M)= \left(a(N_{i-1}-[N_{i-1}/q]q)-[N_{i-1}/q]r)\right)\mathrm{MOD} (M),
+\label{eq:rntrick3}
+\end{equation}
+yielding
+\begin{equation}
+(aN_{i-1}) \mathrm{MOD} (M)= \left(a(N_{i-1}\mathrm{MOD} (q)) -[N_{i-1}/q]r)\right)\mathrm{MOD} (M).
+\label{eq:rntrick4}
+\end{equation}
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\section{Random number generator RNG, RAN0}
+
+\begin{block_mdfboxadmon}[]
+The term $[N_{i-1}/q]r$ is always smaller or equal $N_{i-1}(r/q)$ and with $r < q$ we obtain always a 
+number smaller than $N_{i-1}$, which is smaller than $M$. 
+And since the number $N_{i-1}\mathrm{MOD} (q)$ is between zero and $q-1$ then
+$a(N_{i-1}\mathrm{MOD} (q))< aq$. Combined with our definition of $q=[M/a]$ ensures that 
+this term is also smaller than $M$ meaning that both terms fit into a
+32-bit signed integer. None of these two terms can be negative, but their difference could.
+The algorithm below adds $M$ if their difference is negative.
+Note that the program uses the bitwise $\oplus$ operator to generate
+the starting point for each generation of a random number. The period
+of $ran0$ is $\sim 2.1\times 10^{9}$. A special feature of this
+algorithm is that is should never be called with the initial seed 
+set to $0$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\section{Random number generator RNG, RAN0 code}
+
+\begin{block_mdfboxadmon}[]
+
+\bcppcod
+    /*
+     ** The function
+     **           ran0()
+     ** is an "Minimal" random number generator of Park and Miller
+     ** Set or reset the input value
+     ** idum to any integer value (except the unlikely value MASK)
+     ** to initialize the sequence; idum must not be altered between
+     ** calls for sucessive deviates in a sequence.
+     ** The function returns a uniform deviate between 0.0 and 1.0.
+     */
+double ran0(long &idum)
+{
+   const int a = 16807, m = 2147483647, q = 127773;
+   const int r = 2836, MASK = 123459876;
+   const double am = 1./m;
+   long     k;
+   double   ans;
+   idum ^= MASK;
+   k = (*idum)/q;
+   idum = a*(idum - k*q) - r*k;
+   // add m if negative difference
+   if(idum < 0) idum += m;
+   ans=am*(idum);
+   idum ^= MASK;
+   return ans;
+} // End: function ran0() 
+\ecppcod
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Properties of Selected Random Number Generators}
+
+\begin{block_mdfboxadmon}[]
+
+As mentioned previously, the underlying PDF for the generation of
+random numbers is the uniform distribution, meaning that the 
+probability for finding a number $x$ in the interval [0,1] is $p(x)=1$.
+
+A random number generator should produce numbers which are uniformly distributed
+in this interval. The table  shows the distribution of $N=10000$ random
+numbers generated by the functions in the program library.
+We note in this table that the number of points in the various
+intervals $0.0-0.1$, $0.1-0.2$ etc are fairly close to $1000$, with some minor
+deviations. 
+
+Two additional measures are the standard deviation $\sigma$ and the mean
+$\mu=\langle x\rangle$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Properties of Selected Random Number Generators}
+
+\begin{block_mdfboxadmon}[]
+For the uniform distribution, the mean value $\mu$ is then
+
+\begin{equation*}
+  \mu=\langle x\rangle=\frac{1}{2}
+\end{equation*}
+while the standard deviation is
+
+\begin{equation*}
+   \sigma=\sqrt{\langle x^2\rangle-\mu^2}=\frac{1}{\sqrt{12}}=0.2886.
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Properties of Selected Random Number Generators}
+
+\begin{block_mdfboxadmon}[]
+The various random number generators produce results which agree rather well with
+these limiting values. 
+
+
+\begin{quote}
+\begin{tabular}{crrrr}
+\hline
+\multicolumn{1}{c}{ $x$-bin } & \multicolumn{1}{c}{ ran0 } & \multicolumn{1}{c}{ ran1 } & \multicolumn{1}{c}{ ran2 } & \multicolumn{1}{c}{ ran3 } \\
+\hline
+0.0-0.1  & 1013   & 991    & 938    & 1047   \\
+0.1-0.2  & 1002   & 1009   & 1040   & 1030   \\
+0.2-0.3  & 989    & 999    & 1030   & 993    \\
+0.3-0.4  & 939    & 960    & 1023   & 937    \\
+0.4-0.5  & 1038   & 1001   & 1002   & 992    \\
+0.5-0.6  & 1037   & 1047   & 1009   & 1009   \\
+0.6-0.7  & 1005   & 989    & 1003   & 989    \\
+0.7-0.8  & 986    & 962    & 985    & 954    \\
+0.8-0.9  & 1000   & 1027   & 1009   & 1023   \\
+0.9-1.0  & 991    & 1015   & 961    & 1026   \\
+$\mu$    & 0.4997 & 0.5018 & 0.4992 & 0.4990 \\
+$\sigma$ & 0.2882 & 0.2892 & 0.2861 & 0.2915 \\
+\hline
+\end{tabular}
+\end{quote}
+
+\noindent
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Simple demonstration of RNGs using python}
+
+\begin{block_mdfboxadmon}[]
+The following simple Python code plots the distribution of the produced random numbers using the linear congruential RNG employed by Python. The trend displayed in the previous table is seen rather clearly.
+\bpypro
+#!/usr/bin/env python
+import numpy as np
+import matplotlib.mlab as mlab
+import matplotlib.pyplot as plt
+import random
+
+# initialize the rng with a seed
+random.seed() 
+counts = 10000
+values = np.zeros(counts)   
+for i in range (1, counts, 1):
+    values[i] = random.random()
+
+# the histogram of the data
+n, bins, patches = plt.hist(values, 10, facecolor='green')
+
+plt.xlabel('$x$')
+plt.ylabel('Number of counts')
+plt.title(r'Test of uniform distribution')
+plt.axis([0, 1, 0, 1100])
+plt.grid(True)
+plt.show()
+\epypro
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Properties of Selected Random Number Generators}
+
+\begin{block_mdfboxadmon}[]
+Since our random numbers, which are typically generated via a linear congruential algorithm,
+are never fully independent, we can then define 
+an important test which measures the degree of correlation, namely the  so-called  
+auto-correlation function defined previously, see again Eq. (\ref{eq:autocorrelformal}).
+We rewrite it here as
+\begin{equation*}
+    C_k=\frac{f_d}
+             {\sigma^2},
+\end{equation*}
+with $C_0=1$. Recall that 
+$\sigma^2=\langle x_i^2\rangle-\langle x_i\rangle^2$ and that
+\begin{equation*}
+f_d = \frac{1}{nm}\sum_{\alpha=1}^m\sum_{k=1}^{n-d}(x_{\alpha,k}-\langle X_m \rangle)(x_{\alpha,k+d}-\langle X_m \rangle),
+\end{equation*}
+
+
+The non-vanishing of $C_k$ for $k\ne 0$ means that the random
+numbers are not independent. The independence of the random numbers is crucial 
+in the evaluation of other expectation values. If they are not independent, our
+assumption for approximating $\sigma_N$ in Eq. (\ref{eq:sigmaN}) is no longer valid.
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{\href{{https://github.com/CompPhysics/ComputationalPhysicsMSU/blob/master/doc/Programs/LecturePrograms/programs/MCIntro/cpp/program6.cpp}}{Correlation function for random number generators}}
+
+\begin{block_mdfboxadmon}[]
+The program here computes the correlation function for the Mersenne RNG. 
+\bcppcod
+//  This function computes the autocorrelation function for 
+//  the Mersenne random number generator with a uniform distribution
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+#include <cstdlib>
+#include <random>
+#include <armadillo>
+#include <string>
+#include <cmath>
+using namespace  std;
+using namespace arma;
+// output file
+ofstream ofile;
+
+//     Main function begins here     
+int main(int argc, char* argv[])
+{
+  int MonteCarloCycles;
+  string filename;
+  if (argc > 1) {
+    filename=argv[1];
+    MonteCarloCycles = atoi(argv[2]);
+    string fileout = filename;
+    string argument = to_string(MonteCarloCycles);
+    fileout.append(argument);
+    ofile.open(fileout);
+  }
+
+  // Compute the variance and the mean value of the uniform distribution
+  // Compute also the specific values x for each cycle in order to be able to
+  // compute the covariance and the correlation function  
+
+  vec X  = zeros<vec>(MonteCarloCycles);
+  double MCint = 0.;      double MCintsqr2=0.;
+  std::random_device rd;
+  std::mt19937_64 gen(rd());
+  // Set up the uniform distribution for x \in [[0, 1]
+  std::uniform_real_distribution<double> RandomNumberGenerator(0.0,1.0);
+  for (int i = 0;  i < MonteCarloCycles; i++){
+    double x =   RandomNumberGenerator(gen); 
+    X(i) = x;
+    MCint += x;
+    MCintsqr2 += x*x;
+  }
+  double Mean = MCint/((double) MonteCarloCycles );
+  MCintsqr2 = MCintsqr2/((double) MonteCarloCycles );
+  double STDev = sqrt(MCintsqr2-Mean*Mean);
+  double Variance = MCintsqr2-Mean*Mean;
+  //   Write mean value and variance
+  cout << " Sample variance= " << Variance  << " Mean value = " << Mean << endl;
+  // Now we compute the autocorrelation function
+  vec autocorrelation = zeros<vec>(MonteCarloCycles);
+  for (int j = 0; j < MonteCarloCycles; j++){
+    double sum = 0.0;
+    for (int k = 0; k < (MonteCarloCycles-j); k++){
+      sum  += (X(k)-Mean)*(X(k+j)-Mean); 
+    }
+    autocorrelation(j) = sum/Variance/((double) MonteCarloCycles );
+    ofile << setiosflags(ios::showpoint | ios::uppercase);
+    ofile << setw(15) << setprecision(8) << j;
+    ofile << setw(15) << setprecision(8) << autocorrelation(j) << endl;
+  }
+  // Now compute the exact covariance using the autocorrelation function
+  double Covariance = 0.0;
+  for (int j = 0; j < MonteCarloCycles; j++){
+    Covariance  += autocorrelation(j);
+  }
+  Covariance *=  2.0/((double) MonteCarloCycles);
+  // Compute now the total variance, including the covariance, and obtain the standard deviation
+  double TotalVariance = (Variance/((double) MonteCarloCycles ))+Covariance;
+  cout << " Covariance = " << Covariance << " Totalvariance= " << TotalVariance << " Sample Variance/n= " << (Variance/((double) MonteCarloCycles )) << endl;
+  cout << " STD from sample variance= " << sqrt(Variance/((double) MonteCarloCycles )) << " STD with covariance = " << sqrt(TotalVariance) << endl;
+  ofile.close();  // close output file
+  return 0;
+}  // end of main program 
+\ecppcod
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{\href{{https://github.com/CompPhysics/ComputationalPhysicsMSU/blob/master/doc/Programs/LecturePrograms/programs/MCIntro/cpp/program7.cpp}}{Correlation function for $\pi$}}
+
+\begin{block_mdfboxadmon}[]
+The program here computes the correlation function for the calculation of $\pi$ using the Mersenne RNG. 
+\bcppcod
+//  This function computes the autocorrelation function for 
+//  the Mersenne random number generator with a uniform distribution
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+#include <cstdlib>
+#include <random>
+#include <armadillo>
+#include <string>
+#include <cmath>
+using namespace  std;
+using namespace arma;
+// output file
+ofstream ofile;
+
+//     this function defines the function to integrate  
+double func(double x);
+
+//     Main function begins here     
+int main(int argc, char* argv[])
+{
+  int MonteCarloCycles;
+  string filename;
+  if (argc > 1) {
+    filename=argv[1];
+    MonteCarloCycles = atoi(argv[2]);
+    string fileout = filename;
+    string argument = to_string(MonteCarloCycles);
+    fileout.append(argument);
+    ofile.open(fileout);
+  }
+
+  // Compute the variance and the mean value of the uniform distribution
+  // Compute also the specific values x for each cycle in order to be able to
+  // compute the covariance and the correlation function  
+
+  vec X  = zeros<vec>(MonteCarloCycles);
+  double MCint = 0.;      double MCintsqr2=0.;
+  std::random_device rd;
+  std::mt19937_64 gen(rd());
+  // Set up the uniform distribution for x \in [[0, 1]
+  std::uniform_real_distribution<double> RandomNumberGenerator(0.0,1.0);
+  for (int i = 0;  i < MonteCarloCycles; i++){
+    double x =   RandomNumberGenerator(gen); 
+    X(i) = func(x);
+    MCint += X(i);
+    MCintsqr2 += X(i)*X(i);
+  }
+  double Mean = MCint/((double) MonteCarloCycles );
+  MCintsqr2 = MCintsqr2/((double) MonteCarloCycles );
+  double STDev = sqrt(MCintsqr2-Mean*Mean);
+  double Variance = MCintsqr2-Mean*Mean;
+  //   Write mean value and variance
+  cout << " Sample variance= " << Variance  << " Mean value = " << Mean << endl;
+  // Now we compute the autocorrelation function
+  vec autocorrelation = zeros<vec>(MonteCarloCycles);
+  for (int j = 0; j < MonteCarloCycles; j++){
+    double sum = 0.0;
+    for (int k = 0; k < (MonteCarloCycles-j); k++){
+      sum  += (X(k)-Mean)*(X(k+j)-Mean); 
+    }
+    autocorrelation(j) = sum/Variance/((double) MonteCarloCycles );
+    ofile << setiosflags(ios::showpoint | ios::uppercase);
+    ofile << setw(15) << setprecision(8) << j;
+    ofile << setw(15) << setprecision(8) << autocorrelation(j) << endl;
+  }
+  // Now compute the exact covariance using the autocorrelation function
+  double Covariance = 0.0;
+  for (int j = 0; j < MonteCarloCycles; j++){
+    Covariance  += autocorrelation(j);
+  }
+  Covariance *=  2.0/((double) MonteCarloCycles);
+  // Compute now the total variance, including the covariance, and obtain the standard deviation
+  double TotalVariance = (Variance/((double) MonteCarloCycles ))+Covariance;
+  cout << " Covariance = " << Covariance << " Totalvariance= " << TotalVariance << " Sample Variance/n= " << (Variance/((double) MonteCarloCycles )) << endl;
+  cout << " STD from sample variance= " << sqrt(Variance/((double) MonteCarloCycles )) << " STD with covariance = " << sqrt(TotalVariance) << endl;
+  ofile.close();  // close output file
+  return 0;
+}  // end of main program 
+
+
+double func(double x)
+{
+  double value;
+  value = 4/(1.+x*x);
+  return value;
+} // end of function to evaluate 
+
+\ecppcod
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+
+
+% !split
+\subsection{Correlation function and which random number generators should I use}
+
+\begin{block_mdfboxadmon}[]
+The following Python code plots the results for the correlation function from the above program.
+\bpypro
+import numpy as np
+from  matplotlib import pyplot as plt
+# Load in data file
+data = np.loadtxt("datafiles/autocor.dat")
+# Make arrays containing x-axis and binding energies as function of A
+x = data[:,0]
+corr = data[:,1]
+plt.plot(x, corr ,'ro')
+plt.axis([0,1000,-0.2, 1.1])
+plt.xlabel(r'$d$')
+plt.ylabel(r'$C_d$')
+plt.title(r'autocorrelation function for RNG')
+plt.savefig('autocorr.pdf')
+plt.show()
+
+\epypro
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+
+% !split
+\section{Which RNG should I use?}
+
+\begin{block_mdfboxadmon}[]
+\begin{itemize}
+\item In the library files lib.cpp and lib.h we have included four popular RNGs taken from the widely used textbook \href{{http://numerical.recipes/}}{Numerical Recipes}. These are called ran0, ran1, ran2 and ran3.
+
+\item C++ has a class called \textbf{random}. The \href{{http://www.cplusplus.com/reference/random/}}{random class} contains a large selection of RNGs and is highly recommended. Some of these RNGs have very large periods making it thereby very safe to use these RNGs in case one is performing large calculations. In particular, the \href{{http://www.cplusplus.com/reference/random/mersenne_twister_engine/}}{Mersenne twister random number engine} has a period of $2^{19937}$. 
+\end{itemize}
+
+\noindent
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{How to use the Mersenne generator}
+
+\begin{block_mdfboxadmon}[]
+The following part of a c++ code (from project 4) sets up the uniform distribution for $x\in [0,1]$. 
+\bcppcod
+/*
+
+//  You need this 
+#include <random>
+
+// Initialize the seed and call the Mersienne algo
+std::random_device rd;
+std::mt19937_64 gen(rd());
+// Set up the uniform distribution for x \in [[0, 1]
+std::uniform_real_distribution<double> RandomNumberGenerator(0.0,1.0);
+
+// Now use the RNG
+int ix = (int) (RandomNumberGenerator(gen)*NSpins);
+\ecppcod
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+
+% !split
+\section{Improved Monte Carlo Integration}
+
+\begin{block_mdfboxadmon}[]
+We have presented a simple brute force approach 
+to integration with the Monte Carlo method. There we sampled
+over a given number of points distributed uniformly in the interval
+$[0,1]$
+\begin{equation*}
+   I=\int_0^1 f(x)dx=\langle f\rangle.
+\end{equation*}
+Here we introduce two important steps which in most cases improve
+upon the above simple brute force approach with the uniform distribution, namely
+\begin{itemize}
+\item change of variables and
+
+\item importance sampling
+\end{itemize}
+
+\noindent
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Change of Variables}
+
+\begin{block_mdfboxadmon}[]
+The starting point is always the uniform distribution
+
+\begin{equation*}
+p(x)dx=\left\{\begin{array}{cc} dx & 0 \le x \le 1\\
+                                0  & else\end{array}\right.
+\end{equation*}
+with $p(x)=1$ and 
+satisfying
+
+\begin{equation*}
+  \int_{-\infty}^{\infty}p(x)dx=1.
+\end{equation*}
+All random number generators  use the uniform distribution to generate numbers $x\in [0,1]$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Change of Variables}
+
+\begin{block_mdfboxadmon}[]
+When we attempt a 
+transformation to a new variable 
+$x\rightarrow y$ 
+we have to conserve the probability
+\begin{equation*}
+   p(y)dy=p(x)dx,
+\end{equation*}
+which for the uniform distribution implies
+
+\begin{equation*}
+   p(y)dy=dx.  
+\end{equation*}
+Let us assume that $p(y)$ is a  PDF different from the uniform
+PDF $p(x)=1$ with $x \in [0,1]$.
+If we integrate the last expression we arrive at
+
+\begin{equation*}
+   x(y)=\int_0^y p(y')dy',
+\end{equation*}
+which is nothing but the cumulative distribution of $p(y)$, i.e.,
+\begin{equation*}
+   x(y)=P(y)=\int_0^y p(y')dy'.
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Transformed Uniform Distribution}
+
+\begin{block_mdfboxadmon}[]
+Suppose we have the general uniform distribution
+
+\begin{equation*}
+p(y)dy=\left\{\begin{array}{cc} \frac{dy}{b-a} & a \le y \le b\\
+                                0  & else\end{array}\right.
+\end{equation*}
+If we wish to relate this distribution to the one in the interval
+$x \in [0,1]$
+we have
+\begin{equation*}
+   p(y)dy=\frac{dy}{b-a}=dx,  
+\end{equation*}
+and integrating we obtain the cumulative function
+
+\begin{equation*}
+   x(y)=\int_a^y \frac{dy'}{b-a}, 
+\end{equation*}
+yielding
+
+\begin{equation*}
+    y=a+(b-a)x,
+\end{equation*}
+a well-known result!
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Exponential Distribution}
+
+\begin{block_mdfboxadmon}[]
+Assume that
+
+\begin{equation*}
+  p(y)=\exp{(-y)},
+\end{equation*}
+which is the exponential distribution, important for the analysis
+of e.g., radioactive decay. Again, 
+$p(x)$ is given by the uniform distribution with 
+$x \in [0,1]$, and 
+with the assumption that the probability is conserved we have
+
+\begin{equation*}
+   p(y)dy=\exp{(-y)}dy=dx,  
+\end{equation*}
+which yields after integration
+
+\begin{equation*}
+   x(y)=P(y)=\int_0^y \exp{(-y')}dy'=1-\exp{(-y)},
+\end{equation*}
+or
+
+\begin{equation*}
+   y(x)=-\ln{(1-x)}.
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Exponential Distribution}
+
+\begin{block_mdfboxadmon}[]
+This gives us the new random variable $y$ in the domain
+$y \in [0,\infty)$
+determined through the random variable $x \in [0,1]$ generated by
+functions like $ran0$. 
+
+This means that if we can factor out 
+$\exp{(-y)}$ from an integrand we may have
+
+\begin{equation*}
+   I=\int_0^{\infty}F(y)dy=\int_0^{\infty}\exp{(-y)}G(y)dy   
+\end{equation*}
+which we rewrite as
+
+\begin{equation*}
+  \int_0^{\infty}\exp{(-y)}G(y)dy=
+   \int_0^{1}G(y(x))dx\approx 
+   \frac{1}{N}\sum_{i=1}^NG(y(x_i)),
+\end{equation*}
+where $x_i$ is a random number in the interval $[0,1]$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Exponential Distribution}
+
+\begin{block_mdfboxadmon}[]
+We have changed the integration limits in the second integral, since we have performed a change of variables.  Since we have used the uniform distribution defined for $x\in [0,1]$, the integration limits change to $0$ and $1$. The variable $y$ is now a function of $x$.
+Note also that in practical implementations, our random number generators for the 
+uniform distribution never return exactly 0 or 1, but we may come very close.
+
+The algorithm for the last example is rather simple. 
+In the function which sets up the integral, we simply need
+to call one of the random number generators 
+like $ran0$, $ran1$, $ran2$ or $ran3$ in order to obtain numbers 
+in the interval [0,1]. We obtain $y$ by the taking the logarithm of
+$(1-x)$. Our calling function which sets up the new random
+variable $y$ may then include statements like
+\bcppcod
+.....
+idum=-1;
+x=ran0(&idum);
+y=-log(1.-x);
+.....
+\ecppcod
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Normal Distribution}
+
+\begin{block_mdfboxadmon}[]
+For the normal distribution, expressed here as
+\begin{equation*}
+  g(x,y)=\exp{(-(x^2+y^2)/2)}dxdy.
+\end{equation*}
+it is rather difficult to find an inverse since the cumulative
+distribution is given by the error function $erf(x)$
+
+\begin{equation*}
+    \mathrm{erf}(x) = \frac{2}{\sqrt{\pi}}\int_{0}^x e^{-t^2} dt. 
+\end{equation*}
+Both \href{{http://www.cplusplus.com/reference/cmath/erfc/}}{c++}  and  \href{{https://gcc.gnu.org/onlinedocs/gfortran/ERFC.html}}{Fortran}   have this function as intrinsic ones.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Normal Distribution}
+
+\begin{block_mdfboxadmon}[]
+We obviously would like to avoid computing an integral everytime we need a random variable.
+If we however switch to polar coordinates, we have
+for $x$ and $y$
+
+\begin{equation*}
+   r=\left(x^2+y^2\right)^{1/2} \hspace{1cm}
+   \theta =tan^{-1}\frac{x}{y},
+\end{equation*}
+resulting in
+
+\begin{equation*}
+  g(r,\theta)=r\exp{(-r^2/2)}drd\theta,
+\end{equation*}
+where the angle $\theta$ could be given by a uniform 
+distribution in the region $[0,2\pi]$.
+Following example 1 above, this implies simply 
+multiplying random numbers 
+$x\in [0,1]$ by $2\pi$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Normal Distribution}
+
+\begin{block_mdfboxadmon}[]
+The variable 
+$r$, defined for $r \in [0,\infty)$ needs to be related to
+to random numbers $x'\in [0,1]$. To achieve that, we introduce a new variable
+
+\begin{equation*}
+   u=\frac{1}{2}r^2,
+\end{equation*}
+and define a PDF
+\begin{equation*}
+  \exp{(-u)}du,
+\end{equation*}
+with $u\in [0,\infty)$. 
+Using the results from example 2 for the exponential distribution, we have
+
+\begin{equation*}
+   u=-\ln{(1-x')},
+\end{equation*}
+where $x'$ is a random number generated for $x'\in [0,1]$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Normal Distribution}
+
+\begin{block_mdfboxadmon}[]
+With
+\begin{equation*}
+  x=r\cos{(\theta)}=\sqrt{2u}\cos{(\theta)},
+\end{equation*}
+and
+
+\begin{equation*}
+  y=r\sin{(\theta)}=\sqrt{2u}\sin{(\theta)},
+\end{equation*}
+we can obtain new random numbers $x,y$ through
+\begin{equation*}
+  x=\sqrt{-2\ln{(1-x')}}\cos{(\theta)},
+\end{equation*}
+and
+\begin{equation*}
+  y=\sqrt{-2\ln{(1-x')}}\sin{(\theta)},
+\end{equation*}
+with $x'\in [0,1]$ and $\theta \in 2\pi [0,1]$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Normal Distribution}
+
+\begin{block_mdfboxadmon}[]
+A function which yields such random numbers for the normal
+distribution would include statements like 
+\bcppcod
+.....
+idum=-1;
+radius=sqrt(-2*ln(1.-ran0(idum)));
+theta=2*pi*ran0(idum);
+x=radius*cos(theta);
+y=radius*sin(theta);
+.....
+\ecppcod
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Importance Sampling}
+
+\begin{block_mdfboxadmon}[]
+With the aid of the above variable transformations we address now
+one of the most widely used approaches to Monte Carlo integration,
+namely importance sampling. 
+
+Let us assume that  $p(y)$ is a PDF whose behavior resembles that of a function
+$F$ defined in a certain interval $[a,b]$. The normalization condition is
+
+\begin{equation*}
+   \int_a^bp(y)dy=1.
+\end{equation*}
+We can rewrite our integral as
+
+\begin{equation*}
+   I=\int_a^b F(y) dy =\int_a^b p(y)\frac{F(y)}{p(y)} dy.
+   \label{eq:impsampl1}
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Importance Sampling}
+
+\begin{block_mdfboxadmon}[]
+Since random numbers are generated for the uniform distribution $p(x)$
+with $x\in [0,1]$, we need to perform a change of variables $x\rightarrow y$
+through
+\begin{equation*}
+     x(y)=\int_a^y p(y')dy',
+\end{equation*}
+where we used
+\begin{equation*}
+   p(x)dx=dx=p(y)dy. 
+\end{equation*}
+If we can invert $x(y)$, we find $y(x)$ as well.
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Importance Sampling}
+
+\begin{block_mdfboxadmon}[]
+With this change of variables we can express the integral of 
+Eq. (\ref{eq:impsampl1}) as
+\begin{equation*}
+   I=\int_a^b p(y)\frac{F(y)}{p(y)} dy=\int_{\tilde{a}}^{\tilde{b}}\frac{F(y(x))}{p(y(x))} dx,
+\end{equation*}
+meaning that a Monte Carlo evaluation of the above integral gives
+\begin{equation*}
+\int_{\tilde{a}}^{\tilde{b}}\frac{F(y(x))}{p(y(x))} dx=
+\frac{1}{N}\sum_{i=1}^N\frac{F(y(x_i))}{p(y(x_i))}.
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Importance Sampling}
+
+\begin{block_mdfboxadmon}[]
+Note the change in integration limits from $a$ and $b$ to $\tilde{a}$ and 
+$\tilde{b}$.
+The advantage of such a change of variables in case $p(y)$ follows
+closely $F$ is that the integrand becomes smooth and we can sample
+over relevant values for the integrand. It is however not trivial
+to find such a function $p$.
+The conditions on $p$ which allow us to perform these transformations
+are
+
+\begin{itemize}
+  \item $p$ is normalizable and positive definite,
+
+  \item it is analytically integrable and
+
+  \item the integral is invertible, allowing us thereby to express a new variable in terms of the old one.
+\end{itemize}
+
+\noindent
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Importance Sampling}
+
+\begin{block_mdfboxadmon}[]
+The variance  is now with the definition
+\begin{equation*}
+ \tilde{F}=\frac{F(y(x))}{p(y(x))},
+\end{equation*}
+given by
+\begin{equation*}
+  \sigma^2=\frac{1}{N}\sum_{i=1}^N\left(\tilde{F}\right)^2-
+\left(\frac{1}{N}\sum_{i=1}^N\tilde{F}\right)^2.
+\label{eq:standard_is}
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Importance Sampling}
+
+\begin{block_mdfboxadmon}[]
+The algorithm for this procedure is 
+
+\begin{itemize}
+\item Use the uniform distribution to find the random variable   $y$ in the interval [0,1]. The function $p(x)$ is a user provided PDF.
+
+\item Evaluate thereafter   
+\end{itemize}
+
+\noindent
+\begin{equation*}    
+I=\int_a^b F(x) dx =\int_a^b p(x)\frac{F(x)}{p(x)} dx,
+\end{equation*}
+ by rewriting
+\begin{equation*}
+   \int_a^b p(x)\frac{F(x)}{p(x)} dx =   
+   \int_{\tilde{a}}^{\tilde{b}}\frac{F(x(y))}{p(x(y))} dy,
+\end{equation*}
+since
+
+\begin{equation*}
+   \frac{dy}{dx}=p(x).
+\end{equation*}
+\begin{itemize}
+ \item Perform then a Monte Carlo sampling for  
+\end{itemize}
+
+\noindent
+\begin{equation*} 
+\int_{\tilde{a}}^{\tilde{b}}\frac{F(x(y))}{p(x(y))} dy\approx  \frac{1}{N}\sum_{i=1}^N\frac{F(x(y_i))}{p(x(y_i))},
+\end{equation*}
+with $y_i\in [0,1]$,
+\begin{itemize}
+\item and evaluate the variance as well.
+\end{itemize}
+
+\noindent
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Importance Sampling, a simple example}
+
+\begin{block_mdfboxadmon}[]
+Let us look again at the integral
+\[
+   I=\int_0^1 F(x) dx = \int_0^1 \frac{1}{1+x^2} dx = \frac{\pi}{4}.
+\]
+We choose the following PDF (which follows closely the function to
+integrate)
+\[
+   p(x)=\frac{1}{3}\left(4-2x\right) \hspace{1cm} \int_0^1p(x)dx=1,
+\]
+resulting in
+\[
+   \frac{F(0)}{p(0)}=\frac{F(1)}{p(1)}=\frac{3}{4}.
+\]
+Check that it fullfils the requirements of a PDF!
+We perform then the change of variables (via the Cumulative function) 
+\[
+     y(x)=\int_0^x p(x')dx'=\frac{1}{3}x\left(4-x\right),
+\]
+or
+\[
+   x=2-\left(4-3y\right)^{1/2}
+\]
+We have that when $y=0$ then  $x=0$ and when  $y=1$ we have $x=1$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Importance Sampling, a simple example, a simple plot}
+
+\begin{block_mdfboxadmon}[]
+
+\bpypro
+from  matplotlib import pyplot as plt
+from math import exp, acos, log10
+import numpy as np
+
+#  function to integrate                                                                                     
+def function(x):
+    return 1.0/(1+x*x)
+
+#  new probability                                                                                           
+def newfunction(x):
+    return 0.3333333*(4.0-2*x)
+
+Dim = 100
+x = np.linspace(0.0,1.0,Dim)
+f = np.zeros(Dim)
+g = np.zeros(Dim)
+for i in xrange(Dim):
+    f[i] = function(x[i])
+    g[i] = newfunction(x[i])
+
+plt.plot(x, f ,'b-',x, g,'g-')
+plt.axis([0,1,0.5, 1.5])
+plt.xlabel('$x$')
+plt.ylabel('Functions')
+plt.title('Similarities between functions')
+plt.legend(['Integrand', 'New integrand'], loc='best')
+plt.savefig('newprobability.pdf')
+plt.show()
+
+\epypro
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+
+% !split
+\subsection{Importance Sampling, a simple example, the code part}
+
+\begin{block_mdfboxadmon}[]
+\bcppcod
+//   evaluate the integral with importance sampling
+     for ( int i = 1;  i <= n; i++){
+       x = ran0(&idum);  // random numbers in [0,1]
+       y = 2 - sqrt(4-3*x);  // new random numbers
+       fy=3*func(y)/(4-2*y); // weighted function
+       int_mc += fy;
+       sum_sigma += fy*fy;
+     }
+     int_mc = int_mc/((double) n );
+     sum_sigma = sum_sigma/((double) n );
+     variance=(sum_sigma-int_mc*int_mc);
+\ecppcod
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+
+% !split
+\subsection{Importance Sampling, a simple example, and the results}
+
+\begin{block_mdfboxadmon}[]
+The suffix $cr$ stands for the brute force approach 
+while $is$ stands for the use of importance sampling.
+All calculations use ran0 as function to generate the uniform distribution.
+
+
+\begin{quote}
+\begin{tabular}{ccccc}
+\hline
+\multicolumn{1}{c}{ $N$ } & \multicolumn{1}{c}{ $I_{cr}$ } & \multicolumn{1}{c}{ $\sigma_{cr}$ } & \multicolumn{1}{c}{ $I_{is}$ } & \multicolumn{1}{c}{ $\sigma_{is}$ } \\
+\hline
+10000    & 3.13395E+00 & 4.22881E-01   & 3.14163E+00 & 6.49921E-03   \\
+100000   & 3.14195E+00 & 4.11195E-01   & 3.14163E+00 & 6.36837E-03   \\
+1000000  & 3.14003E+00 & 4.14114E-01   & 3.14128E+00 & 6.39217E-03   \\
+10000000 & 3.14213E+00 & 4.13838E-01   & 3.14160E+00 & 6.40784E-03   \\
+\hline
+\end{tabular}
+\end{quote}
+
+\noindent
+However, it is unfair to study one-dimensional integrals with MC methods!
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+
+
+
+% !split
+\subsection{Acceptance-Rejection Method}
+
+\begin{block_mdfboxadmon}[]
+% add ref
+This is a rather simple and appealing
+method after von Neumann. Assume that we are looking at an interval
+$x\in [a,b]$, this being the domain of the PDF $p(x)$. Suppose also that
+the largest value our distribution function takes in this interval
+is $M$, that is
+\begin{equation*}
+    p(x) \le M \hspace{1cm}  x\in [a,b].
+\end{equation*}
+Then we generate a random number $x$ from the uniform distribution
+for $x\in [a,b]$ and a corresponding number $s$ for the uniform
+distribution between $[0,M]$. If
+\begin{equation*}
+p(x) \ge s,
+\end{equation*}
+we accept the new value of $x$, else we generate
+again two new random numbers $x$ and $s$ and perform the test
+in the latter equation again.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Acceptance-Rejection Method}
+
+\begin{block_mdfboxadmon}[]
+
+As an example, consider the evaluation of the integral
+
+\begin{equation*}
+   I=\int_0^3\exp{(x)}dx.
+\end{equation*}
+Obviously to derive a closed-form expression is much easier, however the integrand could pose some more
+difficult challenges. The aim here is simply to show how to implent the acceptance-rejection algorithm.
+The integral is the area below the curve $f(x)=\exp{(x)}$. If we uniformly fill the rectangle
+spanned by $x\in [0,3]$ and $y\in [0,\exp{(3)}]$, the fraction below the curve obtained from a uniform distribution, and
+multiplied by the area of the rectangle, should approximate the chosen integral.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Acceptance-Rejection Method}
+
+\begin{block_mdfboxadmon}[]
+It is rather
+easy to implement this numerically, as shown in the following code.
+\bcppcod
+//   Loop over Monte Carlo trials n
+     integral =0.;
+     for ( int i = 1;  i <= n; i++){
+//   Finds a random value for x in the interval [0,3]
+          x = 3*ran0(&idum);
+//   Finds y-value between [0,exp(3)]
+          y = exp(3.0)*ran0(&idum);
+//   if the value of y at exp(x) is below the curve, we accept
+          if ( y  < exp(x)) s = s+ 1.0;
+//   The integral is area enclosed below the line f(x)=exp(x)
+    }
+//  Then we multiply with the area of the rectangle and divide by the number of cycles 
+    Integral = 3.*exp(3.)*s/n
+\ecppcod
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Monte Carlo Integration of Multidimensional Integrals}
+
+\begin{block_mdfboxadmon}[]
+When we deal with multidimensional integrals of the form
+
+\begin{equation*} 
+   I=\int_{a_1}^{b_1}dx_1\int_{a_2}^{b_2}dx_2\dots \int_{a_d}^{b_d}dx_d g(x_1,\dots,x_d),
+\end{equation*}
+with 
+$x_i$ defined in the interval  $[a_i,b_i]$ we would typically
+need a transformation
+of variables of the form
+
+\begin{equation*}
+   x_i=a_i+(b_i-a_i)t_i,
+\end{equation*}
+if we were to use the uniform distribution on the interval $[0,1]$.
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Monte Carlo Integration of Multidimensional Integrals}
+
+\begin{block_mdfboxadmon}[]
+In this case, we need a 
+Jacobi determinant
+
+\begin{equation*}
+  \prod_{i=1}^d (b_i-a_i),
+\end{equation*}
+and to convert the function $g(x_1,\dots,x_d)$ to
+
+\begin{equation*}
+   g(x_1,\dots,x_d)\rightarrow 
+   g(a_1+(b_1-a_1)t_1,\dots,a_d+(b_d-a_d)t_d).
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Monte Carlo Integration of Multidimensional Integrals}
+
+\begin{block_mdfboxadmon}[]
+As an example, consider the following six-dimensional
+integral
+\begin{equation*}
+   \int_{-\infty}^{\infty}\mathbf{dxdy}g(\mathbf{x, y}),
+\end{equation*}
+where
+
+\begin{equation*}
+  g(\mathbf{x, y})=\exp{(-\mathbf{x}^2-\mathbf{y}^2)}(\mathbf{x}-\mathbf{y})^2
+\end{equation*}
+with  $d=6$.
+\end{block_mdfboxadmon} % title: 
+
+
+% !split
+\subsection{Monte Carlo Integration of Multidimensional Integrals}
+
+\begin{block_mdfboxadmon}[]
+We can solve this integral by employing our brute force scheme,
+or using importance sampling and random variables distributed 
+according to a gaussian PDF. For the latter, if we set
+the mean value 
+$\mu=0$ and the standard deviation  $\sigma=1/\sqrt{2}$, we have
+\begin{equation*}
+   \frac{1}{\sqrt{\pi}}\exp{(-x^2)},
+\end{equation*}
+and using this normal distribution we rewrite our integral as
+\begin{equation*}
+   \pi^3\int\prod_{i=1}^6\left(
+    \frac{1}{\sqrt{\pi}}\exp{(-x_i^2)}\right)
+    (\mathbf{x}-\mathbf{y})^2dx_1.\dots dx_6.
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Monte Carlo Integration of Multidimensional Integrals}
+
+\begin{block_mdfboxadmon}[]
+
+We  rewrite it in a more compact form as
+\begin{equation*}
+   \int f(x_1,\dots,x_d)F(x_1,\dots,x_d)\prod_{i=1}^6dx_i,
+\end{equation*}
+where $f$ is the above normal distribution
+and
+\begin{equation*}
+  F(x_1,\dots,x_6)=F(\mathbf{x, y})=(\mathbf{x}-\mathbf{y})^2,
+\end{equation*}
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Brute Force Integration}
+
+\begin{block_mdfboxadmon}[]
+Below we list two codes, one for the brute force integration
+and the other employing importance sampling with a gaussian distribution.
+\bcppcod
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+#include "lib.h"
+using namespace std;
+
+double brute_force_MC(double *);
+//     Main function begins here     
+int main()
+{
+     int n;
+     double x[6], y, fx; 
+     double int_mc = 0.;  double variance = 0.;
+     double sum_sigma= 0. ; long idum=-1 ;  
+     double length = 5.; // we fix the max size of the box to L=5
+     double jacobidet = pow((2*length),6);
+     cout << "Read in the number of Monte-Carlo samples" << endl;
+     cin >> n;
+//   evaluate the integral with importance sampling    
+     for ( int i = 1;  i <= n; i++){
+//   x[] contains the random numbers for all dimensions
+       for (int j = 0; j< 6; j++) {
+           x[j]=-length+2*length*ran0(&idum);
+       }
+       fx=brute_force_MC(x); 
+       int_mc += fx;
+       sum_sigma += fx*fx;
+     }
+     int_mc = int_mc/((double) n );
+     sum_sigma = sum_sigma/((double) n );
+     variance=sum_sigma-int_mc*int_mc;
+//   final output 
+      cout << setiosflags(ios::showpoint | ios::uppercase);
+      cout << " Monte carlo result= " << setw(10) << setprecision(8) << jacobidet*int_mc;
+      cout << " Sigma= " << setw(10) << setprecision(8) << volume*sqrt(variance/((double) n )) << endl;
+     return 0;
+}  // end of main program 
+
+// this function defines the integrand to integrate 
+ 
+double  brute_force_MC(double *x) 
+{
+// evaluate the different terms of the exponential
+   double xx=x[0]*x[0]+x[1]*x[1]+x[2]*x[2];
+   double yy=x[3]*x[3]+x[4]*x[4]+x[5]*x[5];
+   double xy=pow((x[0]-x[3]),2)+pow((x[1]-x[4]),2)+pow((x[2]-x[5]),2);
+   return exp(-xx-yy)*xy;
+} // end function for the integrand
+\ecppcod
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Importance Sampling}
+
+\begin{block_mdfboxadmon}[]
+This code includes a call to the function $normal_random$, which produces
+random numbers from a gaussian distribution. 
+\bcppcod
+// importance sampling with gaussian deviates
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+#include "lib.h"
+using namespace std;
+
+double gaussian_MC(double *);
+double gaussian_deviate(long *);
+//     Main function begins here     
+int main()
+{
+     int n;
+     double x[6], y, fx; 
+     cout << "Read in the number of Monte-Carlo samples" << endl;
+     cin >> n;
+     double int_mc = 0.;  double variance = 0.;
+     double sum_sigma= 0. ; long idum=-1 ;  
+     double jacobidet = pow(acos(-1.),3.);
+     double sqrt2 = 1./sqrt(2.);
+//   evaluate the integral with importance sampling    
+     for ( int i = 1;  i <= n; i++){
+//   x[] contains the random numbers for all dimensions
+       for (int j = 0; j < 6; j++) {
+	 x[j] = gaussian_deviate(&idum)*sqrt2;
+       }
+       fx=gaussian_MC(x); 
+       int_mc += fx;
+       sum_sigma += fx*fx;
+     }
+     int_mc = int_mc/((double) n );
+     sum_sigma = sum_sigma/((double) n );
+     variance=sum_sigma-int_mc*int_mc;
+//   final output 
+      cout << setiosflags(ios::showpoint | ios::uppercase);
+      cout << " Monte carlo result= " << setw(10) << setprecision(8) << jacobidet*int_mc;
+      cout << " Sigma= " << setw(10) << setprecision(8) << volume*sqrt(variance/((double) n )) << endl;
+     return 0;
+}  // end of main program 
+
+// this function defines the integrand to integrate 
+ 
+double  gaussian_MC(double *x) 
+{
+// evaluate the different terms of the exponential
+   double xy=pow((x[0]-x[3]),2)+pow((x[1]-x[4]),2)+pow((x[2]-x[5]),2);
+   return xy;
+} // end function for the integrand
+
+// random numbers with gaussian distribution
+double gaussian_deviate(long * idum)
+{
+  static int iset = 0;
+  static double gset;
+  double fac, rsq, v1, v2;
+
+  if ( idum < 0) iset =0;
+  if (iset == 0) {
+    do {
+      v1 = 2.*ran0(idum) -1.0;
+      v2 = 2.*ran0(idum) -1.0;
+      rsq = v1*v1+v2*v2;
+    } while (rsq >= 1.0 || rsq == 0.);
+    fac = sqrt(-2.*log(rsq)/rsq);
+    gset = v1*fac;
+    iset = 1;
+    return v2*fac;
+  } else {
+    iset =0;
+    return gset;
+  }
+} // end function for gaussian deviates
+\ecppcod
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+% !split
+\subsection{Python codes}
+
+\begin{block_mdfboxadmon}[]
+The first code here is an example of a python which computes the above integral using 
+the brute force approach
+\bpypro
+#Monte Carlo integration in 6 dimensions
+
+import numpy,math
+import sys
+
+def integrand(x):
+    """Calculates the integrand
+    exp(-a*(x1^2+x2^2+...+x6^2)-b*[(x1-x4)^2+...+(x3-x6)^2])
+    from the values in the 6-dimensional array x."""
+    a = 1.0
+    b = 0.5
+
+    x2 = numpy.sum(x**2)
+    xy = (x[0]-x[3])**2 + (x[1]-x[4])**2 + (x[2]-x[5])**2
+    
+    return numpy.exp(-a*x2-b*xy)
+
+#Main program
+
+#Integration limits: x[i] in (-5, 5)
+L      = 5.0
+jacobi = (2*L)**6
+
+N = 100000
+
+#Evaluate the integral
+sum  = 0.0
+sum2 = 0.0
+for i in xrange(N):
+    #Generate random coordinates to sample at
+    x = numpy.array([-L+2*L*numpy.random.random() for j in xrange(6)])
+
+    fx         = integrand(x)
+    sum       += fx
+    sum2      += fx**2
+#Calculate expt. values for fx and fx^2
+sum /=float(N)
+sum2/=float(N)
+
+#Result
+int_mc  = jacobi*sum;
+#Gaussian standard deviation
+sigma   = jacobi*math.sqrt((sum2-sum**2)/float(N))
+
+#Output
+print "Montecarlo result = %10.8E" % int_mc
+print "Sigma             = %10.8E" % sigma
+
+\epypro
+\end{block_mdfboxadmon} % title: 
+
+
+
+% !split
+\subsection{Python codes, importance sampling}
+
+\begin{block_mdfboxadmon}[]
+The second code, displayed here, uses importance sampling and random numbers that follow the normal distribution
+the brute force approach
+\bpypro
+#Monte Carlo integration with importance sampling
+
+import numpy,math
+import sys
+
+def integrand(x):
+    """Calculates the integrand
+    exp(-b*[(x1-x4)^2+...+(x3-x6)^2])
+    from the values in the 6-dimensional array x."""
+    b = 0.5
+
+    xy = (x[0]-x[3])**2 + (x[1]-x[4])**2 + (x[2]-x[5])**2
+    return numpy.exp(-b*xy)
+
+#Main program
+
+#Jacobi determinant
+jacobi = math.acos(-1.0)**3
+sqrt2  = 1.0/math.sqrt(2)
+
+N = 100000
+
+#Evaluate the integral
+sum  = 0.0
+sum2 = 0.0
+for i in xrange(N):
+    #Generate random, gaussian distributed coordinates to sample at
+    x = numpy.array([numpy.random.normal()*sqrt2 for j in xrange(6)])
+
+    fx         = integrand(x)
+    sum       += fx
+    sum2      += fx**2
+#Calculate expt. values for fx and fx^2
+sum /=float(N)
+sum2/=float(N)
+
+#Result
+int_mc  = jacobi*sum;
+#Gaussian standard deviation
+sigma   = jacobi*math.sqrt((sum2-sum**2)/float(N))
+
+#Output
+print "Montecarlo result = %10.8E" % int_mc
+print "Sigma             = %10.8E" % sigma
+\epypro
+\end{block_mdfboxadmon} % title: 
+
+
+
+
+
+
+% ------------------- end of main content ---------------
+
+% #ifdef PREAMBLE
+\end{document}
+% #endif
+
