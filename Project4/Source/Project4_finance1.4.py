@@ -52,6 +52,11 @@ m0 = 100
 # Fraction of money to save
 sav = .9
 
+# Mean money = to m0 since all start with same
+mean_money = m0
+
+# Alpha
+a = 1 
 ########################
 
 # Random function for epsilon for modularity
@@ -73,30 +78,31 @@ def agentPick(num_agents):
 #            print('agents same. redoing')
     return agent_i, agent_j
 
-def monetaryAgentPick(num_agents, agents):
+def monetaryAgentPick(num_agents, agents, mean_money, a):
     ''' Pick pairs of agents, non-uniformily, with skewing
     towards agents of similar monetary status. '''
     # Import agents, for num_agents scan for moneys, generate Pij
     #numpy.random.choice(numpy.arange(num_agents), p=[agent1, agent2,.. etc])
    
-    # pick the first agent
-    agent_i = r.randint(0, num_agents-1)
 
     # Import agents, scan through and build a PDF for the second
-    p = np.zeros(num_agents)
-    for i in range(num_agents):
-        p[i] = someFormulaNearestItemsGetHigherP ''' What might this be? '''
+#    p = np.zeros(num_agents)
+#    for i in range(num_agents):
+#        p[i] = someFormulaNearestItemsGetHigherP ''' What might this be? '''
 
     ''' Instead of screwing with the probability of being matched up,
     adjust the likelyhood of transaction once matched. This will slow the 
     'rate of monte carlo' but will surely be faster than scanning through
     all to build a PDF. '''
 
-    # Pick second being sure it is not the first
     while(1):
-        agent_j = np.random.choice(np.arange(num_agents), p) 
-#        agent_j = r.randint(0, num_agents-1)
+        # pick the first agent
+        agent_i = r.randint(0, num_agents-1)
+#        agent_j = np.random.choice(np.arange(num_agents), p) 
+        agent_j = r.randint(0, num_agents-1)
         if agent_i != agent_j:
+            # If valid selection, compute probability of interaction
+            pij = 2*np.abs((agents[agent_i]-agents[agent_j])/mean_money)**-a
             break
     return agent_i, agent_j
 # Setup agents
@@ -126,6 +132,34 @@ def exchangeMoney(num_agents, m0, num_transactions):
         agents[j] = agents[j]*sav + (1-ep)*(1-sav)*(agents_i_old + agents[j])
     return agents
 
+def exchangeMoneyCaveat(num_agents, m0, num_transactions):
+    ''' Attempt to exchange money with some caviat after selection '''
+    agents = np.zeros(num_agents)
+    agents[:] = m0
+    for k in range(num_transactions):
+        # Pick two agents at random, numbered i and j
+        i, j = agentPick(num_agents) # This is still the same
+        
+        # Generate a random number epsilon
+        ep = epsilonGen()
+        
+        # Exchange money | New: if probability agrees with it
+        # TODO: case where mi==mj==m0 is problem? -alpha = div 0
+        # Make own formula:
+        # no just add exception
+        # if alpha = 0, output = 2
+        # LOL kidding make own this works well
+        ''' pij = np.tanh(np.abs((mi-mj)/m0)**-a), where a = 0 to disable, but
+        actually still reduces probability. Nice that bounded by 1, so easy to 
+        work with. small a lessens the effect., big a, agents will back off for
+        smaller differences.'''
+
+        agents_i_old = agents[i]
+#        agents[i] = ep*(agents[i] + agents[j])
+#        agents[j] = (1-ep)*(agents_i_old + agents[j])
+        agents[i] = agents[i]*sav + ep*(1-sav)*(agents[i] + agents[j])
+        agents[j] = agents[j]*sav + (1-ep)*(1-sav)*(agents_i_old + agents[j])
+    return agents
 # Start timer
 begintime = datetime.now()
 
