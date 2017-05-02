@@ -1,0 +1,42 @@
+translating doconce text in mcint.do.txt to html
+*** warning: inline math in HTML must have space around <:
+    a(N_{i-1}\mathrm{MOD} (q))< aq  ->  a(N_{i-1}\mathrm{MOD} (q)) < aq
+*** warning: math block in HTML must have space around <:
+\begin{equation*}
+\begin{array}{ll}
+\theta(x)=0 & x<0 \\
+\theta(x)=\frac{1}{b-a} & \in [a,b].
+\end{array}
+\end{equation*}
+
+    changed to
+\begin{equation*}
+\begin{array}{ll}
+\theta(x)=0 & x < 0 \\
+\theta(x)=\frac{1}{b-a} & \in [a,b].
+\end{array}
+\end{equation*}
+
+*** warning: math block in HTML must have space around <:
+\begin{equation*}
+\sigma^2_m=\frac{\sigma^2}{n}+\frac{2}{mn^2}\sum_{\alpha=1}^m\sum_{k<l}^n (x_{\alpha,k}-\langle X_m \rangle)(x_{\alpha,l}-\langle X_m \rangle),
+\end{equation*}
+
+    changed to
+\begin{equation*}
+\sigma^2_m=\frac{\sigma^2}{n}+\frac{2}{mn^2}\sum_{\alpha=1}^m\sum_{k < l}^n (x_{\alpha,k}-\langle X_m \rangle)(x_{\alpha,l}-\langle X_m \rangle),
+\end{equation*}
+
+*** warning: math block in HTML must have space around <:
+\begin{equation*}
+\frac{2}{mn^2}\sum_{\alpha=1}^m\sum_{k<l}^n (x_{\alpha,k}-\langle X_m \rangle)(x_{\alpha,l}-\langle X_m \rangle)=
+\frac{2}{n}\sum_{d=1}^{n-1} f_d
+\end{equation*}
+
+    changed to
+\begin{equation*}
+\frac{2}{mn^2}\sum_{\alpha=1}^m\sum_{k < l}^n (x_{\alpha,k}-\langle X_m \rangle)(x_{\alpha,l}-\langle X_m \rangle)=
+\frac{2}{n}\sum_{d=1}^{n-1} f_d
+\end{equation*}
+
+output in mcint.html

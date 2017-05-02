@@ -1,0 +1,26 @@
+doconce is magic, go to https://github.com/hplgit/doconce and download. My good friend Hans Petter Langtangen (passed away last October) developed this.
+
+In the phy480 github folder, go to for example https://github.com/CompPhysics/ComputationalPhysicsMSU/tree/master/doc/src/mcint
+
+or any of the folders under /src
+
+There you find the source file
+
+mcint.do.txt   Look at it and see how simple it  is. The file make.sh does the various jobs for,
+
+just run as
+
+bash make.sh mcint   (don't add .do.txt)   and it generates ipynb, various types of html, pdf, latex, you name and you've got it.
+
+If just want say a simple html run as
+
+doconce format html mcint
+
+or an ipynb run as
+
+doconce format ipynb mcint
+
+
+If you need to transform a latex file just do
+
+doconce latex2doconce file.tex >  new file
