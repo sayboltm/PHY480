@@ -87,6 +87,11 @@ def monetaryAgentPick(num_agents, agents):
     for i in range(num_agents):
         p[i] = someFormulaNearestItemsGetHigherP ''' What might this be? '''
 
+    ''' Instead of screwing with the probability of being matched up,
+    adjust the likelyhood of transaction once matched. This will slow the 
+    'rate of monte carlo' but will surely be faster than scanning through
+    all to build a PDF. '''
+
     # Pick second being sure it is not the first
     while(1):
         agent_j = np.random.choice(np.arange(num_agents), p) 

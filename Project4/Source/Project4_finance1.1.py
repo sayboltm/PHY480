@@ -38,8 +38,8 @@ num_experiments = 10**2
 # Number of transactions
 #N = 10**2 # should be 10**7
 #N = 10**7 # Everyone has $0?? Money not being conserved or something
-#N = 10**4 # This works
-N = 10**5 # Barely works
+N = 10**4 # This works
+#N = 10**5 # Barely works
 #N = 10**6 # doesn't work
 
 # start money for all agents
