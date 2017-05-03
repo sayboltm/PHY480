@@ -1,0 +1,24 @@
+Feedback Rx 4-2-17
+
+Begin Tx:
+
+Hi again Bjon and Michael,
+first of all thanks so much for your report. I hope all is well with projects 2 and 3. As I discussed at the lab with you Michael, I am pretty flexible with the deadlines and you can hand in projects 2-4 at your convenience. However, we have a hard deadline, which is April 30, the day before the finals week begins (May 1). 
+The only drawback with handing in late is that my feedback is obviously delayed and the intention behind the feedback is to allow you to improve your project writing skills. Also, as you can see from the form below, when I grade the projects, I try to follow what is written below.  Another thing which is very useful for me when giving feedback is that you have a GitHub account with the project structured in terms of a benchmark folder, a source code folder and a report folder. Then I can peep into the program and see where things could have gone wrong. For project 2-4, please just send me your GitHub username.
+
+Here follows a feedback on your project 1. 
+The abstract is pretty fine and the intro as well, but you could have structured the intro in terms of a general motivation, what you did and then just listing the structure of the report. The intro was somewhat short and I would have had given you a full score, more 5-6 out of 10. 
+The theory part is on the other hand fine and I would have given you a full score. 
+However, I miss a more thorough discussion of the implementation and discussion of your code, tests you run and did and how you made sure that your results are actually correct. Here also a link to the code and possible benchmarks from your GitHub address would be of great help. 
+As an example, a very useful test is to compare your gaussian special solver with the standard LU decomposition also. These two methods should give you exactly the same results. You actually have this in the report, but don't state it!!
+It is important that you think of the implementation part part because it is there where you convince the reader that what you have done is correct. 
+The results are fine, but as you noticed you run into problems with memory allocation when n=10^4. This is simply due to the fact that you cannot allocate larger matrices in memory, the LU methods kneels when n gets close to 50000, which means that you are trying to allocate and use more memory than you have available.
+
+
+The conclusion and refs are also fine but I would have used larger figures and have labels on the figure axes, the figs are somewhat hard to read and figure 3 seems empty to me? It seems that figure 4 was meant to contain the same info? 
+
+Summed up, the theory part and the results, conclusions and refs are very good, but I would subtract on figs and tables, the introduction and obviously the implementation part. In total you have ended up with something between 75-80 points. We can also discuss in more details these topics during the lab sessions.
+
+Cheers and best wishes for the week to come.
+Morten
+p.s. Bjon, I hope all is well, I have not seen you for some time? I hope you are doing well and let me know if you need any help with the projects.
