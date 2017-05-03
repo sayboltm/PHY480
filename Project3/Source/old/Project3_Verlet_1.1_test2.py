@@ -8,7 +8,6 @@ it works! Saving as *Verlet_2.0, and cleaning up
 
 @author: Mike
 """
-# TODO: Fix. Planets go in a straight trajectory
 
 ''' The Earth-Sun system can be modeled by 4 coupled DEs: ODEp12
     v_x,i+1 = v_x,i - h*(4*pi^2/r^3_i)*x_i

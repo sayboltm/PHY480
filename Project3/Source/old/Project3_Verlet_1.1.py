@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Mar 22 12:38:40 2017
-Project 3 binary system test
+Project 3 Verlet: doesn't work, this was basically a fallback if the next version was worse
 @author: Mike
 """
 

@@ -2,6 +2,7 @@
 """
 Created on Wed Mar 22 12:38:40 2017
 Project 3 binary system test
+This does Euler method binary system, no planet class yet 
 @author: Mike
 """
 
@@ -19,7 +20,7 @@ Project 3 binary system test
     dy/dt = v_y
     '''
 
-#### clear;
+#### clearvars; IF DONT HAVE ANACONDA NEED TO COMMENT OUT
 from IPython import get_ipython
 get_ipython().magic('reset -sf')
 #####
@@ -30,6 +31,9 @@ import sys
 
 
 sys.path.append('C:\\Users\\Mike\\Documents\\GitHub\\sayboltm\\PHY480\\')
+sys.path.append('~/GitHub/sayboltm/PHY480/')
+sys.path.append('../../') # Grab shared by all projects, Plottr
+sys.path.append('../../../')
 import Plottr
 
 ###
@@ -115,4 +119,3 @@ while (t < te):
     i += 1
     
 Plottr.plot(xe_arr, ye_arr)
-    
