@@ -1,0 +1,18 @@
+\frametitle{Adaptive methods}
+
+\begin{block}{}
+With
+\[
+\tilde{h}=h\left(\frac{\xi}{\epsilon}\right)^{1+1/M}.
+\]
+we can design the following algorithm:
+\begin{itemize}
+ \item If the two answers are close, keep the approximation to $h$.
+
+ \item If $\epsilon > \xi$ we need to decrease the step size in the next time step.
+
+ \item If $\epsilon < \xi$ we need to increase the step size in the next time step.
+\end{itemize}
+
+\noindent
+\end{block}

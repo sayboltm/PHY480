@@ -1,0 +1,18 @@
+Notes:
+
+tex and ptex worked for both:
+rubber --pdf --warn all fileName
+pdflatex fileName
+
+Note:
+rubber in .tex:
+
+Project3.tex:53: [Fancyhdr] \fancyfoot's `E' option without twoside option is useless. (page 1)
+
+rubber in .p.tex:
+
+compiling Project3.p.tex...
+compiling Project3.p.tex...
+Project3.p.tex:78: [Fancyhdr] \fancyfoot's `E' option without twoside option is useless. (page 1)
+
+
