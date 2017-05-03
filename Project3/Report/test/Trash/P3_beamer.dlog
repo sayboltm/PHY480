@@ -1,0 +1,3 @@
+running preprocess -DFORMAT=pandoc -DDEVICE=screen -DSLIDE_TYPE="remark" -DSLIDE_THEME="light" P3_beamer.do.txt > tmp_preprocess__P3_beamer.do.txt
+translating doconce text in tmp_preprocess__P3_beamer.do.txt to pandoc
+output in P3_beamer.md

@@ -1,0 +1,41 @@
+% PHY 480 Project 3: Ordinary Differential Equations and the Solar System
+% **Michael Saybolt, Michigan State University**
+% 5/3/2017
+
+<!-- Comment? -->
+
+<!-- !split -->
+### Abstract
+* Develop code for simulating solar system
+* Object orient for modularity
+* Euler method
+* Velocity Verlet method
+* Test as it is created to isolate bugs before they grow
+
+
+
+<!-- !split -->
+### Introduction
+* For ease of debugging, a simulation of a simple binary system is created first
+
+The only force in the problem is gravity. Newton's law of gravitation  is given by a force $F_G$
+\[
+F_G=\frac{GM_{\odot}M_{\mathrm{Earth}}}{r^2},
+\]
+where $M_{\odot}$ is the mass of the Sun and $M_{\mathrm{Earth}}$ is the mass of the Earth. The gravitational constant is $G$ and $r$ is the distance between the Earth and the Sun.
+
+
+
+
+
+<!-- !split -->
+### Monte Carlo: Enhances algorithmic thinking!
+* Be able to generate random variables following a given probability distribution function PDF
+* Find a probability distribution function (PDF)
+* Sampling rule for accepting a move
+* Compute standard deviation and other expectation values
+* Techniques for improving errors
+
+
+
+
