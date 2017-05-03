@@ -149,12 +149,22 @@ insert code
 
 \section{Results}
 %This section will show the overall correctness of each calculation, and the average speed of each method.
-\subsection{Euler Binary System}
+Results are presented here
+\def \variable {my_var}=.75
 
+\subsection{Euler}
+%\includegraphics[scale=my_var]{binary_euler.png}
 \includegraphics[scale=0.5]{binary_euler.png}
-\subsection{Enhanced Euler}
 
-\subsection{Velocity Verlet}A
+\includegraphics[scale=0.5]{euler_multiplanet.png}
+
+\subsection{Enhanced Euler}
+\includegraphics[scale=0.5]{euler_enhanced_jupiter.png}
+\includegraphics[scale=0.5]{euler_enhanced_multiplanet.png}
+
+\subsection{Velocity Verlet}
+\includegraphics[scale=0.5]{verlet_jupiter.png}
+\includegraphics[scale=0.5]{verlet_multiplanet.png}
 
 \subsection{Accuracy}
 %The analytical solution to f(x) = 100*exp(-10*x) is known to be u(x) = 1-(1-exp(-10))*x-exp(-10*x). This is used to compare the accuracy of the numerical solutions obtained with both the general Gaussian elimination algorithm as well as the LU decomposition version for various n.  Plots are generated to give a summarized view of the generated output files.\\

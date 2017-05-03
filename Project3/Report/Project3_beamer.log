@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.5.2)  3 MAY 2017 12:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.5.2)  3 MAY 2017 13:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -233,32 +233,80 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 File: ./img/binary_euler.png Graphic file (type png)
 
 <use ./img/binary_euler.png>
-Package pdftex.def Info: ./img/binary_euler.png used on input line 146.
+Package pdftex.def Info: ./img/binary_euler.png used on input line 157.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
- [4 <./img/binary_euler.png>] [5]
-(./Project3_beamer.aux) ) 
+ [4]
+<./img/euler_multiplanet.png, id=27, 462.528pt x 346.896pt>
+File: ./img/euler_multiplanet.png Graphic file (type png)
+
+<use ./img/euler_multiplanet.png>
+Package pdftex.def Info: ./img/euler_multiplanet.png used on input line 159.
+(pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
+
+<./img/euler_enhanced_jupiter.png, id=28, 462.528pt x 346.896pt>
+File: ./img/euler_enhanced_jupiter.png Graphic file (type png)
+
+<use ./img/euler_enhanced_jupiter.png>
+Package pdftex.def Info: ./img/euler_enhanced_jupiter.png used on input line 16
+2.
+(pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
+
+<./img/euler_enhanced_multiplanet.png, id=29, 462.528pt x 346.896pt>
+File: ./img/euler_enhanced_multiplanet.png Graphic file (type png)
+
+<use ./img/euler_enhanced_multiplanet.png>
+Package pdftex.def Info: ./img/euler_enhanced_multiplanet.png used on input lin
+e 163.
+(pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
+
+Overfull \hbox (75.13794pt too wide) in paragraph at lines 162--164
+[] [] 
+ []
+
+[5 <./img/binary_euler.png> <./img/euler_multiplanet.png>]
+<./img/verlet_jupiter.png, id=35, 462.528pt x 346.896pt>
+File: ./img/verlet_jupiter.png Graphic file (type png)
+
+<use ./img/verlet_jupiter.png>
+Package pdftex.def Info: ./img/verlet_jupiter.png used on input line 166.
+(pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
+
+<./img/verlet_multiplanet.png, id=36, 462.528pt x 346.896pt>
+File: ./img/verlet_multiplanet.png Graphic file (type png)
+
+<use ./img/verlet_multiplanet.png>
+Package pdftex.def Info: ./img/verlet_multiplanet.png used on input line 167.
+(pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
+
+Overfull \hbox (75.13794pt too wide) in paragraph at lines 166--168
+[] [] 
+ []
+
+[6 <./img/euler_enhanced_jupiter.png> <./img/euler_enhanced_multiplanet.png> <.
+/img/verlet_jupiter.png> <./img/verlet_multiplanet.png>] (./Project3_beamer.aux
+) ) 
 Here is how much of TeX's memory you used:
- 3231 strings out of 493029
- 48467 string characters out of 6136235
+ 3257 strings out of 493029
+ 49275 string characters out of 6136235
  112221 words of memory out of 5000000
- 6744 multiletter control sequences out of 15000+600000
+ 6765 multiletter control sequences out of 15000+600000
  10798 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,6n,38p,655b,254s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
-12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on Project3_beamer.pdf (5 pages, 140370 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmsy8.pfb>
+Output written on Project3_beamer.pdf (6 pages, 279554 bytes).
 PDF statistics:
- 63 PDF objects out of 1000 (max. 8388607)
- 43 compressed objects within 1 object stream
+ 76 PDF objects out of 1000 (max. 8388607)
+ 45 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

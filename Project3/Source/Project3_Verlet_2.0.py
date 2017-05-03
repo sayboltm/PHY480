@@ -52,6 +52,7 @@ from scipy.constants import G
 sys.path.append('C:\\Users\\Mike\\Documents\\GitHub\\sayboltm\\PHY480\\')
 #sys.path.append('~/GitHub/sayboltm/PHY480')
 sys.path.append('/home/mike/GitHub/sayboltm/PHY480')
+sys.path.append('../../') # This is more portable, cant seem to use ~ here
 import Plottr
 
 ###
@@ -205,7 +206,7 @@ for planet in planet_list:
 plt.figure()
 for planet in planet_list:
     plt.plot(planet.x_arr, planet.y_arr)
-plt.title('bigplot')
+plt.title('Multi-Planet Plot')
 plt.xlabel('xpos')
 plt.ylabel('ypos')
-plt.show()
+plt.show(block=False)
