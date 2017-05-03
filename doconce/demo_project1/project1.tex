@@ -1,0 +1,69 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\pagenumbering{arabic}
+\boldmath
+\begin{document}
+	\title{Project 1}
+	\author{Micheal Saybolt \\ Bjon Charlery}
+	
+	\date{\today}
+	\maketitle
+	\pagebreak
+\begin{abstract}
+This project explored solving differential equations, specifically \\linear second order equations, by using variety of different methods \\including LU Decomposition, Gauss Forward and Backward Substitution : General algorithm, and Gaussian Substitution : Special Case.
+\end{abstract}
+\bigskip
+\bigskip
+\section{Introduction}
+\indent The objective of this project was to solve a differential equation in the form of: (fill in DiffEq here) that can be written into the linear equation $(Ax = b)$. Since A is a tridiagonal matrix there is an actual or analytical solution that can be made for this particular matrix. The following sections will describe the origins for the algorithms used and their respective results.
+\section{Description}
+This section will detail the methods used to solve this linear equation system.(Insert equation). It is solved from three methods:\\
+\begin{itemize}
+	\item. \centering LU decomposition
+	\item. \centering Tridiagonal Solver: Gauss Elimination\\
+	\item. \centering Custom Gauss Elimination\\
+\end{itemize}
+\subsection{LU Decomposition Solver}
+This method consists of creating a Lower-Triangular matrix $L$ and a Upper-Triangular matrix $U$ for factorizing the linear system $(A = LU)$.\\
+$$
+\begin{bmatrix}
+	alpha& beta\\
+	gamma& delta
+\end{bmatrix}
+$$
+Once (L) and (U) are found they can be used to solve the following equation: $(Av = LUv = h\textsuperscript{2} f)$ by allowing $(Ly = h\textsuperscript{2}f)$ and $(Uv = y)$ with backwards substitution, in this case that would be required two times.
+\subsection{Tridiagonal Solver: General Gauss Elimination}
+This method consists of using Gauss elimination due to the matrix (A) only having values along the three diagonals of the matrix.\\
+$$
+\begin{bmatrix}
+alpha& beta\\
+gamma& delta
+\end{bmatrix}
+$$
+The diagonal of the matrix will be changed using the following formula while the "Upper Diagonal" will not be changed:\\
+d\textsubscript{i} = b\textsubscript{i} - a\textsubscript{i}c\textsubscript{i} / d\textsubscript{i-1}\\
+The "Lower Diagonal" will be changed so that all elements below the diagonal are zeros. The vector (f) changes with the following formula:\\
+w\textsubscript{i} = f\textsubscript{i} - a\textsubscript{i}w\textsubscript{i-1} / d\textsubscript{i-1}\\
+With backwards substitution then can be performed after following:\\
+v\textsubscript{i} = w\textsubscript{i-1} - c\textsubscript{i-1}v\textsubscript{i} / d\textsubscript{i-1}\\
+\centering with d\textsubscript{1} = b\textsubscript{1}, w\textsubscript{1} = f \textsubscript{1}, and v\textsubscript{n} = h\textsuperscript{2}w\textsubscript{n} / d\textsubscript{n}
+
+\subsection{Special Case Solver: Custom Gauss Elimination}
+Since the matrix we are using has only -1 along the "Upper diagonal" and "Lower Diagonal", -2 along the "Main Diagonal" \\
+(insert a matrix to show)\\
+the value of d\textsubscript{i} can be simplified to 2 - 1/d\textsubscript{i-1}, the value of w\textsubscript{i} is now simplified to  f\textsubscript{i} + w\textsubscript{i-1} / d\textsubscript{i-1}, and v\textsubscript{i} = w\textsubscript{i-1} + v\textsubscript{i}/d\textsubscript{i-1}\\
+These calculation require an initial values for d\textsubscript{i},w\textsubscript{i}, and v\textsubscript{i} which are 2, f\textsubscript{1}, and h\textsuperscript{2}w\textsubscript{n}/d\textsubscript{n}. Even further similfcation shows that every value of d\textsubscript{i} is equal to (i+1)/i, where i is the same index used for d\textsubscript{i}. 
+\section{Results}
+
+\section{Conclusions}
+From examining all of the methods used to solve the original linear equation we have concluded that the Special Case Solver is the most efficient at finding our solution, followed by the Tridiagonal Solver which is just a generalized case of the previous method. Lastly the least efficient method used to solve the linear equation was the LU Decomposition Solver. 
+
+
+
+
+
+
+
+
+	
+\end{document}
