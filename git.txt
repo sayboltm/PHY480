@@ -68,6 +68,11 @@ git reset --hard HEAD^
 # or for moar
 git reset --hard HEAD~2 # last two commits
 
+# Undo commits..
+git reset --soft HEAD^
+then re add/commit stuff
+don't do with multiple contributors tho
+
 ### Configuring Git
 # Changing username:
 git config --global user.name 'your username'
@@ -171,3 +176,17 @@ git reflog --format=full
 # Change username for that local repo with
 git config user.name 'username'
 git config user.email 'email@email.com'
+
+
+
+### Deployment: install pip from git
+by hash:
+pip install git+git://github.com/userName/someproject.git@commithash02d2fc4..
+
+by branch name:
+@cool-feature
+
+tag:
+@v1.2.0
+moar info:
+ https://pip.pypa.io/en/latest/reference/pip_install.html#git
