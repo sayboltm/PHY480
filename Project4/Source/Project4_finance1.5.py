@@ -61,6 +61,9 @@ mean_money = m0
 # Alpha (discrimination of similar wealth, 0=none, 1 =some, 2= alot)
 #a = 1 
 a = 2.7
+
+# Gamma: effect of previous transactions
+gam = 10 # Setting this = 10 (high) makes them all get $100
 ########################
 
 # Random function for epsilon for modularity
@@ -90,6 +93,9 @@ agents_storage = np.zeros((num_agents,num_experiments))
 
 pct_10 = num_experiments/10
 
+# Setup exchange log
+c = np.zeros((num_agents,num_agents))
+
 def exchangeMoney(num_agents, m0, num_transactions):
     agents = np.zeros(num_agents)
     agents[:] = m0
@@ -108,7 +114,7 @@ def exchangeMoney(num_agents, m0, num_transactions):
         agents[j] = agents[j]*sav + (1-ep)*(1-sav)*(agents_i_old + agents[j])
     return agents
 
-def exchangeMoneyCaveat(num_agents, m0, num_transactions, mean_money, a):
+def exchangeMoneyCaveat(num_agents, m0, num_transactions, mean_money, a, c, gam):
     ''' Attempt to exchange money with some caviat after selection.
     This caveat may be agents must be of similar wealth, or have done a 
     transaction previously. '''
@@ -122,12 +128,17 @@ def exchangeMoneyCaveat(num_agents, m0, num_transactions, mean_money, a):
         ep = epsilonGen()
         
         # Exchange money | New: if probability agrees with it
-        interact = caveatSimilarWealth(agents, i, j, m0, a)
+#        interact = caveatSimilarWealth(agents, i, j, m0, a)
+        # TODO: similar wealth throwing error and it didn't before
+        interact = caveatPreviousTransactions(agents, i, j, c, gam)
 
         if interact == 1: # Else, don't exchange money
             agents_i_old = agents[i]
             agents[i] = agents[i]*sav + ep*(1-sav)*(agents[i] + agents[j])
             agents[j] = agents[j]*sav + (1-ep)*(1-sav)*(agents_i_old + agents[j])
+            # log it too
+            c[i,j] += 1
+            c[j,i] += 1
     return agents
 
 def caveatSimilarWealth(agents, i, j, mean_money, a):
@@ -140,8 +151,9 @@ def caveatSimilarWealth(agents, i, j, mean_money, a):
             a: discrimination based on money
                 0 = disabled
                 small = some discrimination
-                a > 1: only agents with very similar wealth will interact '''
-''' The paper's function was for random initial money, not all the same which
+                a > 1: only agents with very similar wealth will interact
+
+The paper's function was for random initial money, not all the same which
 is why this modification is required. '''
     # Where pij is probability of INTERACTION
 #    pij = np.tanh(np.abs((agents[i]-agents[j])/mean_money)**-a)
@@ -155,8 +167,14 @@ is why this modification is required. '''
     interact = np.random.choice(np.arange(2), p=[p_no_interact, p_interact])
     return interact
 
-def caveatPreviousTransactions():
-    pass
+def caveatPreviousTransactions(agents, i, j, c, gam):
+    # Construct a matrix of cij of all transactions. Each time an agent interacts, they increment their index by one
+    pij = ((c[i,j] + 1)/(np.max(c) + 1))**gam
+
+    p_interact = pij
+    p_no_interact = 1-pij 
+    interact = np.random.choice(np.arange(2), p=[p_no_interact, p_interact])
+    return interact
 
 # Start timer
 begintime = datetime.now()
@@ -165,7 +183,7 @@ begintime = datetime.now()
 for kk in range(num_experiments):
     # Store result for averaging
 #    agents_storage[:,kk] = exchangeMoney(num_agents, m0, N)
-    agents_storage[:,kk] = exchangeMoneyCaveat(num_agents,m0, N,mean_money, a)
+    agents_storage[:,kk] = exchangeMoneyCaveat(num_agents,m0, N,mean_money, a, c, gam)
     # Print progress. Good for long runs
     #print(str(kk+1) + '/' + str(num_experiments) + ' experiments done.')
     if kk % pct_10 == 0:
@@ -174,6 +192,10 @@ for kk in range(num_experiments):
 # End timer
 print(datetime.now() - begintime)
 
+
+
+
+
 ## Average the experiments ( This probably isn't the right way to avg)
 #for i in range(num_agents):
 #    agents_avg[i] = np.mean(agents_storage[i,:])
@@ -181,6 +203,11 @@ print(datetime.now() - begintime)
 agents_total = np.zeros((num_experiments * num_agents))
 for i in range(num_experiments): # Convert from block matrix to linear vector
     agents_total[i*num_agents:i*num_agents+num_agents] = agents_storage[:,i]
+
+
+
+
+
 
 #########
 
