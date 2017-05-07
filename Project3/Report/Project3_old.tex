@@ -5,13 +5,10 @@
 \usepackage[font={small,it}]{caption}
 \pagenumbering{arabic}
 
-%\graphicspath{{./img/}{~/GitHub/sayboltm/PHY480/Project3/Report/img/}}
-\graphicspath{{./img/}}
-
 % This is a comment
 
 \begin{document}
-	\title{Project 3: Ordinary Differential Equations and the Solar System}
+	\title{Project 3}
 	\author{Michael Saybolt \\ Bjon Charlery}
 	
 %	\date{\today}
@@ -20,18 +17,8 @@
 	\pagebreak
 
 \begin{abstract}
-%This project explored solving differential equations, specifically \\linear second order equations, by using a couple of different methods \\ which include LU Decomposition, Gauss Forward and Backward Substitution : General algorithm
-%
-\begin{itemize}
-	\item Develop code for simulating solar system
-	\item Object orient for modularity
-	\item Multiple solvers for ODE
-		\begin{itemize}
-		\item Euler method
-		\item Velocity Verlet metho
-		\end{itemize}
-	\item Test as it is created to isolate bugs before they grow
-\end{itemize}
+This project explored solving differential equations, specifically \\linear second order equations, by using a couple of different methods \\ which include LU Decomposition, Gauss Forward and Backward Substitution : General algorithm
+
 \end{abstract}
 
 \bigskip
@@ -40,15 +27,6 @@
 \section{Introduction}
 %\indent The objective of this project was to solve a differential equation in the form of:\\ $$-u\textsuperscript{''}(x) = f(x), x\epsilon(0,1),u(0) = u(1) = 0.\\$$ that can be written into the linear equation $(Ax = b)$. Since A is a tridiagonal matrix there is an actual or analytical solution that can be made for this particular matrix. The following sections will describe the origins for the algorithms used and their respective results.
 %
-\begin{itemize}
-	\item For ease of debugging, a simulation of a simple binary system is created with just the Sun and the Earth
-\end{itemize}
-The only force in the problem is gravity. Newton's law of gravitation  is given by a force $F_G$
-\[
-F_G=\frac{GM_{\odot}M_{\mathrm{Earth}}}{r^2},
-\]
-where $M_{\odot}$ is the mass of the Sun and $M_{\mathrm{Earth}}$ is the mass of the Earth. The gravitational constant is $G$ and $r$ is the distance between the Earth and the Sun. Eventually the other planets will be added, but for now just this system will be used to test the layout of the algorithms.
-
 
 \section{Description}
 %This section will detail the methods used to solve the linear equation system. It is solved using two methods:\\
@@ -56,115 +34,59 @@ where $M_{\odot}$ is the mass of the Sun and $M_{\mathrm{Earth}}$ is the mass of
 %	\item \centering LU decomposition
 %	\item \centering Tridiagonal Solver - Gauss Elimination\\
 %\end{itemize}
-This section will provide details about the general equations describing the sytem, and the general approach of the problem.
 
-\subsection{Block tied to wall}
-Newton's equation of motion for system:
-\[
-m\frac{d^2x}{dt^2}=-kx,
-\]
-aka:
-\[
-\frac{d^2x}{dt^2}=-\frac{k}{m}x=-\omega_0^2x,
-\label{eq:newton1}
-\]
-with the angular frequency $\omega_0^2=k/m$.
+\subsection{LU Decomposition Solver}
+%This method consists of creating a Lower-Triangular matrix $L$ and a Upper-Triangular matrix $U$ for factorizing the linear system $(A = LU)$.\\
+%\pagebreak
+%\bigskip
+%\bigskip
+%\bigskip
+%$$
+%\begin{bmatrix}
+%	1& 0& 0& 0& 0&\\
+%	l\textsubscript{21}& 1&  0& 0& 0&\\
+%	l\textsubscript{31}& l\textsubscript{32}& 1&  0& 0&\\
+%	l\textsubscript{41}& l\textsubscript{42}& l\textsubscript{43}& 1& 0&\\
+%	l\textsubscript{51}& l\textsubscript{52}& l\textsubscript{53}& l\textsubscript{54}& 1&
+%\end{bmatrix}
+%and
+%\begin{bmatrix}
+%1& l\textsubscript{12}& l\textsubscript{13}& l\textsubscript{14}& l\textsubscript{15}&\\
+%0& 1& l\textsubscript{23}& l\textsubscript{24}& l\textsubscript{25}&\\
+%0& 0& 1& l\textsubscript{34}& l\textsubscript{35}&\\
+%0& 0& 0& 1& l\textsubscript{45}& \\
+%0& 0& 0& 0& 1&
+%
+%\end{bmatrix}
+%$$
+%Once (L) and (U) are found they can be used to solve the following equation: $(Av = LUv = h\textsuperscript{2} f)$ by allowing $(Ly = h\textsuperscript{2}f)$ and $(Uv = y)$ with backwards substitution, in this case that would be required two times.
 
-see line 1116 of ode.tex @Author: mhjensen for more equation
-
-\subsection{Euler Method}
-\begin{itemize}
-	\item Euler
-	\item Enhanced Euler
-		\begin{itemize}
-			\item Better numerical stability
-		\end{itemize}
-\end{itemize}
-
-\subsection{Verlet Method}
-\begin{itemize}
-	\item Verlet
-	\item Velocity Verlet
-		\begin{itemize}
-			\item Method with velocity is studied here
-		\end{itemize}
-\end{itemize}
-
-
-\section{Implementation}
-This section will transform the equations described in the previous section into usable code, and also describe difficulties encountered, and implemented solutions.
-
-For 2D simplification, get 4 coupled DEs:
-\[
-	\frac{dv_x}{dt}=-\frac{GM_{\odot}}{r^3}x,
-\]
-\[
-	\frac{dx}{dt}=v_x,
-\]
-\[
-	\frac{dv_y}{dt}=-\frac{GM_{\odot}}{r^3}y,
-\]
-\[
-	\frac{dy}{dt}=v_y
-\]
-
-This would be the same for 1 or 3 dimensions. But,
-\[
-	GM_{\odot}=v^2r,
-	\]
-
-and assuming Earth's velocity is:
-$v = 2\pi r/\mathrm{yr}=2\pi\mathrm{AU}/\mathrm{yr}$
-
-Thus can equate the following for the velocity in some direction:
-
-\[
-	\frac{dv_x}{dt} = -\frac{GM_{\odot}}{r^3}x = 4\pi^2 \frac{(\mathrm{AU})^3}{\mathrm{yr}^2}
-\]
-
-\subsection{Euler}
-insert discretized
-
-insert code
-
-\subsubsection{Enhanced Euler}
-\begin{itemize}
-	\item better numerical stability as show in results
-\end{itemize}
-
-\subsection{Velocity Verlet}
-\begin{itemize}
-	\item As numerically stable as enhanced Euler
-\end{itemize}
-
-
-
-
-
-
-
-
-
-
+\subsection{Tridiagonal Solver: General Gauss Elimination}
+%This method consists of using Gauss elimination due to the matrix (A) only having values along the three diagonals of the matrix.
+%
+%\\$$
+%
+%\begin{bmatrix}
+%b\textsubscript{1}& c\textsubscript{1}& 0& 0& ...& ...& 0&\\
+%a\textsubscript{1}& b\textsubscript{2}&  c\textsubscript{2}& 0& ...& ...& 0&\\
+%0& a\textsubscript{2}& b\textsubscript{3}&  c\textsubscript{3}& 0& ...& 0&\\
+%\rotatebox{90}{...}& ...& \rotatebox{320}{...}& \rotatebox{320}{...}& \rotatebox{320}{...}& ...& \rotatebox{90}{...}&\\
+%\rotatebox{90}{...}& ...& ...& \rotatebox{320}{...}& \rotatebox{320}{...}& \rotatebox{320}{...}& 0&\\
+%0& ...& ...& 0& a\textsubscript{n-1}& b\textsubscript{n-1}& c\textsubscript{n-1}&\\
+%0& ...& ...& ...& 0& a\textsubscript{n}& b\textsubscript{n}&
+%\end{bmatrix}
+%$$
+%The diagonal of the matrix will be changed using the following formula while the "Upper Diagonal" will not be changed:\\
+%$$d\textsubscript{i} = b\textsubscript{i} - a\textsubscript{i}c\textsubscript{i} / d\textsubscript{i-1}\\$$
+%The "Lower Diagonal" will be changed so that all elements below the diagonal are zeros. The vector (f) changes with the following formula:\\
+%$$w\textsubscript{i} = f\textsubscript{i} - a\textsubscript{i}w\textsubscript{i-1} / d\textsubscript{i-1}\\$$
+%With backwards substitution then can be performed after following:\\
+%$$v\textsubscript{i} = w\textsubscript{i-1} - c\textsubscript{i-1}v\textsubscript{i} / d\textsubscript{i-1}\\$$
+%\begin{centering} with $$d\textsubscript{1} = b\textsubscript{1}, w\textsubscript{1} = f \textsubscript{1}, and v\textsubscript{n} = h\textsuperscript{2}w\textsubscript{n} / d\textsubscript{n}$$
+%\end{centering}
 
 \section{Results}
 %This section will show the overall correctness of each calculation, and the average speed of each method.
-Results are presented here
-\def \variable {my_var}=.75
-
-\subsection{Euler}
-%\includegraphics[scale=my_var]{binary_euler.png}
-\includegraphics[scale=0.5]{binary_euler.png}
-
-\includegraphics[scale=0.5]{euler_multiplanet.png}
-
-\subsection{Enhanced Euler}
-\includegraphics[scale=0.5]{euler_enhanced_jupiter.png}
-\includegraphics[scale=0.5]{euler_enhanced_multiplanet.png}
-
-\subsection{Velocity Verlet}
-\includegraphics[scale=0.5]{verlet_jupiter.png}
-\includegraphics[scale=0.5]{verlet_multiplanet.png}
 
 \subsection{Accuracy}
 %The analytical solution to f(x) = 100*exp(-10*x) is known to be u(x) = 1-(1-exp(-10))*x-exp(-10*x). This is used to compare the accuracy of the numerical solutions obtained with both the general Gaussian elimination algorithm as well as the LU decomposition version for various n.  Plots are generated to give a summarized view of the generated output files.\\
