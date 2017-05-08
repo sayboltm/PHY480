@@ -1,0 +1,3 @@
+# Ignore any variance_storage.txt
+Project4/Source/output/*variance_storage.txt
+
