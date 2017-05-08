@@ -1,0 +1,13 @@
+N=500
+m0=100
+num_transactions=10**6
+num_experiments=10
+sav=0
+mean_money=m0
+a=2.7
+gam=1
+
+
+but similar_wealth and previous_transactions=0
+
+linplot of dist is sstill a little spikey, but variance is plenty converged

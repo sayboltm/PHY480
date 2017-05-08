@@ -3,7 +3,13 @@
 Library for financial transaction simulator because main code too big
 '''
 import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.pylab as plb
 import random as r
+
+import sys
+sys.path.append('../../')
+import Plottr
 
 def epsilonGen(distribution='uniform'):
     ''' Generate random number epsilon for determining how much money is
@@ -24,24 +30,6 @@ def agentPick(num_agents):
             break
     return agent_i, agent_j
 
-#def exchangeMoney(num_agents, m0, num_transactions):
-#    agents = np.zeros(num_agents)
-#    agents[:] = m0
-#    for k in range(num_transactions):
-#        # Pick two agents at random, numbered i and j
-#        i, j = agentPick(num_agents)
-#        
-#        # Generate a random number epsilon
-#        ep = epsilonGen()
-#        
-#        # Exchange money
-#        agents_i_old = agents[i]
-##        agents[i] = ep*(agents[i] + agents[j])
-##        agents[j] = (1-ep)*(agents_i_old + agents[j])
-#        agents[i] = agents[i]*sav + ep*(1-sav)*(agents[i] + agents[j])
-#        agents[j] = agents[j]*sav + (1-ep)*(1-sav)*(agents_i_old + agents[j])
-#    return agents
-
 def exchangeMoney(N, m0, num_transactions, sav, mean_money, a, c, gam):
     ''' Attempt to exchange money with some caviat after selection. This caveat
     may be agents must be of similar wealth, or have done a transaction
@@ -60,9 +48,6 @@ def exchangeMoney(N, m0, num_transactions, sav, mean_money, a, c, gam):
         ep = epsilonGen()
         
         # Exchange money | New: if probability agrees with it
-#        interact = caveatSimilarWealth(agents, i, j, m0, a)
-        # TODO: similar wealth throwing error and it didn't before
-#        interact = caveatPreviousTransactions(agents, i, j, c, gam)
         interact = caveatFunction(agents, i, j, mean_money, a, c, gam)
 
         if interact == 1: # Else, don't exchange money
@@ -83,7 +68,7 @@ def caveatFunction(agents, i, j, mean_money, a, c, gam):
     similar wealth or previous transactions or both or none '''
     # Discriminate based on:
     similar_wealth = 0
-    previous_transactions = 1
+    previous_transactions = 0
 
     if (similar_wealth == 1) and (previous_transactions == 0):
         p_interact = similarWealth(agents, i, j, mean_money, a)
@@ -113,40 +98,57 @@ def previousTransactions(agents, i, j, c, gam):
 
 
 
+##############################################################################
+# Functions to store, load, and plot the data
 
-### Depricated crap ###
-def caveatSimilarWealth(agents, i, j, mean_money, a):
-    ''' A Function to decide on interaction based on similar wealth
-        Where:
-            agents: vector of agents
-            i: first agent picked
-            j: index of second agent picked
-            mean_money: average money of agents
-            a: discrimination based on money
-                0 = disabled
-                small = some discrimination
-                a > 1: only agents with very similar wealth will interact
+# This is in here so it never gets changed and will remain constant between the
+# main processing program, and the separate, plot-it-later program
 
-The paper's function was for random initial money, not all the same which
-is why this modification is required. '''
-    # Where pij is probability of INTERACTION
-#    pij = np.tanh(np.abs((agents[i]-agents[j])/mean_money)**-a)
-    mi = agents[i]
-    mj = agents[j]
-    x = np.abs((mi-mj)/mean_money)
-    pij = 1-(x/(x+1))**a # The 1 in 'x+1' could also be varied in the future
-    p_interact = pij
-    p_no_interact = 1-pij
-    # Decide if interact or not
-    interact = np.random.choice(np.arange(2), p=[p_no_interact, p_interact])
-    return interact
+def loadAll():
+    pass
 
-def caveatPreviousTransactions(agents, i, j, c, gam):
-    # Construct a matrix of cij of all transactions. Each time an agent interacts, they increment their index by one
-    pij = ((c[i,j] + 1)/(np.max(c) + 1))**gam
 
-    p_interact = pij
-    p_no_interact = 1-pij 
-    interact = np.random.choice(np.arange(2), p=[p_no_interact, p_interact])
-    return interact
+
+def plotAll(agents_storage, agents_total, variance_storage, histbins):
+    # Derive some quantities from these given vars
+    num_experiments = np.size(variance_storage[0,:])
+    N = np.size(agents_storage[:,0])
+
+    # Plot variance 
+    plt.figure()
+    for i in range(num_experiments):
+        plt.plot(variance_storage[:, i])
+    plt.xlabel('Monte Carlo Iterations')
+    plt.ylabel('Variance')
+    plt.title('Variance Over Monte Carlo Progression')
+    plt.show()
+
+    # Plot normal
+    #plt.plot(agents)
+    Plottr.plot(np.arange(N), agents_storage[:,-1], 'Agents', '$$$', 
+            'Raw plot of monies(last experiment)')
+    # Plot histogram
+    #hist, bin_edges = np.histogram(agents)
+    plt.figure()
+    plt.hist(agents_storage[:,-1],bins=histbins)
+    plb.xlabel('Money amount ($)')
+    plb.ylabel('Frequency')
+    plb.title('Occurance of certain amount of money(last experiment)')
+    #plt.show() # Only call plt.show() after all plots plotted
+
+    ## Plot results of all experiments
+    #Plottr.plot(np.arange(len(agents_avg)), agents_avg, 'Agents', '$$$', 
+    #        'Raw plot of monies(All)')
+    plt.figure()
+    plt.hist(agents_total,bins=histbins)
+    plb.xlabel('Money amount ($)')
+    plb.ylabel('Frequency')
+    plb.title('Occurance of certain amount of money(All Experiments)')
+    #plt.show(block=False) # show but allow input (and python to quit and leave plot)
+
+    # Plot the log histogram (part b)
+    data, bins = np.histogram(agents_total, bins=histbins)
+    Plottr.plot(bins[:-1], np.log10(data))
+    plt.show(block=False)
+
 

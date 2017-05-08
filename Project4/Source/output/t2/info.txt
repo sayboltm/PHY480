@@ -1,0 +1,16 @@
+N=500
+m0=1000
+num_transactions=10**6
+num_experiments=10**2
+sav=0
+mean_money=m0
+a=2.7
+gam=1
+
+1:09:44.016802
+
+but similar_wealth and previous_transactions=0
+
+took just as long, but less spikey. Not sure if from moar money (shouldn't matter) or more MC runs
+
+

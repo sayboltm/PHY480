@@ -1,3 +1,8 @@
 # Ignore any variance_storage.txt
-Project4/Source/output/*variance_storage.txt
+Project4/Source/output/variance_storage.txt
 
+Project4/Source/output/t0/variance_storage.txt
+
+Project4/Source/output/t1/variance_storage.txt
+
+Project4/Source/output/t2/variance_storage.txt
