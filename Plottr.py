@@ -36,7 +36,7 @@ def plot(X, Y=None, x_label=' ', y_label = ' ', title = ' ', xlog=0, ylog=0):
         plt.xscale('log')
     if ylog == 1:
         plt.yscale('log')
-    #plt.show()
+    plt.show(block=False)
 
 def ImShow(array, xlabel='', ylabel='', title='', limits=None, docolorbar=0):
     ''' 2D array plot via ImShow '''
