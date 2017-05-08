@@ -1,8 +1,82 @@
 \documentclass[12pt]{article} % Define document class
 
-\usepackage{graphicx}
-% Usepackage{{for images}}
+%% Main package imports with descriptions
+\usepackage{graphicx, amsmath}
+% Usepackage{{for images}{for referencing equations with numbers}}
 
 \graphicspath{./img/} % graphicx: define path for images
 
+% Hyperlinks in PDF:
+\usepackage{hyperref, color}
+\definecolor{linkcolor}{rgb}{0,0,0.4}
+\hypersetup{
+		breaklinks=true,
+		colorlinks=true,
+		linkcolor=linkcolor,
+		urlcolor=linkcolor,
+		citecolor=black,
+		filecolor=black,
+		%filecolor=blue,
+		pdfmenubar=true,
+		pdftoolbar=true,
+		bookmarksdepth=3   % Uncomment (and tweak) for PDF bookmarks with more levels than the TOC
+	    }
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\title{Project 4: Financial Engineering from a Statistical Physics Approach}
+\author{Michael Saybolt}
+\date{5/7/2017}
+\maketitle
+\pagebreak
+
+\tableofcontents
+
+\begin{abstract} % Present tense
+This project explores the generation and simulation of an economic system. Financial transactions among agents are simulated using Monte Carlo methods. The resulting distribution of wealth is then studied. Various parameters can be tuned to create a system that accurately models real wealth distributions from various countries.
+\end{abstract}
+
+\section{Introduction}
+The end goal is to analyze the distribution of wealth as a function of agents'
+money/income, \textit{m}. The result should follow a Pareto distribution.
+moar details, section layouts, how rng assigned, what effects examined
+
+\section{technical intro}
+- some maths
+	copy from paper
+- initial conditions, unlike papers, all have same money, cant get debtjj
+-termination conditions
+ random, some variancec, also see nate
+parameter selection
+ - good results, need sufficient start money I think
+
+\subsection{implementation sepcifics}
+	- mention quikplot, big MC, necessity of ldr/str
+	- try parallel
+	- try modularize st multiple instances
+\section{Results}
+\subsection{Default}
+\subsection{Savings}
+\subsection{Similar Wealth}
+\subsection{Previous Interactions}
+\section{Conclusions and Future Work}
+
+
+\begin{thebibliography}{2} % Bib must be called thebibliography
+		% Bib changes to bib if doctype=book or something,
+		% doctype=article makes it print references
+		%The number supposedly needs to match the num refs but doesn't
+		%seem so
+\bibitem{Pareto}
+\href{{http://www.institutcoppet.org/2012/05/08/cours-deconomie-politique-1896-de-vilfredo-pareto}}{V. Pareto, Cours d'economie politique, Lausanne, 1897}.
+
+\bibitem{Patriarca}	
+\href{{http://www.sciencedirect.com/science/article/pii/S0378437104004327}}{M. Patriarca, A. Chakraborti, K. Kaski, Physica A \textbf{340}, 334 (2004)}.
+
+\bibitem{Goswami}
+\href{{http://www.sciencedirect.com/science/article/pii/S0378437114006967}}{S. Goswami and P. Sen, Physica A \textbf{415}, 514 (2014)}.
+%moar
+%https://www.sharelatex.com/learn/Bibliography_management_with_bibtex?&nocdn=true
+\end{thebibliography}
+\end{document}
