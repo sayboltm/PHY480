@@ -1,8 +1,9 @@
 \documentclass[12pt]{article} % Define document class
 
 %% Main package imports with descriptions
-\usepackage{graphicx, amsmath}
-% Usepackage{{for images}{for referencing equations with numbers}}
+\usepackage{graphicx, amsmath, grffile, subcaption}
+% Usepackage{{for images}{for referencing equations with
+% numbers}{filenameswithdotslol}{sub figures}}
 
 \graphicspath{{./img/}} % graphicx: define path for images
 
@@ -106,25 +107,27 @@ This can be guessed by looking at the data and seeing when it quits changing
 much with additional transactions, or for a more quantatative approach, the variance
 amongst the agents can be observed as the transactions go on, which will
 stabilize when the system reaches equilibrium.
-\newcommand{\scaleVar}{0.5}
+\newcommand{\scaleVar}{0.45}
 \begin{figure}
-	\includegraphics[scale=\scaleVar]{variancenotconverged.png}
-	%\centering
-	\caption{Variance of 10 Monte Carlo cycles with
-	\texttt{num\_transactions}=$10^3$}
-	\label{fig:variancenotconverged}
-\end{figure}
-\begin{figure}
-	\includegraphics[scale=\scaleVar]{varianceconverged.png}
-	\caption{Variance of 10 Monte Carlo cycles with
-	\texttt{num\_transactions}=$10^4$
-	\label{fig:varianceconverged}
-\end{figure}
-\begin{figure}
-	\includegraphics[scale=\scaleVar]{variancefullyconverged.png}	
-	\caption{Variance of 10 Monte Carlo cycles with
-	\texttt{num\_transactions}=$10^5$
-	\label{fig:variancefullyconverged}
+	\begin{subfigure}{0.5\textwidth}
+		\centering
+		\includegraphics[scale=\scaleVar]{variancenotconverged.png}
+		\caption{\texttt{num\_transactions}=$10^3$}
+		\label{fig:variancenotconverged}
+	\end{subfigure}
+	\begin{subfigure}{0.5\textwidth}
+		\centering
+		\includegraphics[scale=\scaleVar]{varianceconverged.png}
+		\caption{\texttt{num\_transactions}=$10^4$}
+		\label{fig:varianceconverged}
+	\end{subfigure}\\[1ex]
+	\begin{subfigure}{\textwidth}
+		\centering
+		\includegraphics[scale=\scaleVar]{variancefullyconverged.png}	
+		\caption{\texttt{num\_transactions}=$10^5$}
+		\label{fig:variancefullyconverged}
+	\end{subfigure}
+	\caption{Variance of 10 MC cycles with \texttt{N} = 500}
 \end{figure}
 Figures \ref{fig:variancenotconverged}, \ref{fig:varianceconverged}, and
 \ref{fig:variancefullyconverged} show the variance against number of
@@ -171,9 +174,9 @@ python instances can be started separately, and then data combined at the end,
 programatically, but not truly 'parallel' code.
 
 \begin{figure}
-	\includegraphics[scale=0.75]{LOL.PNG}
+	\includegraphics[scale=0.5]{LOL.PNG}
 	\centering
-	\caption{Taking over the engineering compute servers}
+	\caption{Taking over the egr compute servers}
 	\label{fig:computeuse}
 \end{figure}
 
@@ -190,18 +193,25 @@ The 'default' model simply follows exponential decay as mentioned in the
 introduction \cite{Pareto}. Agents do not save any money, nor do they
 discriminate based on wealth or previous transaction. There are many agents
 with little money, and very few with a lot of money.
-\newcommand{\scaleResults}{0.75}
+\newcommand{\scaleResults}{0.45}
 \begin{figure}
-	\includegraphics[scale=\scaleResults]{}
-	\caption{Pareto distribution}
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[scale=\scaleResults]{default.png}
+		\caption{Histogram: Gibbs distribution}
+	\end{subfigure}
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[scale=\scaleResults]{default_log.png}
+		\caption{Log of the Gibbs distribution}
+	\end{subfigure}
+	\caption{The 'default' Gibbs distribution, N=500,
+	\texttt{num\_transactions}=$10^7$, \texttt{num\_experiments=$10^2$}}
 \end{figure}
 
 Taking the log of this function results in a relatively straight line, so long
-as enough interactions take place.
-\begin{figure}
-	\includegraphics[scale=\scaleResults]{}
-	\caption{Log of the 'default' Gibbs distribution}
-\end{figure}
+as enough interactions take place. Despite the high number of transactions, the
+lower number of experiments results in poor convergence despite taking just as
+many flops as if \texttt{num\_transactions}=$10^6$ and
+\texttt{num\_experiments}=$10^3$.
 
 \subsection{Savings}
 To add realism or study a hypothetical economic systme, agents can save a
@@ -218,62 +228,94 @@ and
   m_j' = \lambda m_j+(1-\epsilon)(1-\lambda)(m_i+m_j),
 \end{equation*}
 
-When agents save money, a strong 'middle class' is born. Results for saving a
-quarter, half and 90\% of their money is shown.
-
+When agents save money, a strong 'middle class' is born. The more they save,
+the stronger this gets, and less agents have little to no money to deal with.
+The distribution goes from resembling a Gibbs distribution, to almost a perfect
+Gaussian. Results for saving a quarter, half and 90\% of their money is shown
+by figures 
+\newcommand{\scaleResultsB}{0.45}
 \begin{figure}
-	\includegraphics[scale=\scaleResults]{}
-	\caption{Distribution of wealth for $\lambda$=0.25}
-	\label{}
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[scale=\scaleResultsB]{sav.25.png}
+		\caption{$\lambda$=0.25, N=500}
+		\label{fig:sav.25}
+	\end{subfigure}
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[scale=\scaleResultsB]{sav.5.png}
+		\caption{$\lambda$=0.5, N=500}
+		\label{fig:sav.5}
+	\end{subfigure}
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[scale=\scaleResultsB]{sav.9.png}
+		\caption{$\lambda$=0.9, N=500}
+		\label{fig:sav.9}
+	\end{subfigure}
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[scale=\scaleResultsB]{sav.9_last.png}
+		\caption{$\lambda$=0.9, N=500, last MC cycle only}
+		\label{fig:sav.9_last}
+	\end{subfigure}
+	\caption{Distribution of wealth for \texttt{num\_transactions}=$10^5$, 
+	\texttt{num\_experiments}=$10^3$}
 \end{figure}
 
+wtf \ref{fig:sav.25}, \ref{fig:sav.5}, and \ref{fig:sav.9} respectively.
 
-\begin{figure}
-	\includegraphics[scale=\scaleResults]{}
-	\caption{Distribution of wealth for $\lambda$=0.5}
-	\label{}
-\end{figure}
-\begin{figure}
-	\includegraphics[scale=\scaleResults]{}
-	\caption{Distribution of wealth for $\lambda$=0.9}
-	\label{}
-\end{figure}
+Note the importance of having enough MC cycles to get an accurate
+representation of the correct distribution. Figure \ref{fig:sav.9_last} shows
+the last MC cycle in this data set alone without 'averaging' them all together;
+the data is much more sporadic.
+
 
 \subsection{Similar Wealth}
 Agents can also be tailored to be more likely to interact with other agents of
 similar wealth, or geographic proximity, regardless of how much they save. This seems to help the lower and
 mid-income agents, and if the log is taken, somewhat resembles the plots in
-Goswami and Sen\cite{Goswami}.
+Goswami and Sen\cite{Goswami}. It seems there may be a bug since increasing
+$\alpha$ does not have as much effect on the curveature as expected.
 
+
+\newcommand{\scaleResultsC}{0.7}
 \begin{figure}
-	\includegraphics[scale=\scaleResults]{}
+	\includegraphics[scale=\scaleResultsC]{a.5.png}
+	\centering
 	\caption{Distribution of wealth for $\alpha$=0.5}
-	\label{}
+	\label{fig:a.5}
 \end{figure}
 
 \begin{figure}
-	\includegraphics[scale=\scaleResults]{}
+	\includegraphics[scale=\scaleResultsC]{a1.png}
+	\centering
 	\caption{Distribution of wealth for $\alpha$=1.0}
-	\label{}
+	\label{fig:a1}
 \end{figure}
 \begin{figure}
-	\includegraphics[scale=\scaleResults]{}
+	\includegraphics[scale=\scaleResultsC]{a1.5.png}
+	\centering
 	\caption{Distribution of wealth for $\alpha$=1.5}
-	\label{}
+	\label{fig:a1.5}
 \end{figure}
-\begin{figure}
-	\includegraphics[scale=\scaleResults]{}
+\begin{figure} % TODO: FIX
+	\includegraphics[scale=\scaleResultsC]{a1.5.png} %FIXXX
+	\centering
 	\caption{Distribution of wealth for $\alpha$=2.0}
-	\label{}
+	\label{fig:a2}
 \end{figure}
 
-Taking it to the max to really see the influence
+
+Taking it to the max to really see the influence, there is a difference with
+$\alpha$=10, but it is not as much change as expected.
 
 \begin{figure}
-	\includegraphics[scale=\scaleResults]{}
+	\includegraphics[scale=\scaleResultsC]{a10.png}
+	\centering
 	\caption{Distribution of wealth for $\alpha$=10}
-	\label{}
+	\label{fig:a10}
 \end{figure}
+
+The figures are enlarged to show the x-axis scale, which does change
+considerably. The effect of larger $\alpha$ causing the agents to stick
+together results in a lower upper bound for maximum money.
 
 \subsection{Adding Previous Interactions}
 People may have a tendency to want to continue to do business with previous
@@ -283,9 +325,87 @@ comparison to the maximum transactions between any agents, a confidence factor
 can be added in, increasing the likelhood of a transaction occuring the more
 previous transactions some agents have with each other.
 
+\newcommand{\scaleResultsA}{0.5}
+\newcommand{\scaleTextWidth}{0.5}
+\begin{figure}[h!]
+	\begin{subfigure}{\scaleTextWidth\textwidth}
+		\includegraphics[scale=\scaleResultsA]{a1g0.png}
+		\caption{$\alpha$=1, $\gamma$=0}
+		\label{fig:a1g0}
+	\end{subfigure}
+	\begin{subfigure}{\scaleTextWidth\textwidth}
+		\includegraphics[scale=\scaleResultsA]{a1g1.png}
+		\caption{$\alpha$=1, $\gamma$=1}
+		\label{fig:a1g1}
+	\end{subfigure}\\[1ex] % Does magical centering/newline things
+	\begin{subfigure}{\scaleTextWidth\textwidth}
+		\includegraphics[scale=\scaleResultsA]{a1g2.png}
+		\caption{$\alpha$=1, $\gamma$=2}
+		\label{fig:a1g2}
+	\end{subfigure}
+	\begin{subfigure}{\scaleTextWidth\textwidth}
+		\includegraphics[scale=\scaleResultsA]{a1g3.png}
+		\caption{$\alpha$=1, $\gamma$=3}
+		\label{fig:a1g3}
+	\end{subfigure}\\[1ex]
+	\begin{subfigure}{\scaleTextWidth\textwidth}
+		\includegraphics[scale=\scaleResultsA]{a1g4.png}
+		\caption{$\alpha$=1, $\gamma$=4}
+		\label{fig:a1g4}
+	\end{subfigure}
+	\begin{subfigure}{\scaleTextWidth\textwidth}
+		\includegraphics[scale=\scaleResultsA]{a1g5.png}
+		\caption{$\alpha$=1, $\gamma$=5}
+		\label{fig:a1g5}
+	\end{subfigure}
+	\caption{Distribution of wealth for $\alpha$=1, N=500,
+	\texttt{num\_transactions}=$10^6$, \texttt{num\_experiments}=$10^3$}
+\end{figure}
+\begin{figure}[h!]
+	\begin{subfigure}{\scaleTextWidth\textwidth}
+		\includegraphics[scale=\scaleResultsA]{a2g0.png}
+		\caption{$\alpha$=2, $\gamma$=0}
+		\label{fig:a2g0}
+	\end{subfigure}
+	\begin{subfigure}{\scaleTextWidth\textwidth}
+		\includegraphics[scale=\scaleResultsA]{a2g1.png}
+		\caption{$\alpha$=2, $\gamma$=1}
+		\label{fig:a2g1}
+	\end{subfigure}
+	\begin{subfigure}{\scaleTextWidth\textwidth}
+		\includegraphics[scale=\scaleResultsA]{a2g1.png} % TODO: FIX
+		\caption{$\alpha$=2, $\gamma$=2}
+		\label{fig:a2g2}
+	\end{subfigure}
+	\begin{subfigure}{\scaleTextWidth\textwidth}
+		\includegraphics[scale=\scaleResultsA]{a2g3.png}
+		\caption{$\alpha$=2, $\gamma$=3}
+		\label{fig:a2g3}
+	\end{subfigure}
+	\begin{subfigure}{\scaleTextWidth\textwidth}
+		\includegraphics[scale=\scaleResultsA]{a2g4.png}
+		\caption{$\alpha$=2, $\gamma$=4}
+		\label{fig:a2g4}
+	\end{subfigure}
+	\begin{subfigure}{\scaleTextWidth\textwidth}
+		\includegraphics[scale=\scaleResultsA]{a2g5.png}
+		\caption{$\alpha$=2, $\gamma$=5}
+		\label{fig:a2g5}
+	\end{subfigure}
+	\caption{Distribution of wealth for $\alpha$=2, N=500,
+	\texttt{num\_transactions}=$10^6$, \texttt{num\_experiments}=$10^3$}
+\end{figure}
 
+Looks like a bug where the probabilities are not scaled to each other properly.
+You see one effect clearly overtake the other.
+insert combined log and non log plots
+not sure why stick going up in the air. seen with default too (on an individual
+run). Guess is lack of interaction or low money exchange. Default averaged
+looks fine. Maybe need to establish criterion examining the variance and
+terminating then.
+interaction by chance or something.
 \section{Conclusions and Future Work}
-
+something
 
 \begin{thebibliography}{2} % Bib must be called thebibliography
 		% Bib changes to bib if doctype=book or something,

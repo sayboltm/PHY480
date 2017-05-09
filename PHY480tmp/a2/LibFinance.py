@@ -67,7 +67,7 @@ def caveatFunction(agents, i, j, mean_money, a, c, gam):
     ''' A generic caveat function so one can apply discrimination based on
     similar wealth or previous transactions or both or none '''
     # Discriminate based on:
-    similar_wealth = 0
+    similar_wealth = 1
     previous_transactions = 0
 
     if (similar_wealth == 1) and (previous_transactions == 0):

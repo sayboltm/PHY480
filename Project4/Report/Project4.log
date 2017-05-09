@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.5.3)  8 MAY 2017 09:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.5.3)  8 MAY 2017 22:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -110,6 +110,69 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 631.
 LaTeX Info: Redefining \[ on input line 2735.
 LaTeX Info: Redefining \] on input line 2736.
 )
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grffile.sty
+Package: grffile 2012/04/05 v1.16 Extended file name support for graphics (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package grffile Info: Option `multidot' is set to `true'.
+Package grffile Info: Option `extendedchars' is set to `false'.
+Package grffile Info: Option `space' is set to `true'.
+Package grffile Info: \Gin@ii of package `graphicx' fixed on input line 486.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2016/02/20 v1.1-142 Sub-captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/02/04 v1.7-139 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen114
+\captionmargin@=\dimen115
+\captionwidth=\dimen116
+\caption@tempdima=\dimen117
+\caption@indent=\dimen118
+\caption@parindent=\dimen119
+\caption@hangindent=\dimen120
+)
+\c@ContinuedFloat=\count100
+)
+\c@subfigure=\count101
+\c@subtable=\count102
+)
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
 
@@ -122,26 +185,15 @@ Package: hobsub-generic 2012/05/28 v1.13 Bundle oberdiek, subset generic (HO)
 Package: hobsub 2012/05/28 v1.13 Construct package bundles (HO)
 Package hobsub Info: Skipping package `infwarerr' (already loaded).
 Package hobsub Info: Skipping package `ltxcmds' (already loaded).
-Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX not detected.
+Package hobsub Info: Skipping package `ifluatex' (already loaded).
 Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
 Package: intcalc 2007/09/27 v1.1 Expandable calculations with integers (HO)
-Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
-Package ifpdf Info: pdfTeX in PDF mode is detected.
-Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
-Package etexcmds Info: Could not find \expanded.
-(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
-(etexcmds)             that some package has redefined \expanded.
-(etexcmds)             In the latter case, load this package earlier.
-Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+Package hobsub Info: Skipping package `ifpdf' (already loaded).
+Package hobsub Info: Skipping package `etexcmds' (already loaded).
+Package hobsub Info: Skipping package `kvsetkeys' (already loaded).
 Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
-Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
-)
-Package pdftexcmds Info: LuaTeX not detected.
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
+Package hobsub Info: Skipping package `pdftexcmds' (already loaded).
 Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
 Package: bigintcalc 2012/04/08 v1.3 Expandable calculations on big integers (HO
 )
@@ -158,23 +210,17 @@ Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
 Package: refcount 2011/10/16 v3.4 Data extraction from label references (HO)
 Package: hycolor 2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
-Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
-)
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/auxhook.sty
 Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
-Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
-)
-\@linkdim=\dimen114
-\Hy@linkcounter=\count100
-\Hy@pagecounter=\count101
+\@linkdim=\dimen121
+\Hy@linkcounter=\count103
+\Hy@pagecounter=\count104
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2012/11/06 v6.83m Hyperref: PDFDocEncoding definition (HO)
 )
-\Hy@SavedSpaceFactor=\count102
+\Hy@SavedSpaceFactor=\count105
 
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
@@ -186,17 +232,17 @@ Package hyperref Info: Plain pages OFF on input line 4458.
 Package hyperref Info: Backreferencing OFF on input line 4463.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4688.
-\c@Hy@tempcnt=\count103
+\c@Hy@tempcnt=\count106
 
 (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip11
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 5041.
-\XeTeXLinkMargin=\dimen115
-\Fld@menulength=\count104
-\Field@Width=\dimen116
-\Fld@charsize=\dimen117
+\XeTeXLinkMargin=\dimen122
+\Fld@menulength=\count107
+\Field@Width=\dimen123
+\Fld@charsize=\dimen124
 Package hyperref Info: Hyper figures OFF on input line 6295.
 Package hyperref Info: Link nesting OFF on input line 6300.
 Package hyperref Info: Hyper index ON on input line 6303.
@@ -206,17 +252,17 @@ Package hyperref Info: Link coloring with OCG OFF on input line 6320.
 Package hyperref Info: PDF/A mode OFF on input line 6325.
 LaTeX Info: Redefining \ref on input line 6365.
 LaTeX Info: Redefining \pageref on input line 6369.
-\Hy@abspage=\count105
-\c@Item=\count106
-\c@Hfootnote=\count107
+\Hy@abspage=\count108
+\c@Item=\count109
+\c@Hfootnote=\count110
 )
 
 Package hyperref Message: Driver (autodetected): hpdftex.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
-\Fld@listcount=\count108
-\c@bookmark@seq@number=\count109
+\Fld@listcount=\count111
+\c@bookmark@seq@number=\count112
 
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
@@ -233,40 +279,40 @@ File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 143.
 )
-Package hyperref Info: Option `breaklinks' set `true' on input line 23.
-Package hyperref Info: Option `colorlinks' set `true' on input line 23.
-Package hyperref Info: Option `pdfmenubar' set `true' on input line 23.
-Package hyperref Info: Option `pdftoolbar' set `true' on input line 23.
+Package hyperref Info: Option `breaklinks' set `true' on input line 24.
+Package hyperref Info: Option `colorlinks' set `true' on input line 24.
+Package hyperref Info: Option `pdfmenubar' set `true' on input line 24.
+Package hyperref Info: Option `pdftoolbar' set `true' on input line 24.
 
 (./Project4.aux)
 \openout1 = `Project4.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
  (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count110
-\scratchdimen=\dimen118
+\scratchcounter=\count113
+\scratchdimen=\dimen125
 \scratchbox=\box28
-\nofMPsegments=\count111
-\nofMParguments=\count112
+\nofMPsegments=\count114
+\nofMParguments=\count115
 \everyMPshowfont=\toks20
-\MPscratchCnt=\count113
-\MPscratchDim=\dimen119
-\MPnumerator=\count114
-\makeMPintoPDFobject=\count115
+\MPscratchCnt=\count116
+\MPscratchDim=\dimen126
+\MPnumerator=\count117
+\makeMPintoPDFobject=\count118
 \everyMPtoPDFconversion=\toks21
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -283,8 +329,11 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: hyperref package is loaded.
+Package caption Info: End \AtBeginDocument code.
 \AtBeginShipoutBox=\box29
-Package hyperref Info: Link coloring ON on input line 27.
+Package hyperref Info: Link coloring ON on input line 28.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -292,11 +341,11 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count116
+\c@section@level=\count119
 )
-LaTeX Info: Redefining \ref on input line 27.
-LaTeX Info: Redefining \pageref on input line 27.
-LaTeX Info: Redefining \nameref on input line 27.
+LaTeX Info: Redefining \ref on input line 28.
+LaTeX Info: Redefining \pageref on input line 28.
+LaTeX Info: Redefining \nameref on input line 28.
 
 (./Project4.out) (./Project4.out)
 \@outlinefile=\write3
@@ -308,58 +357,368 @@ LaTeX Info: Redefining \nameref on input line 27.
 \tf@toc=\write4
 \openout4 = `Project4.toc'.
 
-
-
-LaTeX Warning: Citation `Pareto' on page 2 undefined on input line 43.
-
-
-LaTeX Warning: Citation `Patriarca' on page 2 undefined on input line 48.
-
-
-LaTeX Warning: Citation `Goswami' on page 2 undefined on input line 53.
-
-
-LaTeX Warning: Citation `Pareto' on page 2 undefined on input line 63.
-
-[2] <./img/variancenotconverged.png, id=42, 462.528pt x 346.896pt>
+ [2] [3]
+<./img/variancenotconverged.png, id=121, 462.528pt x 346.896pt>
 File: ./img/variancenotconverged.png Graphic file (type png)
 
 <use ./img/variancenotconverged.png>
-Package pdftex.def Info: ./img/variancenotconverged.png used on input line 111.
+Package pdftex.def Info: ./img/variancenotconverged.png used on input line 114.
 
-(pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
+(pdftex.def)             Requested size: 208.13567pt x 156.10175pt.
 
-<./img/varianceconverged.png, id=44, 462.528pt x 346.896pt>
+Overfull \hbox (13.13567pt too wide) in paragraph at lines 114--115
+ [][] 
+ []
+
+<./img/varianceconverged.png, id=123, 462.528pt x 346.896pt>
 File: ./img/varianceconverged.png Graphic file (type png)
 
 <use ./img/varianceconverged.png>
-Package pdftex.def Info: ./img/varianceconverged.png used on input line 118.
+Package pdftex.def Info: ./img/varianceconverged.png used on input line 120.
+(pdftex.def)             Requested size: 208.13567pt x 156.10175pt.
+
+Overfull \hbox (13.13567pt too wide) in paragraph at lines 120--121
+ [][] 
+ []
+
+<./img/variancefullyconverged.png, id=124, 462.528pt x 346.896pt>
+File: ./img/variancefullyconverged.png Graphic file (type png)
+
+<use ./img/variancefullyconverged.png>
+Package pdftex.def Info: ./img/variancefullyconverged.png used on input line 12
+6.
+(pdftex.def)             Requested size: 208.13567pt x 156.10175pt.
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 112--130
+[]$[]$ $[]$ 
+ []
+
+[4] [5 <./img/variancenotconverged.png> <./img/varianceconverged.png> <./img/va
+riancefullyconverged.png>] <./img/LOL.PNG, id=141, 978.65625pt x 673.01437pt>
+File: ./img/LOL.PNG Graphic file (type png)
+
+<use ./img/LOL.PNG>
+Package pdftex.def Info: ./img/LOL.PNG used on input line 177.
+(pdftex.def)             Requested size: 489.32693pt x 336.50636pt.
+
+Overfull \hbox (99.32693pt too wide) in paragraph at lines 177--179
+ [][] 
+ []
+
+<./img/default.png, id=143, 462.528pt x 346.896pt>
+File: ./img/default.png Graphic file (type png)
+ <use ./img/default.png>
+Package pdftex.def Info: ./img/default.png used on input line 199.
+(pdftex.def)             Requested size: 208.13567pt x 156.10175pt.
+
+Overfull \hbox (13.13567pt too wide) in paragraph at lines 199--200
+[][] 
+ []
+
+<./img/default_log.png, id=144, 462.528pt x 346.896pt>
+File: ./img/default_log.png Graphic file (type png)
+
+<use ./img/default_log.png>
+Package pdftex.def Info: ./img/default_log.png used on input line 203.
+(pdftex.def)             Requested size: 208.13567pt x 156.10175pt.
+
+Overfull \hbox (13.13567pt too wide) in paragraph at lines 203--204
+[][] 
+ []
+
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 198--207
+[]$[]$ $[]$ 
+ []
+
+[6] [7 <./img/LOL.PNG>] <./img/sav.25.png, id=157, 462.528pt x 346.896pt>
+File: ./img/sav.25.png Graphic file (type png)
+
+<use ./img/sav.25.png>
+Package pdftex.def Info: ./img/sav.25.png used on input line 239.
+(pdftex.def)             Requested size: 208.13567pt x 156.10175pt.
+
+Overfull \hbox (13.13567pt too wide) in paragraph at lines 239--240
+[][] 
+ []
+
+<./img/sav.5.png, id=158, 462.528pt x 346.896pt>
+File: ./img/sav.5.png Graphic file (type png)
+ <use ./img/sav.5.png>
+Package pdftex.def Info: ./img/sav.5.png used on input line 244.
+(pdftex.def)             Requested size: 208.13567pt x 156.10175pt.
+
+Overfull \hbox (13.13567pt too wide) in paragraph at lines 244--245
+[][] 
+ []
+
+<./img/sav.9.png, id=159, 462.528pt x 346.896pt>
+File: ./img/sav.9.png Graphic file (type png)
+ <use ./img/sav.9.png>
+Package pdftex.def Info: ./img/sav.9.png used on input line 249.
+(pdftex.def)             Requested size: 208.13567pt x 156.10175pt.
+
+Overfull \hbox (13.13567pt too wide) in paragraph at lines 249--250
+[][] 
+ []
+
+<./img/sav.9_last.png, id=160, 462.528pt x 346.896pt>
+File: ./img/sav.9_last.png Graphic file (type png)
+
+<use ./img/sav.9_last.png>
+Package pdftex.def Info: ./img/sav.9_last.png used on input line 254.
+(pdftex.def)             Requested size: 208.13567pt x 156.10175pt.
+
+Overfull \hbox (13.13567pt too wide) in paragraph at lines 254--255
+[][] 
+ []
+
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 238--259
+[]$[]$ $[]$
+ []
+
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 238--259
+[]$ $[]$ 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 259--259
+[]\OT1/cmr/m/n/12 Figure 4: |Dis-tri-bu-tion of wealth for \OT1/cmtt/m/n/12 num
+[]transactions\OT1/cmr/m/n/12 =$10[]$,
+ []
+
+[8 <./img/default.png> <./img/default_log.png>]
+<./img/a.5.png, id=174, 462.528pt x 346.896pt>
+File: ./img/a.5.png Graphic file (type png)
+ <use ./img/a.5.png>
+Package pdftex.def Info: ./img/a.5.png used on input line 280.
+(pdftex.def)             Requested size: 323.76738pt x 242.82553pt.
+
+<./img/a1.png, id=175, 462.528pt x 346.896pt>
+File: ./img/a1.png Graphic file (type png)
+ <use ./img/a1.png>
+Package pdftex.def Info: ./img/a1.png used on input line 287.
+(pdftex.def)             Requested size: 323.76738pt x 242.82553pt.
+
+<./img/a1.5.png, id=176, 462.528pt x 346.896pt>
+File: ./img/a1.5.png Graphic file (type png)
+ <use ./img/a1.5.png>
+Package pdftex.def Info: ./img/a1.5.png used on input line 293.
+(pdftex.def)             Requested size: 323.76738pt x 242.82553pt.
+File: ./img/a1.5.png Graphic file (type png)
+
+<use ./img/a1.5.png>
+Package pdftex.def Info: ./img/a1.5.png used on input line 299.
+(pdftex.def)             Requested size: 323.76738pt x 242.82553pt.
+ <./img/a10.png, id=177, 462.528pt x 346.896pt>
+File: ./img/a10.png Graphic file (type png)
+
+<use ./img/a10.png>
+Package pdftex.def Info: ./img/a10.png used on input line 310.
+(pdftex.def)             Requested size: 323.76738pt x 242.82553pt.
+ <./img/a1g0.png, id=178, 462.528pt x 346.896pt>
+File: ./img/a1g0.png Graphic file (type png)
+
+<use ./img/a1g0.png>
+Package pdftex.def Info: ./img/a1g0.png used on input line 332.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
-)
-Runaway argument?
-{Variance of 10 Monte Carlo cycles with \texttt {num\_transactions}=$\ETC.
-! File ended while scanning use of \@xdblarg.
-<inserted text> 
-                \par 
-<*> \nonstopmode \input{Project4.tex}
-                                     
-I suspect you have forgotten a `}', causing me
-to read past where you wanted me to stop.
-I'll try to recover; but if the error is serious,
-you'd better type `E' or `X' now and fix your file.
 
-! Emergency stop.
-<*> \nonstopmode \input{Project4.tex}
-                                     
-*** (job aborted, no legal \end found)
+Overfull \hbox (36.26343pt too wide) in paragraph at lines 332--333
+[][] 
+ []
 
- 
+<./img/a1g1.png, id=179, 462.528pt x 346.896pt>
+File: ./img/a1g1.png Graphic file (type png)
+ <use ./img/a1g1.png>
+Package pdftex.def Info: ./img/a1g1.png used on input line 337.
+(pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
+
+Overfull \hbox (36.26343pt too wide) in paragraph at lines 337--338
+[][] 
+ []
+
+<./img/a1g2.png, id=180, 462.528pt x 346.896pt>
+File: ./img/a1g2.png Graphic file (type png)
+ <use ./img/a1g2.png>
+Package pdftex.def Info: ./img/a1g2.png used on input line 342.
+(pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
+
+Overfull \hbox (36.26343pt too wide) in paragraph at lines 342--343
+[][] 
+ []
+
+<./img/a1g3.png, id=181, 462.528pt x 346.896pt>
+File: ./img/a1g3.png Graphic file (type png)
+ <use ./img/a1g3.png>
+Package pdftex.def Info: ./img/a1g3.png used on input line 347.
+(pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
+
+Overfull \hbox (36.26343pt too wide) in paragraph at lines 347--348
+[][] 
+ []
+
+<./img/a1g4.png, id=182, 462.528pt x 346.896pt>
+File: ./img/a1g4.png Graphic file (type png)
+ <use ./img/a1g4.png>
+Package pdftex.def Info: ./img/a1g4.png used on input line 352.
+(pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
+
+Overfull \hbox (36.26343pt too wide) in paragraph at lines 352--353
+[][] 
+ []
+
+<./img/a1g5.png, id=183, 462.528pt x 346.896pt>
+File: ./img/a1g5.png Graphic file (type png)
+ <use ./img/a1g5.png>
+Package pdftex.def Info: ./img/a1g5.png used on input line 357.
+(pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
+
+Overfull \hbox (36.26343pt too wide) in paragraph at lines 357--358
+[][] 
+ []
+
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 331--362
+[]$[]$ $[]$ 
+ []
+
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 331--362
+[]$ $[]$ 
+ []
+
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 331--362
+[]$ $[]$ 
+ []
+
+
+LaTeX Warning: Float too large for page by 81.97601pt on input line 363.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<./img/a2g0.png, id=184, 462.528pt x 346.896pt>
+File: ./img/a2g0.png Graphic file (type png)
+ <use ./img/a2g0.png>
+Package pdftex.def Info: ./img/a2g0.png used on input line 366.
+(pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
+
+Overfull \hbox (36.26343pt too wide) in paragraph at lines 366--367
+[][] 
+ []
+
+<./img/a2g1.png, id=185, 462.528pt x 346.896pt>
+File: ./img/a2g1.png Graphic file (type png)
+ <use ./img/a2g1.png>
+Package pdftex.def Info: ./img/a2g1.png used on input line 371.
+(pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
+
+Overfull \hbox (36.26343pt too wide) in paragraph at lines 371--372
+[][] 
+ []
+
+File: ./img/a2g1.png Graphic file (type png)
+<use ./img/a2g1.png>
+Package pdftex.def Info: ./img/a2g1.png used on input line 376.
+(pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
+
+Overfull \hbox (36.26343pt too wide) in paragraph at lines 376--377
+[][] 
+ []
+
+<./img/a2g3.png, id=186, 462.528pt x 346.896pt>
+File: ./img/a2g3.png Graphic file (type png)
+ <use ./img/a2g3.png>
+Package pdftex.def Info: ./img/a2g3.png used on input line 381.
+(pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
+
+Overfull \hbox (36.26343pt too wide) in paragraph at lines 381--382
+[][] 
+ []
+
+<./img/a2g4.png, id=187, 462.528pt x 346.896pt>
+File: ./img/a2g4.png Graphic file (type png)
+ <use ./img/a2g4.png>
+Package pdftex.def Info: ./img/a2g4.png used on input line 386.
+(pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
+
+Overfull \hbox (36.26343pt too wide) in paragraph at lines 386--387
+[][] 
+ []
+
+<./img/a2g5.png, id=188, 462.528pt x 346.896pt>
+File: ./img/a2g5.png Graphic file (type png)
+ <use ./img/a2g5.png>
+Package pdftex.def Info: ./img/a2g5.png used on input line 391.
+(pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
+
+Overfull \hbox (36.26343pt too wide) in paragraph at lines 391--392
+[][] 
+ []
+
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 365--396
+[]$[]$ $[]$
+ []
+
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 365--396
+[]$ $[]$
+ []
+
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 365--396
+[]$ $[]$ 
+ []
+
+
+LaTeX Warning: Float too large for page by 71.64267pt on input line 397.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[9] [10 <./img/sav.25.png> <./img/sav.5.png> <./img/sav.9.png> <./img/sav.9_las
+t.png>] [11 <./img/a.5.png> <./img/a1.png>] [12 <./img/a1.5.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 426.
+ [13 <./img/a10.png>] [14 <./img/a1g0.png> <./img/a1g1.png> <./img/a1g2.png> <.
+/img/a1g3.png> <./img/a1g4.png> <./img/a1g5.png>] [15 <./img/a2g0.png> <./img/a
+2g1.png> <./img/a2g3.png> <./img/a2g4.png> <./img/a2g5.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 426.
+ (./Project4.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 426.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 426.
+Package rerunfilecheck Info: File `Project4.out' has not changed.
+(rerunfilecheck)             Checksum: AA32A5D9A0AD4467C939812F543A42F5;1052.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 426.
+ ) 
 Here is how much of TeX's memory you used:
- 5727 strings out of 493029
- 83259 string characters out of 6136235
- 171786 words of memory out of 5000000
- 9213 multiletter control sequences out of 15000+600000
- 11057 words of font info for 40 fonts, out of 8000000 for 9000
+ 7084 strings out of 493029
+ 108301 string characters out of 6136235
+ 203476 words of memory out of 5000000
+ 10505 multiletter control sequences out of 15000+600000
+ 12065 words of font info for 44 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,8n,28p,365b,339s stack positions out of 5000i,500n,10000p,200000b,80000s
-!  ==> Fatal error occurred, no output PDF file produced!
+ 43i,10n,40p,365b,520s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on Project4.pdf (15 pages, 1290308 bytes).
+PDF statistics:
+ 310 PDF objects out of 1000 (max. 8388607)
+ 226 compressed objects within 3 object streams
+ 49 named destinations out of 1000 (max. 500000)
+ 254 words of extra memory for PDF output out of 10000 (max. 10000000)
+

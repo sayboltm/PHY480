@@ -65,7 +65,7 @@ mean_money = m0
 
 # Alpha (discrimination of similar wealth, 0=none, 1 =some, 2= alot)
 #a = 1 
-a = 2.7
+a = 2
 
 # Gamma: effect of previous transactions
 gam = 1 # Setting this = 10 (high) makes them all get $100
@@ -112,7 +112,8 @@ agents_total = np.ravel(agents_storage, 1)
 #####################
 # Save data
 if write_to_file == 1:
-    working_vars = ['agents_storage', 'agents_total', 'variance_storage']
+#    working_vars = ['agents_storage', 'agents_total', 'variance_storage']
+    working_vars = ['agents_storage', 'agents_total']
     for item in working_vars:
         np.savetxt(workingdir + '/' + item + '.txt', eval(item))
 

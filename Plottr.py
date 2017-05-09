@@ -46,8 +46,8 @@ def ImShow(array, xlabel='', ylabel='', title='', limits=None, docolorbar=0):
     if limits != None:
         plt.imshow(np.transpose(array), origin = 'lower', extent = limits)
     else:
-        plt.imshow(np.transpose(array), origin = 'lower')
-    plt.show()
+        plt.imshow(np.transpose(array), origin = 'lower') # check out aspect=
+    plt.show(block=False)
     plb.title(title)
     plb.xlabel(xlabel)
     plb.ylabel(ylabel)
