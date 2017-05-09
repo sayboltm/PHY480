@@ -295,8 +295,8 @@ $\alpha$ does not have as much effect on the curveature as expected.
 	\caption{Distribution of wealth for $\alpha$=1.5}
 	\label{fig:a1.5}
 \end{figure}
-\begin{figure} % TODO: FIX
-	\includegraphics[scale=\scaleResultsC]{a1.5.png} %FIXXX
+\begin{figure} 
+	\includegraphics[scale=\scaleResultsC]{a2.png} %FIXXX
 	\centering
 	\caption{Distribution of wealth for $\alpha$=2.0}
 	\label{fig:a2}
@@ -373,7 +373,7 @@ previous transactions some agents have with each other.
 		\label{fig:a2g1}
 	\end{subfigure}
 	\begin{subfigure}{\scaleTextWidth\textwidth}
-		\includegraphics[scale=\scaleResultsA]{a2g1.png} % TODO: FIX
+		\includegraphics[scale=\scaleResultsA]{a2g2.png} 
 		\caption{$\alpha$=2, $\gamma$=2}
 		\label{fig:a2g2}
 	\end{subfigure}
@@ -396,16 +396,63 @@ previous transactions some agents have with each other.
 	\texttt{num\_transactions}=$10^6$, \texttt{num\_experiments}=$10^3$}
 \end{figure}
 
-Looks like a bug where the probabilities are not scaled to each other properly.
-You see one effect clearly overtake the other.
-insert combined log and non log plots
-not sure why stick going up in the air. seen with default too (on an individual
-run). Guess is lack of interaction or low money exchange. Default averaged
-looks fine. Maybe need to establish criterion examining the variance and
-terminating then.
-interaction by chance or something.
+Unfortunately, the result looks like it has been skewed by a bug where the probabilities are not scaled to each other properly.
+You see one effect clearly overtake the other. The small shape of the
+curveature change from $\alpha$=1 to $\alpha$=2 is present, delaying the effect
+of the previous transactions until higher $\gamma$. Eventually, the
+distribution is taken over by clumping as previous transaction preference
+becomes the dominant factor. For some reason, a certain percentage of agents
+appear to be holding out and not interacting at all, even with $10^6$
+transactoins per experiment.
+
+The Pareto distribution from Goswami and Sen \cite{Goswami} can be reproduced
+by plotting the top edges of these trials on a log/log scale as shown in figure
+\ref{fig:paretodist}
+
+\begin{figure}
+	\includegraphics[scale=\scaleResultsC]{pareto.png}
+	\centering
+	\caption{Pareto distribution from Goswami and Sen recreation}
+	\label{fig:paretodist}
+\end{figure}
+%insert combined log and non log plots
+%not sure why stick going up in the air. seen with default too (on an individual
+%run). Guess is lack of interaction or low money exchange. Default averaged
+%looks fine. Maybe need to establish criterion examining the variance and
+%terminating then.
+%interaction by chance or something.
 \section{Conclusions and Future Work}
-something
+Monte Carlo methods were used to model an economic system in similar ways as
+the works of Patriarca\cite{Patriarca} and Goswami and Sen\cite{Goswami}. While
+the results turned out similarly to works cited in most cases, there were still
+potentially some strange bugs that were not completey erradiacted.
+
+Additionally, there were convergence issues in regards to the system reaching
+quilibrium. Perhaps more MC cycles would have fixed this, but to go up another
+order of magnitude would have at least doubled CPU time that just wasn't
+present. While crudely parallelizing the code to generate more results in a
+shorter time period certainly helped (else the log results would barely look
+linear), there were still some discrepancies.
+
+Lastly, this model could include more details such as adding a system for
+taxation, or subdividing it up into smaller economies and examining effects of
+exchange rates around the world, as well as removing the debt restriction so
+that agents can obtain debt, or sub-economic systems can become unstable and
+collapse, which unfortunately frequently happens with real
+people. 
+
+All in all, this was an interesting project and provided additional variety of
+challenges to solve. Implementing better methods for folder naming conventions
+and really more robust loading and saving of data would have been useful to set
+up in the very beginning. I just wish I had more time to let
+this run and really examine things. Modularized code has become increasingly
+important with the progression of these projects, and almost becomes its own
+optimization problem on determining what parts are worth the effort to make
+many iterations of to test and ensure the modular version works just as well
+and hopefully better. Many lessons were learned, and I leave with an enhanced 
+programming environment and mental set of tools to assist with other projects.
+
+
 
 \begin{thebibliography}{2} % Bib must be called thebibliography
 		% Bib changes to bib if doctype=book or something,
