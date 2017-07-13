@@ -53,7 +53,7 @@ num_transactions = 10**5 # less transactions for debugging
 #N = 10**7 
 
 # Total experiments
-num_experiments = 10**3
+num_experiments = 10**1
 
 ### Experiment parameters ###
 # Fraction of money to save (set = 0 to disable)

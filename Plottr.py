@@ -36,7 +36,7 @@ def plot(X, Y=None, x_label=' ', y_label = ' ', title = ' ', xlog=0, ylog=0):
         plt.xscale('log')
     if ylog == 1:
         plt.yscale('log')
-    #plt.show()
+    plt.show(block=False)
 
 def ImShow(array, xlabel='', ylabel='', title='', limits=None, docolorbar=0):
     ''' 2D array plot via ImShow '''
@@ -46,8 +46,8 @@ def ImShow(array, xlabel='', ylabel='', title='', limits=None, docolorbar=0):
     if limits != None:
         plt.imshow(np.transpose(array), origin = 'lower', extent = limits)
     else:
-        plt.imshow(np.transpose(array), origin = 'lower')
-    plt.show()
+        plt.imshow(np.transpose(array), origin = 'lower') # check out aspect=
+    plt.show(block=False)
     plb.title(title)
     plb.xlabel(xlabel)
     plb.ylabel(ylabel)

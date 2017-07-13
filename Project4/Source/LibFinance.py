@@ -118,10 +118,10 @@ def plotAll(agents_storage, agents_total, variance_storage, histbins):
     plt.figure()
     for i in range(num_experiments):
         plt.plot(variance_storage[:, i])
-    plt.xlabel('Monte Carlo Iterations')
+    plt.xlabel('Number of Transactions')
     plt.ylabel('Variance')
-    plt.title('Variance Over Monte Carlo Progression')
-    plt.show()
+    plt.title('Variance During Monte Carlo Progression')
+    plt.show(block=False)
 
     # Plot normal
     #plt.plot(agents)
@@ -144,7 +144,7 @@ def plotAll(agents_storage, agents_total, variance_storage, histbins):
     plb.xlabel('Money amount ($)')
     plb.ylabel('Frequency')
     plb.title('Occurance of certain amount of money(All Experiments)')
-    #plt.show(block=False) # show but allow input (and python to quit and leave plot)
+    plt.show(block=False) # show but allow input (and python to quit and leave plot)
 
     # Plot the log histogram (part b)
     data, bins = np.histogram(agents_total, bins=histbins)
