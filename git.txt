@@ -72,6 +72,7 @@ git reset --hard HEAD~2 # last two commits
 git reset --soft HEAD^
 then re add/commit stuff
 don't do with multiple contributors tho
+https://stackoverflow.com/questions/927358/how-do-i-undo-the-last-commits-in-git
 
 ### Configuring Git
 # Changing username:
